@@ -16,6 +16,7 @@
 
 - [プロダクト仕様・画面遷移](minihome-product-spec.md)
 - [Mockoon API仕様](minihome-api.md)
+- [デザインシステム](minihome-design-system.md)
 - [セキュリティと公開リポジトリ運用](security.md)
 
 miniHomeへの移行では、上記2文書をMVPの仕様とAPI契約の入口として扱う。

@@ -10,12 +10,13 @@ class AppColors {
   AppColors._internal() {
     // initialization logic
   }
-  static const Color primary = Color(0xFF333333);
+  static const Color primary = Color(0xFF26A69A);
+  static const Color primaryContainer = Color(0xFFE7F6F4);
 
   static const Color secondary = Color(0xFFFF9800);
 
-  static const Color text = Color(0xFF333333);
-  static const Color greyText = Color(0xFF777777);
+  static const Color text = Color(0xFF1D2939);
+  static const Color greyText = Color(0xFF667085);
   static const Color whiteText = Color(0xFFFFFFFF);
 
   static const Color white = Color(0xFFFFFFFF);
@@ -32,6 +33,8 @@ class AppColors {
 
   static const Color link = Color(0xFF236EAC);
   static const Color placeholder = Color(0xFFAAAAAA);
-  static const Color border = Color(0xFFE0E3EA);
-  static const Color background = Color(0xFFF5F7FB);
+  static const Color border = Color(0xFFEAECF0);
+  static const Color background = Color(0xFFF6F8FA);
+  static const Color lightAccent = Color(0xFFFFB547);
+  static const Color airConditioner = Color(0xFF4A90E2);
 }
