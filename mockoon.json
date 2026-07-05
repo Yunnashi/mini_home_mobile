@@ -21,7 +21,12 @@
           "latency": 120,
           "statusCode": 200,
           "label": "Success",
-          "headers": [{"key": "Content-Type", "value": "application/json"}],
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
@@ -52,7 +57,12 @@
           "latency": 180,
           "statusCode": 200,
           "label": "Success",
-          "headers": [{"key": "Content-Type", "value": "application/json"}],
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
@@ -71,12 +81,25 @@
           "latency": 0,
           "statusCode": 200,
           "label": "Empty list",
-          "headers": [{"key": "Content-Type", "value": "application/json"}],
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
           "sendFileAsBody": false,
-          "rules": [{"target": "query", "modifier": "empty", "value": "true", "operator": "equals", "invert": false}],
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "empty",
+              "value": "true",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
@@ -102,7 +125,12 @@
           "latency": 120,
           "statusCode": 200,
           "label": "Success",
-          "headers": [{"key": "Content-Type", "value": "application/json"}],
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
@@ -133,7 +161,12 @@
           "latency": 120,
           "statusCode": 200,
           "label": "Success",
-          "headers": [{"key": "Content-Type", "value": "application/json"}],
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
@@ -164,7 +197,12 @@
           "latency": 120,
           "statusCode": 200,
           "label": "Success",
-          "headers": [{"key": "Content-Type", "value": "application/json"}],
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
@@ -195,7 +233,12 @@
           "latency": 100,
           "statusCode": 200,
           "label": "Success",
-          "headers": [{"key": "Content-Type", "value": "application/json"}],
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
@@ -214,7 +257,12 @@
           "latency": 0,
           "statusCode": 400,
           "label": "Validation error",
-          "headers": [{"key": "Content-Type", "value": "application/json"}],
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
@@ -224,6 +272,37 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "4dc4f185-9075-4a59-9359-000000000008",
+      "type": "http",
+      "documentation": "miniHome delete device",
+      "method": "delete",
+      "endpoint": "v1/homes/:homeId/devices/:deviceId",
+      "responses": [
+        {
+          "uuid": "4dc4f185-9075-4a59-9359-000000000081",
+          "body": "",
+          "latency": 100,
+          "statusCode": 204,
+          "label": "Success",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
           "crudKey": "id",
           "callbacks": []
         }
@@ -245,7 +324,12 @@
           "latency": 100,
           "statusCode": 200,
           "label": "Success",
-          "headers": [{"key": "Content-Type", "value": "application/json"}],
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
@@ -264,7 +348,12 @@
           "latency": 0,
           "statusCode": 400,
           "label": "Validation error",
-          "headers": [{"key": "Content-Type", "value": "application/json"}],
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
@@ -1843,6 +1932,38 @@
     {
       "type": "route",
       "uuid": "95c867f8-4b44-4669-bbe3-e8d99fb39e3e"
+    },
+    {
+      "type": "route",
+      "uuid": "4dc4f185-9075-4a59-9359-000000000001"
+    },
+    {
+      "type": "route",
+      "uuid": "4dc4f185-9075-4a59-9359-000000000002"
+    },
+    {
+      "type": "route",
+      "uuid": "4dc4f185-9075-4a59-9359-000000000005"
+    },
+    {
+      "type": "route",
+      "uuid": "4dc4f185-9075-4a59-9359-000000000003"
+    },
+    {
+      "type": "route",
+      "uuid": "4dc4f185-9075-4a59-9359-000000000004"
+    },
+    {
+      "type": "route",
+      "uuid": "4dc4f185-9075-4a59-9359-000000000006"
+    },
+    {
+      "type": "route",
+      "uuid": "4dc4f185-9075-4a59-9359-000000000007"
+    },
+    {
+      "type": "route",
+      "uuid": "4dc4f185-9075-4a59-9359-000000000008"
     }
   ],
   "proxyMode": false,

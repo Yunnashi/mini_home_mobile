@@ -164,7 +164,16 @@
     "fan_speed": "風量",
     "offline_message": "デバイスはオフラインです。現在操作できません。",
     "modes": {"auto": "自動", "cooling": "冷房", "heating": "暖房", "fan": "送風"},
-    "fans": {"low": "弱", "medium": "中", "high": "強"}
+    "fans": {"low": "弱", "medium": "中", "high": "強"},
+    "settings": {
+      "name": "デバイス名",
+      "room": "部屋",
+      "information": "デバイス情報",
+      "delete": "デバイスを削除",
+      "delete_title": "デバイスを削除しますか？",
+      "delete_message": "マイホームからデバイスを削除します。この操作は元に戻せません。",
+      "saved": "デバイス設定を保存しました"
+    }
   },
   "device": {
     "status": {

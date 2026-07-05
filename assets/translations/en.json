@@ -162,7 +162,16 @@
     "fan_speed": "Fan speed",
     "offline_message": "This device is offline. Controls are temporarily unavailable.",
     "modes": {"auto": "Auto", "cooling": "Cool", "heating": "Heat", "fan": "Fan"},
-    "fans": {"low": "Low", "medium": "Medium", "high": "High"}
+    "fans": {"low": "Low", "medium": "Medium", "high": "High"},
+    "settings": {
+      "name": "Device name",
+      "room": "Room",
+      "information": "Device information",
+      "delete": "Delete device",
+      "delete_title": "Delete this device?",
+      "delete_message": "The device will be removed from My Home. This action cannot be undone.",
+      "saved": "Device settings saved"
+    }
   },
   "device": {
     "status": {

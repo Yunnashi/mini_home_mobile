@@ -108,6 +108,39 @@ class DeviceRepository {
     return response ?? Failure('Unable to update air conditioner');
   }
 
+  Future<Result> updateMetadata({
+    required int homeId,
+    required int deviceId,
+    required String name,
+    required int roomId,
+  }) async {
+    Result? response;
+    await _dioClient.sendRequest(
+      resourcePath: '${ApiEndpoints.homes}/$homeId/devices/$deviceId',
+      method: HttpMethod.patch,
+      isLoggedInContent: true,
+      body: {'name': name, 'roomId': roomId},
+      successCallback: (data) => response = Success(data),
+      errorCallback: (message, code) => response = Failure(message, code: code),
+    );
+    return response ?? Failure('Unable to update device');
+  }
+
+  Future<Result> deleteSmartDevice({
+    required int homeId,
+    required int deviceId,
+  }) async {
+    Result? response;
+    await _dioClient.sendRequest(
+      resourcePath: '${ApiEndpoints.homes}/$homeId/devices/$deviceId',
+      method: HttpMethod.delete,
+      isLoggedInContent: true,
+      successCallback: (data) => response = Success(data),
+      errorCallback: (message, code) => response = Failure(message, code: code),
+    );
+    return response ?? Failure('Unable to delete device');
+  }
+
   Future<Result> getDeviceById({
     required int userGroupId,
     required int deviceId,

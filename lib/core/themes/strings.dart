@@ -24,6 +24,16 @@ class AppStrings {
   static String get mediumFan => "smart_device.fans.medium".tr();
   static String get highFan => "smart_device.fans.high".tr();
   static String get offlineMessage => "smart_device.offline_message".tr();
+  static String get deviceName => "smart_device.settings.name".tr();
+  static String get room => "smart_device.settings.room".tr();
+  static String get deviceInformation =>
+      "smart_device.settings.information".tr();
+  static String get deleteDevice => "smart_device.settings.delete".tr();
+  static String get deleteDeviceTitle =>
+      "smart_device.settings.delete_title".tr();
+  static String get deleteDeviceMessage =>
+      "smart_device.settings.delete_message".tr();
+  static String get settingsSaved => "smart_device.settings.saved".tr();
   static final AppStrings _instance = AppStrings._internal();
 
   factory AppStrings() {

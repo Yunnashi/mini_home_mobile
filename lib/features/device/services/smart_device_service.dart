@@ -78,4 +78,29 @@ class SmartDeviceService extends _$SmartDeviceService {
       throw Exception(result.message);
     }
   }
+
+  Future<void> updateMetadata(
+      {required String name, required int roomId}) async {
+    final current = state.value;
+    if (current == null) return;
+    final result = await ref.read(deviceRepositoryProvider).updateMetadata(
+          homeId: current.homeId,
+          deviceId: current.id,
+          name: name,
+          roomId: roomId,
+        );
+    if (result is Failure) throw Exception(result.message);
+    state =
+        AsyncData(current.copyWith(name: name, nickname: name, roomId: roomId));
+  }
+
+  Future<void> deleteDevice() async {
+    final current = state.value;
+    if (current == null) return;
+    final result = await ref.read(deviceRepositoryProvider).deleteSmartDevice(
+          homeId: current.homeId,
+          deviceId: current.id,
+        );
+    if (result is Failure) throw Exception(result.message);
+  }
 }
