@@ -155,6 +155,17 @@
       "login_button": "ログイン",
       "register_button": "新規登録"
   },
+  "smart_device": {
+    "power": "電源",
+    "brightness": "明るさ",
+    "color_temperature": "色温度",
+    "target_temperature": "設定温度",
+    "operation_mode": "運転モード",
+    "fan_speed": "風量",
+    "offline_message": "デバイスはオフラインです。現在操作できません。",
+    "modes": {"auto": "自動", "cooling": "冷房", "heating": "暖房", "fan": "送風"},
+    "fans": {"low": "弱", "medium": "中", "high": "強"}
+  },
   "device": {
     "status": {
       "disconnected": "未使用",

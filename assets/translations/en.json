@@ -153,6 +153,17 @@
     "login_button": "Sign in",
     "register_button": "Create account"
   },
+  "smart_device": {
+    "power": "Power",
+    "brightness": "Brightness",
+    "color_temperature": "Color temperature",
+    "target_temperature": "Target temperature",
+    "operation_mode": "Mode",
+    "fan_speed": "Fan speed",
+    "offline_message": "This device is offline. Controls are temporarily unavailable.",
+    "modes": {"auto": "Auto", "cooling": "Cool", "heating": "Heat", "fan": "Fan"},
+    "fans": {"low": "Low", "medium": "Medium", "high": "High"}
+  },
   "device": {
     "status": {
       "disconnected": "Not in use",

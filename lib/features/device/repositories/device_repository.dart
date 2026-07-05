@@ -47,6 +47,67 @@ class DeviceRepository {
     return response ?? Failure('Unable to update device');
   }
 
+  Future<Result> getSmartDevice({
+    required int homeId,
+    required int deviceId,
+  }) async {
+    Result? response;
+    await _dioClient.sendRequest(
+      resourcePath: '${ApiEndpoints.homes}/$homeId/devices/$deviceId',
+      method: HttpMethod.get,
+      isLoggedInContent: true,
+      successCallback: (data) => response = Success(data),
+      errorCallback: (message, code) => response = Failure(message, code: code),
+    );
+    return response ?? Failure('Unable to load device');
+  }
+
+  Future<Result> updateLightState({
+    required int homeId,
+    required int deviceId,
+    required int brightness,
+    required int colorTemperature,
+  }) async {
+    Result? response;
+    await _dioClient.sendRequest(
+      resourcePath:
+          '${ApiEndpoints.homes}/$homeId/devices/$deviceId/light-state',
+      method: HttpMethod.patch,
+      isLoggedInContent: true,
+      body: {
+        'brightness': brightness,
+        'colorTemperature': colorTemperature,
+      },
+      successCallback: (data) => response = Success(data),
+      errorCallback: (message, code) => response = Failure(message, code: code),
+    );
+    return response ?? Failure('Unable to update light');
+  }
+
+  Future<Result> updateAirConditionerState({
+    required int homeId,
+    required int deviceId,
+    required int targetTemperature,
+    required String mode,
+    required String fanSpeed,
+  }) async {
+    Result? response;
+    await _dioClient.sendRequest(
+      resourcePath:
+          '${ApiEndpoints.homes}/$homeId/devices/$deviceId/air-conditioner-state',
+      method: HttpMethod.patch,
+      isLoggedInContent: true,
+      body: {
+        'targetTemperature': targetTemperature,
+        'mode': mode,
+        'fanSpeed': fanSpeed,
+      },
+      successCallback: (data) => response = Success(data),
+      errorCallback: (message, code) => response = Failure(message, code: code),
+    );
+    return response ?? Failure('Unable to update air conditioner');
+  }
+
   Future<Result> getDeviceById({
     required int userGroupId,
     required int deviceId,

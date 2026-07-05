@@ -10,6 +10,20 @@ class AppStrings {
       "home.brightness".tr(namedArgs: {'value': '$value'});
   static String temperatureValue(int value) =>
       "home.target_temperature".tr(namedArgs: {'value': '$value'});
+  static String get power => "smart_device.power".tr();
+  static String get brightness => "smart_device.brightness".tr();
+  static String get colorTemperature => "smart_device.color_temperature".tr();
+  static String get targetTemperature => "smart_device.target_temperature".tr();
+  static String get operationMode => "smart_device.operation_mode".tr();
+  static String get fanSpeed => "smart_device.fan_speed".tr();
+  static String get autoMode => "smart_device.modes.auto".tr();
+  static String get coolingMode => "smart_device.modes.cooling".tr();
+  static String get heatingMode => "smart_device.modes.heating".tr();
+  static String get fanMode => "smart_device.modes.fan".tr();
+  static String get lowFan => "smart_device.fans.low".tr();
+  static String get mediumFan => "smart_device.fans.medium".tr();
+  static String get highFan => "smart_device.fans.high".tr();
+  static String get offlineMessage => "smart_device.offline_message".tr();
   static final AppStrings _instance = AppStrings._internal();
 
   factory AppStrings() {
