@@ -1,0 +1,294 @@
+{
+  "commons": {
+    "labels": {
+      "email": "Email address",
+      "password": "Password",
+      "terms": "Terms of Use",
+      "privacy_policy": "Privacy Policy",
+      "charging_result_time": "Total charging time",
+      "charging_result_kwh": "Estimated energy delivered",
+      "connecting_result_time": "Latest elapsed time"
+    },
+    "actions": {
+      "save": "Save",
+      "change": "Change",
+      "close": "Close",
+      "retry": "Try again",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "to_registration": "Create an account"
+    },
+    "validations": {
+      "min_length": "{field} must be at least {min} characters.",
+      "max_length": "{field} must be no more than {max} characters.",
+      "required": "This field is required.",
+      "not_match": "The {field} entries do not match.",
+      "email_invalid_format": "Enter a valid email address.",
+      "password": {
+        "lowercase": "- lowercase letter",
+        "number": "- number",
+        "symbol": "- special character",
+        "min_length": "- characters or more"
+      }
+    },
+    "errors": {
+      "error": "Error",
+      "no_signal": "Your connection is unstable. Move to an area with a better signal.",
+      "bad_response": "We couldn't find what you requested. Please try again later.",
+      "authorization": "Your session has expired and you have been signed out.\nPlease sign in again.",
+      "server": "A server error occurred. Please try again later.",
+      "network": "Your connection is unstable. Please try again when you have a better signal.",
+      "unknown": "An unexpected error occurred."
+    },
+    "units": {
+      "about": "About",
+      "minute": "min",
+      "minute_long_text": "minutes",
+      "second": "sec",
+      "hour": "hr"
+    },
+    "formats": {
+      "datetime": {
+        "full_with_seconds": "MMM d, yyyy HH:mm:ss",
+        "full_without_seconds": "MMM d, yyyy HH:mm",
+        "date_only": "MMM d, yyyy",
+        "month_day_with_seconds": "MMM d HH:mm:ss",
+        "month_day_without_seconds": "MMM d HH:mm",
+        "month_day_only": "MMM d",
+        "year_month_only": "MMM yyyy"
+      },
+      "charging_time": "{hour} hr {minute} min {second} sec"
+    },
+    "permissions": {
+      "error_title": "Permission required",
+      "camera_permission_message": "Allow camera access in Settings to continue.",
+      "open_settings": "Open Settings"
+    },
+    "placeholders": {
+      "password": "At least 8 letters, numbers, and symbols"
+    },
+    "update_app": {
+      "dialog_title": "Update available",
+      "dialog_message": "A new version is available.\nUpdate the app from the store.",
+      "update": "Update",
+      "pass": "Later"
+    }
+  },
+  "settings": {
+    "account_settings": { "title": "Account settings" },
+    "withdrawal": {
+      "title": "Delete account",
+      "withdraw": "Delete account",
+      "confirm_withdraw": "Deleting your account will remove your data and you will no longer be able to use it.\n\nContinue?",
+      "confirm_withdraw_final": "This action cannot be undone.\nDelete your account?",
+      "withdraw_success_dialog": {
+        "title": "Account deleted",
+        "content": "Your account has been deleted.\nThank you for trying miniHome."
+      }
+    },
+    "charging_history": {
+      "title": "Charging history",
+      "fetch_error": "Failed to load charging history."
+    },
+    "others": {
+      "licenses": "Open-source licenses",
+      "faq": "FAQ",
+      "inquiry": {
+        "title": "Contact",
+        "call_failure": "Unable to make the call."
+      }
+    },
+    "signout": {
+      "signout": "Sign out",
+      "confirm": "Sign out of miniHome?",
+      "complete": "You have been signed out."
+    },
+    "signin": {
+      "dialog_title_signin_error": "Sign-in failed",
+      "dialog_success": "Signed in successfully",
+      "title": "Sign in"
+    },
+    "signup": {
+      "title": "Create account",
+      "password_confirm": "Confirm password",
+      "to_signin": "Already have an account? Sign in",
+      "submit": "Agree and create account",
+      "privacy_and": " and ",
+      "privacy_note": " before creating your account.",
+      "dialog_error": "Account creation failed",
+      "dialog_success_title": "Verification email sent",
+      "dialog_success_message": "Open the link in the email to verify your address."
+    }
+  },
+  "password_reset": {
+    "to_password_reset": "Forgot your current password?",
+    "title": "Reset password",
+    "description": "Enter your registered email address to receive password reset instructions.",
+    "description2": "If the email does not arrive, check the address and try again.",
+    "send_button": "Send email",
+    "success_dialog": {
+      "title": "Password reset email sent",
+      "message": "Use the link in the email to reset your password.\nIf it does not arrive, check the email address you entered."
+    }
+  },
+  "password_change": {
+    "title": "Change password",
+    "current_password": "Current password",
+    "new_password": "New password",
+    "confirm_password": "Confirm new password",
+    "success_message": "Password changed."
+  },
+  "welcome": {
+    "title": "Welcome home",
+    "description": "Control your lights and air conditioner\nfrom one simple place.",
+    "login_button": "Sign in",
+    "register_button": "Create account"
+  },
+  "device": {
+    "status": {
+      "disconnected": "Not in use",
+      "connected": "Connected",
+      "charging": "Charging",
+      "charging_stopped": "Paused",
+      "error": "Unavailable",
+      "unknown": "Unknown",
+      "ota_in_progress": "Updating",
+      "offline": "Offline"
+    },
+    "fw_update_status": {
+      "update_available": "A firmware update is available",
+      "update_available_short": "Update available",
+      "updating": "Updating firmware...",
+      "updating_short": "Updating..."
+    }
+  },
+  "device_list": {
+    "device": "Device",
+    "setting_power": "Power setting",
+    "temperature": "Temperature",
+    "fetch_error": "Failed to load devices.",
+    "no_device": {
+      "description": "Add a device to start\nyour smarter home.",
+      "add_device": "Add a device"
+    },
+    "add_device": "Add device"
+  },
+  "device_detail": {
+    "title": "Device details",
+    "fetch_error": "Failed to load device details.",
+    "update_error": "Failed to update the setting. Please try again.",
+    "is_offline_error": "This feature is unavailable while the device is offline.",
+    "device_info": "Device information",
+    "device_id": "Device ID",
+    "device_nickname_title": "Rename device",
+    "device_nickname": "Device name",
+    "device_nickname_short": "Name",
+    "device_nickname_placeholder": "Up to 24 characters",
+    "settings_title": "Settings",
+    "fw_version": "Firmware",
+    "device_status": "Status",
+    "temperature": "Temperature",
+    "change_charging_ampere": "Change output",
+    "change_charging_ampere_title": "Change output",
+    "change_charging_ampere_note": "Check your power plan and other appliances before changing this setting.",
+    "pending_changes": "Updating",
+    "latest_usage": "Recent activity",
+    "more_usage": "View more",
+    "charging_schedule": "Schedule",
+    "charging_schedule_description": "When a schedule is enabled, the device runs only during its configured time. Changes may take a moment to appear.",
+    "status_help_title": "About device status",
+    "status_help_content_disconnected": "The device is not currently in use.",
+    "status_help_content_connected": "The device is connected.",
+    "status_help_content_charging": "The device is running.",
+    "status_help_content_ota_in_progress": "A firmware update is in progress.",
+    "status_help_content_error": "The device is currently unavailable.",
+    "status_help_content_charging_stopped": "The device is temporarily paused.",
+    "status_help_content_offline": "The device is not connected to the network or has no power.",
+    "fw_update": {
+      "dialog": {
+        "title": "Firmware update",
+        "content": "A new firmware version is available. Tap Update to continue.",
+        "caution": "The update may take 5–10 minutes and the device will be temporarily unavailable.",
+        "button": "Update"
+      },
+      "timeout": "The update timed out. Please try again.",
+      "success": "Update complete."
+    }
+  },
+  "usage_history": {
+    "title": "Activity history",
+    "month_group": "{month}",
+    "empty": "No activity yet"
+  },
+  "device_settings": {
+    "reboot": {
+      "label": "Restart",
+      "do_reboot": "Restart device",
+      "success": "Device restarted"
+    }
+  },
+  "ble": {
+    "search_failed": "Device not found. Turn on Bluetooth and try again near the device.",
+    "bluetooth_off": "Turn on Bluetooth.",
+    "permission_denied": "Allow Bluetooth access.",
+    "invalid_device_id": "The device ID is invalid."
+  },
+  "user_group": { "my_home": "My Home" },
+  "qr_code_scan": {
+    "read_qr": "Scan QR code",
+    "note": "QR Code is a registered trademark of DENSO WAVE INCORPORATED.",
+    "description": "Scan the QR code included with your device.",
+    "flash_switch": "Turn flash\n{state}",
+    "flash_on": "Turn flash on",
+    "flash_off": "Turn flash off",
+    "device_id_error": "This QR code cannot be used.",
+    "resend_confirmation_email": "Resend verification email"
+  },
+  "schedule": {
+    "title": "Schedule",
+    "create_title": "Add schedule",
+    "edit_title": "Edit schedule",
+    "save_success": "Schedule saved",
+    "save_error": "Failed to save schedule",
+    "delete_success": "Schedule deleted",
+    "delete_error": "Failed to delete schedule",
+    "delete_confirm_title": "Delete schedule",
+    "delete_confirm_message": "Delete this schedule?",
+    "create_error_dialog_title": "Unable to create schedule",
+    "start_time": "Start time",
+    "end_time": "End time",
+    "repeat_everyday": "Repeat daily",
+    "switch_weekday": "Choose days",
+    "weekdays": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat"
+    },
+    "frequency": {
+      "daily": "Daily",
+      "weekday": "Weekdays",
+      "next_day": "Next day",
+      "every_week": "Every week"
+    },
+    "validations": {
+      "time_range_error": "Start and end times must be different.",
+      "weekday_required_error": "Select at least one day."
+    }
+  },
+  "legal": {
+    "terms": {
+      "body": "miniHome Terms of Use (Portfolio Sample)\n\nminiHome is a portfolio project that demonstrates smart-home UI and application architecture. Devices, actions, and account data shown in the app are for demonstration only and do not control real products or services.\n\nThis sample is provided for UI demonstration and is not a legal agreement for a production service."
+    },
+    "privacy": {
+      "body": "Privacy Policy (Portfolio Sample)\n\nminiHome handles only the information needed for the portfolio demo. API keys, credentials, and personal information are not stored in the public repository.\n\nThis sample is provided for UI demonstration and is not a legal document for a production service."
+    },
+    "faq": {
+      "body": "Frequently Asked Questions\n\nQ. Can miniHome control real lights or air conditioners?\nA. Not yet. The current MVP uses a Mockoon API for demonstration.\n\nQ. Which devices are supported?\nA. The demo focuses on smart lights and air conditioners.\n\nQ. Where is data stored?\nA. The MVP uses mock API data. Firebase Auth and Firestore are planned as a later migration."
+    }
+  },
+  "font_family": "SF Pro Display"
+}

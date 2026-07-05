@@ -1,0 +1,19 @@
+{
+  "ENVIRONMENT": "homeStaging",
+  "ENABLE_FIREBASE": false,
+  "API_SCHEME": "http",
+  "API_HOST": "localhost:3001",
+  "APP_API_KEY": "",
+  "PLAY_STORE_URL": "https://play.google.com/store/apps",
+  "APP_STORE_URL": "https://apps.apple.com/",
+  "DEVICE_QR_URL_PATTERN": "^https:\\/\\/example\\.com\\/devices\\/([a-zA-Z0-9_-]+)$",
+  "FIREBASE_PROJECT_ID": "your-mini-home-project-id",
+  "FIREBASE_MESSAGING_SENDER_ID": "000000000000",
+  "FIREBASE_STORAGE_BUCKET": "your-mini-home-project-id.firebasestorage.app",
+  "FIREBASE_IOS_API_KEY": "your-ios-api-key",
+  "FIREBASE_IOS_APP_ID": "your-ios-app-id",
+  "FIREBASE_IOS_CLIENT_ID": "",
+  "FIREBASE_IOS_BUNDLE_ID": "com.example.miniHome",
+  "FIREBASE_ANDROID_API_KEY": "your-android-api-key",
+  "FIREBASE_ANDROID_APP_ID": "your-android-app-id"
+}

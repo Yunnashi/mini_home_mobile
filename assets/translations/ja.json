@@ -1,0 +1,299 @@
+{
+  "commons": {
+    "labels": {
+      "email": "メールアドレス",
+      "password": "パスワード",
+      "terms": "利用規約",
+      "privacy_policy": "プライバシーポリシー",
+      "charging_result_time": "合計充電時間",
+      "charging_result_kwh": "合計充電量(目安)",
+      "connecting_result_time": "最終経過時間"
+    },
+    "actions": {
+      "save": "保存",
+      "change": "変更",
+      "close": "閉じる",
+      "retry": "再試行",
+      "cancel": "キャンセル",
+      "delete": "削除",
+      "to_registration": "まだアカウントをお持ちでない方はこちら"
+    },
+    "validations": {
+      "min_length": "{field}が短すぎます（{min}文字以上）",
+      "max_length": "{field}が長すぎます（{max}文字以内）",
+      "required": "この項目は入力必須です。",
+      "not_match": "{field}と入力が一致しません。",
+      "email_invalid_format": "メールアドレスを正しく入力してください。",
+      "password": {
+        "lowercase": "半角英字-字以上",
+        "number": "半角数字-字以上",
+        "symbol": "特殊文字-字以上",
+        "min_length": "- 文字以上"
+      }
+    },
+    "errors": {
+      "error": "エラー",
+      "no_signal": "電波状況が不安定です。電波状況が良い場所に移動してください。",
+      "bad_response": "お探しのページが見つかりませんでした。しばらく時間をおいて再度お試しください。",
+      "authorization": "セッションが無効になったため、自動的にログアウトしました。\n再度ログインしてください。",
+      "server": "サーバーエラーが発生しました。しばらく時間をおいて再度お試しください。",
+      "network": "電波状況が不安定です。電波状況の良い場所に移動してから再度お試しください。",
+      "unknown": "予期せぬエラーが発生しました。"
+    },
+    "units": {
+      "about": "約",
+      "minute": "分",
+      "minute_long_text": "分",
+      "second": "秒",
+      "hour": "時間"
+    },
+    "formats": {
+      "datetime": {
+        "full_with_seconds": "yyyy年MM月dd日 HH:mm:ss",
+        "full_without_seconds": "yyyy年MM月dd日 HH:mm",
+        "date_only": "yyyy年MM月dd日",
+        "month_day_with_seconds": "M月dd日 HH:mm:ss",
+        "month_day_without_seconds": "M月dd日 HH:mm",
+        "month_day_only": "M月dd日",
+        "year_month_only": "yyyy年M月"
+      },
+      "charging_time": "{hour}時間{minute}分{second}秒"
+    },
+    "permissions": {
+      "error_title": "必要な権限が不足しています",
+      "camera_permission_message": "カメラを利用するためには、\n設定の許可が必要です。",
+      "open_settings": "設定画面へ"
+    },
+    "placeholders": {
+      "password": "8文字以上の半角英数記号"
+    },
+    "update_app": {
+      "dialog_title": "アップデートのお知らせ",
+      "dialog_message": "新しいバージョンがリリースされています。\nストアから新しいバージョンにアップデートしてください。",
+      "update": "アップデートする",
+      "pass": "あとで"
+    }
+  },
+  "settings": {
+    "account_settings": {
+      "title": "アカウント設定"
+    },
+    "withdrawal": {
+      "title": "退会",
+      "withdraw": "退会する",
+      "confirm_withdraw": "退会すると、充電履歴等のデータは削除され、アカウントは使用できなくなります。\n\n本当に退会しますか？",
+      "confirm_withdraw_final": "この操作は元に戻せません。\n本当に退会しますか？",
+      "withdraw_success_dialog": {
+        "title": "退会が完了しました",
+        "content": "ご利用ありがとうございました。\nまたのご利用をお待ちしております。"
+      }
+    },
+    "charging_history": {
+      "title": "充電履歴",
+      "fetch_error": "充電履歴の取得に失敗しました"
+    },
+    "others": {
+      "licenses": "ライセンス情報",
+      "faq": "よくあるご質問",
+      "inquiry": {
+        "title": "お問い合わせ",
+        "call_failure": "電話をかけることができませんでした。"
+      }
+    },
+    "signout": {
+      "signout": "ログアウト",
+      "confirm": "本当にログアウトしますか？",
+      "complete": "ログアウトしました。"
+    },
+    "signin": {
+      "dialog_title_signin_error": "ログインに失敗しました",
+      "dialog_success": "ログインに成功しました",
+      "title": "ログイン"
+    },
+    "signup": {
+      "title": "アカウント登録",
+      "password_confirm": "パスワード（確認）",
+      "to_signin": "すでにアカウント登録済みの方はこちら",
+      "submit": "利用規約に同意してアカウント登録",
+      "privacy_and": "および ",
+      "privacy_note": "をご一読いただき、ご同意いただいた上でアカウントをご登録ください。",
+      "dialog_error": "アカウント登録に失敗しました",
+      "dialog_success_title": "メールアドレスのご確認メールを送信しました",
+      "dialog_success_message": "メール内の確認用リンクをクリックし、メールアドレスの確認を完了してください。"
+    }
+  },
+  "password_reset": {
+    "to_password_reset": "現在のパスワードを忘れた場合はこちら",
+    "title": "パスワード再設定",
+    "description": "パスワード再設定の案内メールを送信するため、\nご登録済みのメールアドレスを入力してください。",
+    "description2": "メールが届かない場合は\nメールアドレスをご確認し、再度お試しください。",
+    "send_button": "メールを送信",
+    "success_dialog": {
+      "title": "パスワード再設定の案内メールを送信しました",
+      "message": "メール内のリンクからパスワードを再設定してください。\n※メールが届かない場合は入力されたメールアドレスに誤りがある可能性があります。"
+    }
+  },
+  "password_change": {
+    "title": "パスワードの変更",
+    "current_password": "現在のパスワード",
+    "new_password": "新しいパスワード",
+    "confirm_password": "新しいパスワード（確認）",
+    "success_message": "パスワードを変更しました。"
+  },
+  "welcome": {
+      "title": "ようこそ!",
+      "description": "このアプリはご自宅のEV充電をサポート\nするアプリです",
+      "login_button": "ログイン",
+      "register_button": "新規登録"
+  },
+  "device": {
+    "status": {
+      "disconnected": "未使用",
+      "connected": "接続中",
+      "charging": "充電中",
+      "charging_stopped": "一時停止中",
+      "error": "使用不可",
+      "unknown": "不明",
+      "ota_in_progress": "アップデート中",
+      "offline": "オフライン"
+    },
+    "fw_update_status": {
+      "update_available": "ファームウェアのアップデートが可能です",
+      "update_available_short": "アップデート可能",
+      "updating": "ファームウェアのアップデート中です...",
+      "updating_short": "アップデート中..."
+    }
+  },
+  "device_list": {
+    "device": "EV充電器",
+    "setting_power": "設定電力",
+    "temperature": "温度",
+    "fetch_error": "充電器情報の取得に失敗しました。",
+    "no_device": {
+      "description": "充電器を追加して\n新しい生活を始めましょう",
+      "add_device": "QRで充電器を追加する"
+    },
+    "add_device": "充電器を追加"
+
+  },
+  "device_detail": {
+    "title": "充電器詳細",
+    "fetch_error": "充電器詳細の取得に失敗しました",
+    "update_error": "設定の更新に失敗しました。お手数ですがはじめからやり直してください。",
+    "is_offline_error": "充電器がオフライン状態のため、この機能はご利用いただけません。",
+    "device_info": "充電器の情報",
+    "device_id": "デバイスID",
+    "device_nickname_title": "名前を変更する",
+    "device_nickname": "充電器の名前",
+    "device_nickname_short": "名前",
+    "device_nickname_placeholder": "24文字まで入力できます",
+    "settings_title": "設定",
+    "fw_version": "ファームウェア",
+    "device_status": "状況",
+    "temperature": "内部温度",
+    "change_charging_ampere": "出力変更",
+    "change_charging_ampere_title": "出力を変更する",
+    "change_charging_ampere_note": "ご自宅の電力契約や他の電化製品の使用状況をお確かめの上、変更を行なってください。",
+    "pending_changes": "変更中",
+    "latest_usage": "直近の利用履歴",
+    "more_usage": "もっと見る",
+    "charging_schedule": "充電スケジュール",
+    "charging_schedule_description": "充電スケジュールをONにしている場合は、\n設定時間中のみ充電が行われます。\n充電器を車両に接続していても、設定時間外には充電が行われません。\n設定変更後、充電器に反映されるまでお時間がかかる場合があります。",
+    "status_help_title": "充電器の状況について",
+    "status_help_content_disconnected": "充電器を車両に接続していない状態です。",
+    "status_help_content_connected": "充電器を車両に接続した状態です。",
+    "status_help_content_charging": "車両に充電中の状態です。",
+    "status_help_content_ota_in_progress": "ファームウェアのアップデート中です。\nアップデート中は充電は一時停止します。",
+    "status_help_content_error": "充電器を使用できない状態です。\n「充電スケジュール機能」がONになっている場合、設定時間外はこの状況になります。",
+    "status_help_content_charging_stopped": "満充電や車両設定などの理由により、車両の充電を一時停止している状態です。",
+    "status_help_content_offline": "充電器がネットワークに接続されていないか、電源が入っていない状態です。\n充電器の再起動後(停電からの復帰等を含む)は、ネットワーク接続に時間がかかる場合がございます。\nしばらくお待ちいただくか、充電器本体の再起動を再度お試しください。",
+    "fw_update": {
+      "dialog": {
+        "title": "ファームウェアのアップデート",
+        "content": "新しいファームウェアバージョンが利用可能です。\nアップデートするには、「アップデート」ボタンをタップしてください",
+        "caution": "※ アップデートには5~10分程かかる場合があります。\n※ アップデート中は車両の充電は一時停止します",
+        "button": "アップデート"
+      },
+      "timeout": "アップデートがタイムアウトしました。再度お試しください。",
+      "success": "アップデートが完了しました。"
+    }
+  },
+  "usage_history": {
+    "title": "利用履歴",
+    "month_group": "{month}分",
+    "empty": "利用履歴がありません"
+  },
+  "device_settings": {
+    "reboot": {
+      "label": "再起動",
+      "do_reboot": "充電器を再起動",
+      "success": "充電器を再起動しました"
+    }
+  },
+  "ble": {
+    "search_failed": "充電器が見つかりませんでした。Bluetoothをオンにし、充電器の近くで再度お試しください。",
+    "bluetooth_off": "Bluetoothをオンにしてください",
+    "permission_denied": "Bluetoothの権限を有効にしてください",
+    "invalid_device_id": "デバイスIDが正しくありません。設定をご確認ください。"
+  },
+  "user_group": {
+    "my_home": "マイホーム"
+  },
+  "qr_code_scan": {
+    "read_qr": "QRコードを読み取る",
+    "note": "※ QRコードは(株)デンソーウェーブの登録商標です",
+    "description": "同封されたQRコードを読み取ってください",
+    "flash_switch": "フラッシュを\n{state}にする",
+    "flash_on": "フラッシュをONにする",
+    "flash_off": "フラッシュをOFFにする",
+    "device_id_error": "このQRコードはご利用いただけません。",
+    "resend_confirmation_email": "確認メールを再送する"
+  },
+  "schedule": {
+    "title": "スケジュール",
+    "create_title": "スケジュールの追加",
+    "edit_title": "スケジュールの編集",
+    "save_success": "スケジュールを保存しました",
+    "save_error": "スケジュールの保存に失敗しました",
+    "delete_success": "スケジュールを削除しました",
+    "delete_error": "スケジュールの削除に失敗しました",
+    "delete_confirm_title": "スケジュール削除の確認",
+    "delete_confirm_message": "このスケジュールを削除しますか？",
+    "create_error_dialog_title": "スケジュール作成エラー",
+    "start_time": "開始時間",
+    "end_time": "終了時間",
+    "repeat_everyday": "毎日繰り返し",
+    "switch_weekday": "曜日指定",
+    "weekdays": {
+      "sun": "日",
+      "mon": "月",
+      "tue": "火",
+      "wed": "水",
+      "thu": "木",
+      "fri": "金",
+      "sat": "土"
+    },
+    "frequency": {
+      "daily": "毎日",
+      "weekday": "平日",
+      "next_day": "翌",
+      "every_week": "毎週"
+    },
+    "validations": {
+      "time_range_error": "開始時間と終了時間には異なる時間を設定してください",
+      "weekday_required_error": "少なくとも1つの曜日を選択してください"
+    }
+  },
+  "legal": {
+    "terms": {
+      "body": "miniHome 利用規約（ポートフォリオ用サンプル）\n\nminiHomeは、スマートホーム管理のUIとアプリ設計を紹介するポートフォリオ作品です。表示されるデバイス、操作結果、アカウント情報はデモ用であり、実在する機器やサービスを操作するものではありません。\n\n本画面はUIデモのためのサンプルであり、実サービス向けの法的文書ではありません。"
+    },
+    "privacy": {
+      "body": "プライバシーポリシー（ポートフォリオ用サンプル）\n\nminiHomeは、ポートフォリオのデモに必要な範囲で入力情報を扱います。公開リポジトリにAPIキー、認証情報、個人情報を保存しません。\n\n本画面はUIデモのためのサンプルであり、実サービス向けの法的文書ではありません。"
+    },
+    "faq": {
+      "body": "よくあるご質問\n\nQ. 実際のライトやエアコンを操作できますか？\nA. 現在はMockoonを利用したデモで、実機操作には対応していません。\n\nQ. 対応するデバイスは何ですか？\nA. スマートライトとエアコンを想定しています。\n\nQ. データはどこに保存されますか？\nA. MVPではモックAPIを使用し、将来Firebase AuthとFirestoreへ移行する予定です。"
+    }
+  },
+  "font_family": "Hiragino Kaku Gothic ProN"
+}

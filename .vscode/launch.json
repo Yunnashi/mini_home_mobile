@@ -1,0 +1,76 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    //
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "miniHome Product (debug)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug",
+            "program": "lib/main.dart",
+            "args": [
+                "--flavor",
+                "homeProduct",
+                "--dart-define-from-file=config/app_config.local.json",
+                "--dart-define=ENVIRONMENT=homeProduct"
+            ]
+        },
+        {
+            "name": "miniHome Product (release)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release",
+            "program": "lib/main.dart",
+            "args": [
+                "--flavor",
+                "homeProduct",
+                "--dart-define-from-file=config/app_config.local.json",
+                "--dart-define=ENVIRONMENT=homeProduct"
+            ]
+        },
+        {
+            "name": "miniHome Staging (debug)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug",
+            "program": "lib/main.dart",
+            "args": [
+                "--flavor",
+                "homeStaging",
+                "--dart-define-from-file=config/app_config.local.json",
+                "--dart-define=ENVIRONMENT=homeStaging"
+            ]
+        },
+        {
+            "name": "miniHome Staging (release)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release",
+            "program": "lib/main.dart",
+            "args": [
+                "--flavor",
+                "homeStaging",
+                "--dart-define-from-file=config/app_config.local.json",
+                "--dart-define=ENVIRONMENT=homeStaging"
+            ]
+        },
+        {
+            "name": "miniHome local (debug)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug",
+            "program": "lib/main.dart",
+            "args": [
+                "--flavor",
+                "homeStaging",
+                "--dart-define-from-file=config/app_config.local.json",
+                "--dart-define=ENVIRONMENT=homeStaging",
+                "--dart-define=API_SCHEME=http",
+                "--dart-define=API_HOST=localhost:3001"
+            ]
+        }
+    ]
+}
