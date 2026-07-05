@@ -16,6 +16,14 @@ T _$identity<T>(T value) => value;
 mixin _$Device {
   int get id;
   String get externalDeviceId;
+  int get homeId;
+  int get roomId;
+  String? get name;
+  DeviceType get type;
+  bool get isOnline;
+  bool get isPowerOn;
+  LightState? get lightState;
+  AirConditionerState? get airConditionerState;
   String? get nickname;
   double? get chargingAmpere;
   double? get maxChargingAmpere;
@@ -49,6 +57,18 @@ mixin _$Device {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.externalDeviceId, externalDeviceId) ||
                 other.externalDeviceId == externalDeviceId) &&
+            (identical(other.homeId, homeId) || other.homeId == homeId) &&
+            (identical(other.roomId, roomId) || other.roomId == roomId) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.isOnline, isOnline) ||
+                other.isOnline == isOnline) &&
+            (identical(other.isPowerOn, isPowerOn) ||
+                other.isPowerOn == isPowerOn) &&
+            (identical(other.lightState, lightState) ||
+                other.lightState == lightState) &&
+            (identical(other.airConditionerState, airConditionerState) ||
+                other.airConditionerState == airConditionerState) &&
             (identical(other.nickname, nickname) ||
                 other.nickname == nickname) &&
             (identical(other.chargingAmpere, chargingAmpere) ||
@@ -74,26 +94,35 @@ mixin _$Device {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      externalDeviceId,
-      nickname,
-      chargingAmpere,
-      maxChargingAmpere,
-      evseState,
-      ellaState,
-      temperature,
-      mode,
-      isOffline,
-      cplt,
-      model,
-      fwVersion,
-      lastPingedAt);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        externalDeviceId,
+        homeId,
+        roomId,
+        name,
+        type,
+        isOnline,
+        isPowerOn,
+        lightState,
+        airConditionerState,
+        nickname,
+        chargingAmpere,
+        maxChargingAmpere,
+        evseState,
+        ellaState,
+        temperature,
+        mode,
+        isOffline,
+        cplt,
+        model,
+        fwVersion,
+        lastPingedAt
+      ]);
 
   @override
   String toString() {
-    return 'Device(id: $id, externalDeviceId: $externalDeviceId, nickname: $nickname, chargingAmpere: $chargingAmpere, maxChargingAmpere: $maxChargingAmpere, evseState: $evseState, ellaState: $ellaState, temperature: $temperature, mode: $mode, isOffline: $isOffline, cplt: $cplt, model: $model, fwVersion: $fwVersion, lastPingedAt: $lastPingedAt)';
+    return 'Device(id: $id, externalDeviceId: $externalDeviceId, homeId: $homeId, roomId: $roomId, name: $name, type: $type, isOnline: $isOnline, isPowerOn: $isPowerOn, lightState: $lightState, airConditionerState: $airConditionerState, nickname: $nickname, chargingAmpere: $chargingAmpere, maxChargingAmpere: $maxChargingAmpere, evseState: $evseState, ellaState: $ellaState, temperature: $temperature, mode: $mode, isOffline: $isOffline, cplt: $cplt, model: $model, fwVersion: $fwVersion, lastPingedAt: $lastPingedAt)';
   }
 }
 
@@ -105,6 +134,14 @@ abstract mixin class $DeviceCopyWith<$Res> {
   $Res call(
       {int id,
       String externalDeviceId,
+      int homeId,
+      int roomId,
+      String? name,
+      DeviceType type,
+      bool isOnline,
+      bool isPowerOn,
+      LightState? lightState,
+      AirConditionerState? airConditionerState,
       String? nickname,
       double? chargingAmpere,
       double? maxChargingAmpere,
@@ -117,6 +154,9 @@ abstract mixin class $DeviceCopyWith<$Res> {
       DeviceModel model,
       String? fwVersion,
       DateTime? lastPingedAt});
+
+  $LightStateCopyWith<$Res>? get lightState;
+  $AirConditionerStateCopyWith<$Res>? get airConditionerState;
 }
 
 /// @nodoc
@@ -133,6 +173,14 @@ class _$DeviceCopyWithImpl<$Res> implements $DeviceCopyWith<$Res> {
   $Res call({
     Object? id = null,
     Object? externalDeviceId = null,
+    Object? homeId = null,
+    Object? roomId = null,
+    Object? name = freezed,
+    Object? type = null,
+    Object? isOnline = null,
+    Object? isPowerOn = null,
+    Object? lightState = freezed,
+    Object? airConditionerState = freezed,
     Object? nickname = freezed,
     Object? chargingAmpere = freezed,
     Object? maxChargingAmpere = freezed,
@@ -155,6 +203,38 @@ class _$DeviceCopyWithImpl<$Res> implements $DeviceCopyWith<$Res> {
           ? _self.externalDeviceId
           : externalDeviceId // ignore: cast_nullable_to_non_nullable
               as String,
+      homeId: null == homeId
+          ? _self.homeId
+          : homeId // ignore: cast_nullable_to_non_nullable
+              as int,
+      roomId: null == roomId
+          ? _self.roomId
+          : roomId // ignore: cast_nullable_to_non_nullable
+              as int,
+      name: freezed == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      type: null == type
+          ? _self.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as DeviceType,
+      isOnline: null == isOnline
+          ? _self.isOnline
+          : isOnline // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isPowerOn: null == isPowerOn
+          ? _self.isPowerOn
+          : isPowerOn // ignore: cast_nullable_to_non_nullable
+              as bool,
+      lightState: freezed == lightState
+          ? _self.lightState
+          : lightState // ignore: cast_nullable_to_non_nullable
+              as LightState?,
+      airConditionerState: freezed == airConditionerState
+          ? _self.airConditionerState
+          : airConditionerState // ignore: cast_nullable_to_non_nullable
+              as AirConditionerState?,
       nickname: freezed == nickname
           ? _self.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
@@ -204,6 +284,35 @@ class _$DeviceCopyWithImpl<$Res> implements $DeviceCopyWith<$Res> {
           : lastPingedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
     ));
+  }
+
+  /// Create a copy of Device
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LightStateCopyWith<$Res>? get lightState {
+    if (_self.lightState == null) {
+      return null;
+    }
+
+    return $LightStateCopyWith<$Res>(_self.lightState!, (value) {
+      return _then(_self.copyWith(lightState: value));
+    });
+  }
+
+  /// Create a copy of Device
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AirConditionerStateCopyWith<$Res>? get airConditionerState {
+    if (_self.airConditionerState == null) {
+      return null;
+    }
+
+    return $AirConditionerStateCopyWith<$Res>(_self.airConditionerState!,
+        (value) {
+      return _then(_self.copyWith(airConditionerState: value));
+    });
   }
 }
 
@@ -301,6 +410,14 @@ extension DevicePatterns on Device {
     TResult Function(
             int id,
             String externalDeviceId,
+            int homeId,
+            int roomId,
+            String? name,
+            DeviceType type,
+            bool isOnline,
+            bool isPowerOn,
+            LightState? lightState,
+            AirConditionerState? airConditionerState,
             String? nickname,
             double? chargingAmpere,
             double? maxChargingAmpere,
@@ -322,6 +439,14 @@ extension DevicePatterns on Device {
         return $default(
             _that.id,
             _that.externalDeviceId,
+            _that.homeId,
+            _that.roomId,
+            _that.name,
+            _that.type,
+            _that.isOnline,
+            _that.isPowerOn,
+            _that.lightState,
+            _that.airConditionerState,
             _that.nickname,
             _that.chargingAmpere,
             _that.maxChargingAmpere,
@@ -357,6 +482,14 @@ extension DevicePatterns on Device {
     TResult Function(
             int id,
             String externalDeviceId,
+            int homeId,
+            int roomId,
+            String? name,
+            DeviceType type,
+            bool isOnline,
+            bool isPowerOn,
+            LightState? lightState,
+            AirConditionerState? airConditionerState,
             String? nickname,
             double? chargingAmpere,
             double? maxChargingAmpere,
@@ -377,6 +510,14 @@ extension DevicePatterns on Device {
         return $default(
             _that.id,
             _that.externalDeviceId,
+            _that.homeId,
+            _that.roomId,
+            _that.name,
+            _that.type,
+            _that.isOnline,
+            _that.isPowerOn,
+            _that.lightState,
+            _that.airConditionerState,
             _that.nickname,
             _that.chargingAmpere,
             _that.maxChargingAmpere,
@@ -409,6 +550,14 @@ extension DevicePatterns on Device {
     TResult? Function(
             int id,
             String externalDeviceId,
+            int homeId,
+            int roomId,
+            String? name,
+            DeviceType type,
+            bool isOnline,
+            bool isPowerOn,
+            LightState? lightState,
+            AirConditionerState? airConditionerState,
             String? nickname,
             double? chargingAmpere,
             double? maxChargingAmpere,
@@ -429,6 +578,14 @@ extension DevicePatterns on Device {
         return $default(
             _that.id,
             _that.externalDeviceId,
+            _that.homeId,
+            _that.roomId,
+            _that.name,
+            _that.type,
+            _that.isOnline,
+            _that.isPowerOn,
+            _that.lightState,
+            _that.airConditionerState,
             _that.nickname,
             _that.chargingAmpere,
             _that.maxChargingAmpere,
@@ -453,16 +610,24 @@ class _Device extends Device {
   const _Device(
       {required this.id,
       required this.externalDeviceId,
+      this.homeId = 1,
+      this.roomId = 1,
+      this.name,
+      this.type = DeviceType.light,
+      this.isOnline = true,
+      this.isPowerOn = false,
+      this.lightState,
+      this.airConditionerState,
       this.nickname,
       this.chargingAmpere,
       this.maxChargingAmpere,
-      @EvseStateConverter() required this.evseState,
-      @EllaStateConverter() required this.ellaState,
+      @EvseStateConverter() this.evseState = EvseState.unknown,
+      @EllaStateConverter() this.ellaState = EllaState.unknown,
       this.temperature,
       this.mode,
       this.isOffline = false,
-      required this.cplt,
-      required this.model,
+      this.cplt = false,
+      this.model = DeviceModel.nadiya,
       this.fwVersion,
       this.lastPingedAt})
       : super._();
@@ -473,15 +638,38 @@ class _Device extends Device {
   @override
   final String externalDeviceId;
   @override
+  @JsonKey()
+  final int homeId;
+  @override
+  @JsonKey()
+  final int roomId;
+  @override
+  final String? name;
+  @override
+  @JsonKey()
+  final DeviceType type;
+  @override
+  @JsonKey()
+  final bool isOnline;
+  @override
+  @JsonKey()
+  final bool isPowerOn;
+  @override
+  final LightState? lightState;
+  @override
+  final AirConditionerState? airConditionerState;
+  @override
   final String? nickname;
   @override
   final double? chargingAmpere;
   @override
   final double? maxChargingAmpere;
   @override
+  @JsonKey()
   @EvseStateConverter()
   final EvseState evseState;
   @override
+  @JsonKey()
   @EllaStateConverter()
   final EllaState ellaState;
   @override
@@ -492,8 +680,10 @@ class _Device extends Device {
   @JsonKey()
   final bool isOffline;
   @override
+  @JsonKey()
   final bool cplt;
   @override
+  @JsonKey()
   final DeviceModel model;
   @override
   final String? fwVersion;
@@ -523,6 +713,18 @@ class _Device extends Device {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.externalDeviceId, externalDeviceId) ||
                 other.externalDeviceId == externalDeviceId) &&
+            (identical(other.homeId, homeId) || other.homeId == homeId) &&
+            (identical(other.roomId, roomId) || other.roomId == roomId) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.isOnline, isOnline) ||
+                other.isOnline == isOnline) &&
+            (identical(other.isPowerOn, isPowerOn) ||
+                other.isPowerOn == isPowerOn) &&
+            (identical(other.lightState, lightState) ||
+                other.lightState == lightState) &&
+            (identical(other.airConditionerState, airConditionerState) ||
+                other.airConditionerState == airConditionerState) &&
             (identical(other.nickname, nickname) ||
                 other.nickname == nickname) &&
             (identical(other.chargingAmpere, chargingAmpere) ||
@@ -548,26 +750,35 @@ class _Device extends Device {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      externalDeviceId,
-      nickname,
-      chargingAmpere,
-      maxChargingAmpere,
-      evseState,
-      ellaState,
-      temperature,
-      mode,
-      isOffline,
-      cplt,
-      model,
-      fwVersion,
-      lastPingedAt);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        externalDeviceId,
+        homeId,
+        roomId,
+        name,
+        type,
+        isOnline,
+        isPowerOn,
+        lightState,
+        airConditionerState,
+        nickname,
+        chargingAmpere,
+        maxChargingAmpere,
+        evseState,
+        ellaState,
+        temperature,
+        mode,
+        isOffline,
+        cplt,
+        model,
+        fwVersion,
+        lastPingedAt
+      ]);
 
   @override
   String toString() {
-    return 'Device(id: $id, externalDeviceId: $externalDeviceId, nickname: $nickname, chargingAmpere: $chargingAmpere, maxChargingAmpere: $maxChargingAmpere, evseState: $evseState, ellaState: $ellaState, temperature: $temperature, mode: $mode, isOffline: $isOffline, cplt: $cplt, model: $model, fwVersion: $fwVersion, lastPingedAt: $lastPingedAt)';
+    return 'Device(id: $id, externalDeviceId: $externalDeviceId, homeId: $homeId, roomId: $roomId, name: $name, type: $type, isOnline: $isOnline, isPowerOn: $isPowerOn, lightState: $lightState, airConditionerState: $airConditionerState, nickname: $nickname, chargingAmpere: $chargingAmpere, maxChargingAmpere: $maxChargingAmpere, evseState: $evseState, ellaState: $ellaState, temperature: $temperature, mode: $mode, isOffline: $isOffline, cplt: $cplt, model: $model, fwVersion: $fwVersion, lastPingedAt: $lastPingedAt)';
   }
 }
 
@@ -580,6 +791,14 @@ abstract mixin class _$DeviceCopyWith<$Res> implements $DeviceCopyWith<$Res> {
   $Res call(
       {int id,
       String externalDeviceId,
+      int homeId,
+      int roomId,
+      String? name,
+      DeviceType type,
+      bool isOnline,
+      bool isPowerOn,
+      LightState? lightState,
+      AirConditionerState? airConditionerState,
       String? nickname,
       double? chargingAmpere,
       double? maxChargingAmpere,
@@ -592,6 +811,11 @@ abstract mixin class _$DeviceCopyWith<$Res> implements $DeviceCopyWith<$Res> {
       DeviceModel model,
       String? fwVersion,
       DateTime? lastPingedAt});
+
+  @override
+  $LightStateCopyWith<$Res>? get lightState;
+  @override
+  $AirConditionerStateCopyWith<$Res>? get airConditionerState;
 }
 
 /// @nodoc
@@ -608,6 +832,14 @@ class __$DeviceCopyWithImpl<$Res> implements _$DeviceCopyWith<$Res> {
   $Res call({
     Object? id = null,
     Object? externalDeviceId = null,
+    Object? homeId = null,
+    Object? roomId = null,
+    Object? name = freezed,
+    Object? type = null,
+    Object? isOnline = null,
+    Object? isPowerOn = null,
+    Object? lightState = freezed,
+    Object? airConditionerState = freezed,
     Object? nickname = freezed,
     Object? chargingAmpere = freezed,
     Object? maxChargingAmpere = freezed,
@@ -630,6 +862,38 @@ class __$DeviceCopyWithImpl<$Res> implements _$DeviceCopyWith<$Res> {
           ? _self.externalDeviceId
           : externalDeviceId // ignore: cast_nullable_to_non_nullable
               as String,
+      homeId: null == homeId
+          ? _self.homeId
+          : homeId // ignore: cast_nullable_to_non_nullable
+              as int,
+      roomId: null == roomId
+          ? _self.roomId
+          : roomId // ignore: cast_nullable_to_non_nullable
+              as int,
+      name: freezed == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      type: null == type
+          ? _self.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as DeviceType,
+      isOnline: null == isOnline
+          ? _self.isOnline
+          : isOnline // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isPowerOn: null == isPowerOn
+          ? _self.isPowerOn
+          : isPowerOn // ignore: cast_nullable_to_non_nullable
+              as bool,
+      lightState: freezed == lightState
+          ? _self.lightState
+          : lightState // ignore: cast_nullable_to_non_nullable
+              as LightState?,
+      airConditionerState: freezed == airConditionerState
+          ? _self.airConditionerState
+          : airConditionerState // ignore: cast_nullable_to_non_nullable
+              as AirConditionerState?,
       nickname: freezed == nickname
           ? _self.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
@@ -679,6 +943,35 @@ class __$DeviceCopyWithImpl<$Res> implements _$DeviceCopyWith<$Res> {
           : lastPingedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
     ));
+  }
+
+  /// Create a copy of Device
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LightStateCopyWith<$Res>? get lightState {
+    if (_self.lightState == null) {
+      return null;
+    }
+
+    return $LightStateCopyWith<$Res>(_self.lightState!, (value) {
+      return _then(_self.copyWith(lightState: value));
+    });
+  }
+
+  /// Create a copy of Device
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AirConditionerStateCopyWith<$Res>? get airConditionerState {
+    if (_self.airConditionerState == null) {
+      return null;
+    }
+
+    return $AirConditionerStateCopyWith<$Res>(_self.airConditionerState!,
+        (value) {
+      return _then(_self.copyWith(airConditionerState: value));
+    });
   }
 }
 

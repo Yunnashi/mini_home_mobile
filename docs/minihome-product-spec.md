@@ -124,9 +124,9 @@ Smart Life系アプリの「明るい背景、状態が読みやすいカード�
 
 ```dart
 enum DeviceType {
-  @JsonValue('LIGHT')
+  @JsonValue('light')
   light,
-  @JsonValue('AIR_CONDITIONER')
+  @JsonValue('airConditioner')
   airConditioner,
 }
 ```
@@ -210,8 +210,8 @@ flowchart TD
     AddDevice -->|Added| Home
     Home -->|Device card| DeviceDetail["Device detail"]
     DeviceDetail --> Type{"device.type"}
-    Type -->|LIGHT| LightPanel["Light controls"]
-    Type -->|AIR_CONDITIONER| AirPanel["Air conditioner controls"]
+    Type -->|light| LightPanel["Light controls"]
+    Type -->|airConditioner| AirPanel["Air conditioner controls"]
     DeviceDetail --> ScheduleCreate["Schedule create"]
     DeviceDetail --> ScheduleEdit["Schedule edit"]
     DeviceDetail --> DeviceSettings["Device settings"]

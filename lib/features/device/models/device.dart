@@ -1,6 +1,9 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:mini_home/features/device/models/device_model.dart';
 import 'package:mini_home/features/device/models/device_status.dart';
+import 'package:mini_home/features/device/models/device_type.dart';
+import 'package:mini_home/features/device/models/light_state.dart';
+import 'package:mini_home/features/device/models/air_conditioner_state.dart';
 import 'package:mini_home/features/device/models/ella_state.dart';
 import 'package:mini_home/features/device/models/evse_state.dart';
 import 'package:mini_home/features/device/models/fw_update_status.dart';
@@ -15,16 +18,24 @@ sealed class Device with _$Device {
   const factory Device(
       {required int id,
       required String externalDeviceId,
+      @Default(1) int homeId,
+      @Default(1) int roomId,
+      String? name,
+      @Default(DeviceType.light) DeviceType type,
+      @Default(true) bool isOnline,
+      @Default(false) bool isPowerOn,
+      LightState? lightState,
+      AirConditionerState? airConditionerState,
       String? nickname,
       double? chargingAmpere,
       double? maxChargingAmpere,
-      @EvseStateConverter() required EvseState evseState,
-      @EllaStateConverter() required EllaState ellaState,
+      @EvseStateConverter() @Default(EvseState.unknown) EvseState evseState,
+      @EllaStateConverter() @Default(EllaState.unknown) EllaState ellaState,
       double? temperature,
       String? mode,
       @Default(false) bool isOffline,
-      required bool cplt,
-      required DeviceModel model,
+      @Default(false) bool cplt,
+      @Default(DeviceModel.nadiya) DeviceModel model,
       String? fwVersion,
       DateTime? lastPingedAt}) = _Device;
 
@@ -61,6 +72,13 @@ sealed class Device with _$Device {
       _$DeviceFromJson(_withOfflineState(json));
 
   static Map<String, dynamic> _withOfflineState(Map<String, dynamic> json) {
+    if (json['evseState'] == null || json['ellaState'] == null) {
+      return {
+        ...json,
+        'nickname': json['nickname'] ?? json['name'],
+        'isOffline': json['isOffline'] ?? json['isOnline'] == false,
+      };
+    }
     // 暫定対応：アプリ側でlastPingedAt と evseState/ellaState を使ってオフライン判定
     final evseState =
         const EvseStateConverter().fromJson((json['evseState'] as num).toInt());

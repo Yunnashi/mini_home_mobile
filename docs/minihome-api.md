@@ -259,6 +259,7 @@ miniHome用エラーコードは`MH_`を接頭辞とする。
 - 正常系をdefault responseにする
 - 主要APIには`400`、`404`、`500`の確認用レスポンスを用意する
 - Flutterモデル変更とMockoonレスポンス変更は同じ実装段階で行う
+- `type`は`light`または`airConditioner`とし、他の表記へ変換しない
 - MVPではMockoon上の永続性を保証しない
 
 ## 9. Firestore移行時の対応
