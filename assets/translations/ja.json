@@ -140,6 +140,15 @@
     "confirm_password": "新しいパスワード（確認）",
     "success_message": "パスワードを変更しました。"
   },
+  "home": {
+    "all_rooms": "すべて",
+    "online": "オンライン",
+    "offline": "オフライン",
+    "brightness": "明るさ {value}%",
+    "target_temperature": "設定温度 {value}°C",
+    "no_devices_title": "デバイスがありません",
+    "no_devices_message": "ライトまたはエアコンを追加してスマートホームを始めましょう。"
+  },
   "welcome": {
       "title": "ようこそ!",
       "description": "このアプリはご自宅のEV充電をサポート\nするアプリです",

@@ -13,6 +13,7 @@ class ApiEndpoints {
 
   // ========= ユーザーグループ関連エンドポイント ==========
   static const String userGroups = '/v1/users/user-groups';
+  static const String homes = '/v1/homes';
 
   // その他のエンドポイントはここに追加
 }

@@ -138,6 +138,15 @@
     "confirm_password": "Confirm new password",
     "success_message": "Password changed."
   },
+  "home": {
+    "all_rooms": "All",
+    "online": "Online",
+    "offline": "Offline",
+    "brightness": "{value}% brightness",
+    "target_temperature": "{value}°C",
+    "no_devices_title": "No devices yet",
+    "no_devices_message": "Add a light or air conditioner to start your smarter home."
+  },
   "welcome": {
     "title": "Welcome home",
     "description": "Control your lights and air conditioner\nfrom one simple place.",

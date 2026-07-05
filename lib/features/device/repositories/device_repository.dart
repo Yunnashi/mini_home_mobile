@@ -18,6 +18,35 @@ class DeviceRepository {
 
   DeviceRepository._(this._dioClient);
 
+  Future<Result> getDevices({required int homeId}) async {
+    Result? response;
+    await _dioClient.sendRequest(
+      resourcePath: '${ApiEndpoints.homes}/$homeId/devices',
+      method: HttpMethod.get,
+      isLoggedInContent: true,
+      successCallback: (data) => response = Success(data),
+      errorCallback: (message, code) => response = Failure(message, code: code),
+    );
+    return response ?? Failure('Unable to load devices');
+  }
+
+  Future<Result> updatePower({
+    required int homeId,
+    required int deviceId,
+    required bool isPowerOn,
+  }) async {
+    Result? response;
+    await _dioClient.sendRequest(
+      resourcePath: '${ApiEndpoints.homes}/$homeId/devices/$deviceId',
+      method: HttpMethod.patch,
+      isLoggedInContent: true,
+      body: {'isPowerOn': isPowerOn},
+      successCallback: (data) => response = Success(data),
+      errorCallback: (message, code) => response = Failure(message, code: code),
+    );
+    return response ?? Failure('Unable to update device');
+  }
+
   Future<Result> getDeviceById({
     required int userGroupId,
     required int deviceId,

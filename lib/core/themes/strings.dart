@@ -1,6 +1,15 @@
 import 'package:easy_localization/easy_localization.dart';
 
 class AppStrings {
+  static String get allRooms => "home.all_rooms".tr();
+  static String get online => "home.online".tr();
+  static String get offline => "home.offline".tr();
+  static String get noDevicesTitle => "home.no_devices_title".tr();
+  static String get noDevicesMessage => "home.no_devices_message".tr();
+  static String brightnessValue(int value) =>
+      "home.brightness".tr(namedArgs: {'value': '$value'});
+  static String temperatureValue(int value) =>
+      "home.target_temperature".tr(namedArgs: {'value': '$value'});
   static final AppStrings _instance = AppStrings._internal();
 
   factory AppStrings() {
