@@ -38,9 +38,11 @@ class AuthStateService extends _$AuthStateService {
       return AuthState(
           isLoggedIn: true,
           email: user?.email ?? "",
-          defaultUserGroup: user?.userGroups?.isNotEmpty == true
-              ? user?.userGroups!.first
-              : null);
+          defaultUserGroup: user?.defaultHomeId != null
+              ? UserGroup(id: user!.defaultHomeId!, name: 'My Home')
+              : user?.userGroups?.isNotEmpty == true
+                  ? user?.userGroups!.first
+                  : null);
     } else {
       return AuthState.initial();
     }

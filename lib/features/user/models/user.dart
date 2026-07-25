@@ -9,6 +9,8 @@ abstract class User with _$User {
   const factory User({
     required int id,
     required String email,
+    int? defaultHomeId,
+    // Legacy compatibility for locally cached users created before miniHome.
     List<UserGroup>? userGroups,
     String? createdAt,
     String? updatedAt,

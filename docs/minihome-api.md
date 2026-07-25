@@ -30,13 +30,18 @@ MVPではAPIをMockoonで提供するが、Flutter側は通常のrepository経�
 
 | Method | Path | 用途 |
 | --- | --- | --- |
-| POST | `/v1/users/registration` | サインアップ |
-| POST | `/v1/users/sign-in` | サインイン |
-| POST | `/v1/users/refresh-token` | トークン更新 |
-| PATCH | `/v1/users/password` | パスワード変更 |
+| POST | `/v1/auth/sign-up` | サインアップ |
+| POST | `/v1/auth/sign-in` | サインイン |
+| POST | `/v1/auth/refresh` | トークン更新 |
+| PATCH | `/v1/auth/password` | パスワード変更 |
+| POST | `/v1/auth/password/reset` | パスワード再設定メール |
+| POST | `/v1/auth/verification/resend` | 確認メール再送 |
+| DELETE | `/v1/account` | アカウント削除 |
 
 Mockoonでは固定のデモユーザーとトークンを返す。実在するメールアドレス、
 パスワード、アクセストークンは保存しない。
+
+認証レスポンスのユーザーは`defaultHomeId: 1`を持ち、旧`userGroups`は返さない。
 
 ## 4. Home
 
@@ -126,6 +131,13 @@ Query:
 成功時は作成されたデバイスを返し、ステータスは`201`とする。
 
 Mockoonでは実機探索を行わず、選択した種類に応じたデモデバイスを返す。
+
+### QRによるデバイス追加
+
+`POST /v1/homes/:homeId/devices/scan`
+
+既存のカメラ／QRフローを維持し、読み取った`encryptedDeviceId`を送信する。
+Bluetoothを利用する認証処理も削除しない。
 
 ### デバイス共通状態更新
 

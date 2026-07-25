@@ -24,7 +24,7 @@ class UserGroupRepository {
     Result? response;
 
     await _dioClient.sendRequest(
-      resourcePath: '${ApiEndpoints.userGroups}/$userGroupId',
+      resourcePath: ApiEndpoints.home(userGroupId),
       method: HttpMethod.get,
       isLoggedInContent: true,
       successCallback: (data) {

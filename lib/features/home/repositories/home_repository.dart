@@ -20,7 +20,7 @@ class HomeRepository {
   Future<Result> getHome(int homeId) async {
     Result? result;
     await _dioClient.sendRequest(
-      resourcePath: '${ApiEndpoints.homes}/$homeId',
+      resourcePath: ApiEndpoints.home(homeId),
       method: HttpMethod.get,
       isLoggedInContent: true,
       successCallback: (data) => result = Success(data),

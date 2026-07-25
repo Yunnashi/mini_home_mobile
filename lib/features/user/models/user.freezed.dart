@@ -16,6 +16,8 @@ T _$identity<T>(T value) => value;
 mixin _$User {
   int get id;
   String get email;
+  int?
+      get defaultHomeId; // Legacy compatibility for locally cached users created before miniHome.
   List<UserGroup>? get userGroups;
   String? get createdAt;
   String? get updatedAt;
@@ -37,6 +39,8 @@ mixin _$User {
             other is User &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.email, email) || other.email == email) &&
+            (identical(other.defaultHomeId, defaultHomeId) ||
+                other.defaultHomeId == defaultHomeId) &&
             const DeepCollectionEquality()
                 .equals(other.userGroups, userGroups) &&
             (identical(other.createdAt, createdAt) ||
@@ -47,12 +51,12 @@ mixin _$User {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, email,
+  int get hashCode => Object.hash(runtimeType, id, email, defaultHomeId,
       const DeepCollectionEquality().hash(userGroups), createdAt, updatedAt);
 
   @override
   String toString() {
-    return 'User(id: $id, email: $email, userGroups: $userGroups, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'User(id: $id, email: $email, defaultHomeId: $defaultHomeId, userGroups: $userGroups, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 }
 
@@ -64,6 +68,7 @@ abstract mixin class $UserCopyWith<$Res> {
   $Res call(
       {int id,
       String email,
+      int? defaultHomeId,
       List<UserGroup>? userGroups,
       String? createdAt,
       String? updatedAt});
@@ -83,6 +88,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
   $Res call({
     Object? id = null,
     Object? email = null,
+    Object? defaultHomeId = freezed,
     Object? userGroups = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
@@ -96,6 +102,10 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _self.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
+      defaultHomeId: freezed == defaultHomeId
+          ? _self.defaultHomeId
+          : defaultHomeId // ignore: cast_nullable_to_non_nullable
+              as int?,
       userGroups: freezed == userGroups
           ? _self.userGroups
           : userGroups // ignore: cast_nullable_to_non_nullable
@@ -205,16 +215,16 @@ extension UserPatterns on User {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(int id, String email, List<UserGroup>? userGroups,
-            String? createdAt, String? updatedAt)?
+    TResult Function(int id, String email, int? defaultHomeId,
+            List<UserGroup>? userGroups, String? createdAt, String? updatedAt)?
         $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
       case _User() when $default != null:
-        return $default(_that.id, _that.email, _that.userGroups,
-            _that.createdAt, _that.updatedAt);
+        return $default(_that.id, _that.email, _that.defaultHomeId,
+            _that.userGroups, _that.createdAt, _that.updatedAt);
       case _:
         return orElse();
     }
@@ -235,15 +245,15 @@ extension UserPatterns on User {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(int id, String email, List<UserGroup>? userGroups,
-            String? createdAt, String? updatedAt)
+    TResult Function(int id, String email, int? defaultHomeId,
+            List<UserGroup>? userGroups, String? createdAt, String? updatedAt)
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _User():
-        return $default(_that.id, _that.email, _that.userGroups,
-            _that.createdAt, _that.updatedAt);
+        return $default(_that.id, _that.email, _that.defaultHomeId,
+            _that.userGroups, _that.createdAt, _that.updatedAt);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -263,15 +273,15 @@ extension UserPatterns on User {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(int id, String email, List<UserGroup>? userGroups,
-            String? createdAt, String? updatedAt)?
+    TResult? Function(int id, String email, int? defaultHomeId,
+            List<UserGroup>? userGroups, String? createdAt, String? updatedAt)?
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _User() when $default != null:
-        return $default(_that.id, _that.email, _that.userGroups,
-            _that.createdAt, _that.updatedAt);
+        return $default(_that.id, _that.email, _that.defaultHomeId,
+            _that.userGroups, _that.createdAt, _that.updatedAt);
       case _:
         return null;
     }
@@ -284,6 +294,7 @@ class _User implements User {
   const _User(
       {required this.id,
       required this.email,
+      this.defaultHomeId,
       final List<UserGroup>? userGroups,
       this.createdAt,
       this.updatedAt})
@@ -294,7 +305,11 @@ class _User implements User {
   final int id;
   @override
   final String email;
+  @override
+  final int? defaultHomeId;
+// Legacy compatibility for locally cached users created before miniHome.
   final List<UserGroup>? _userGroups;
+// Legacy compatibility for locally cached users created before miniHome.
   @override
   List<UserGroup>? get userGroups {
     final value = _userGroups;
@@ -331,6 +346,8 @@ class _User implements User {
             other is _User &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.email, email) || other.email == email) &&
+            (identical(other.defaultHomeId, defaultHomeId) ||
+                other.defaultHomeId == defaultHomeId) &&
             const DeepCollectionEquality()
                 .equals(other._userGroups, _userGroups) &&
             (identical(other.createdAt, createdAt) ||
@@ -341,12 +358,12 @@ class _User implements User {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, email,
+  int get hashCode => Object.hash(runtimeType, id, email, defaultHomeId,
       const DeepCollectionEquality().hash(_userGroups), createdAt, updatedAt);
 
   @override
   String toString() {
-    return 'User(id: $id, email: $email, userGroups: $userGroups, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'User(id: $id, email: $email, defaultHomeId: $defaultHomeId, userGroups: $userGroups, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 }
 
@@ -359,6 +376,7 @@ abstract mixin class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   $Res call(
       {int id,
       String email,
+      int? defaultHomeId,
       List<UserGroup>? userGroups,
       String? createdAt,
       String? updatedAt});
@@ -378,6 +396,7 @@ class __$UserCopyWithImpl<$Res> implements _$UserCopyWith<$Res> {
   $Res call({
     Object? id = null,
     Object? email = null,
+    Object? defaultHomeId = freezed,
     Object? userGroups = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
@@ -391,6 +410,10 @@ class __$UserCopyWithImpl<$Res> implements _$UserCopyWith<$Res> {
           ? _self.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
+      defaultHomeId: freezed == defaultHomeId
+          ? _self.defaultHomeId
+          : defaultHomeId // ignore: cast_nullable_to_non_nullable
+              as int?,
       userGroups: freezed == userGroups
           ? _self._userGroups
           : userGroups // ignore: cast_nullable_to_non_nullable

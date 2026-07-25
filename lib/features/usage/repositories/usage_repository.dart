@@ -35,7 +35,7 @@ class UsageRepository {
       'sort_order': sortOrder,
     };
     await _dioClient.sendRequest(
-      resourcePath: '${ApiEndpoints.userGroups}/$userGroupId/usages',
+      resourcePath: '${ApiEndpoints.home(userGroupId)}/usages',
       method: HttpMethod.get,
       isLoggedInContent: true,
       queryParameters: queryParams,

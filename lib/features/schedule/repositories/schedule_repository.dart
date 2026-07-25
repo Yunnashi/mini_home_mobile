@@ -25,8 +25,7 @@ class ScheduleRepository {
   }) async {
     Result? response;
     await _dioClient.sendRequest(
-      resourcePath:
-          '${ApiEndpoints.userGroups}/$userGroupId/devices/$deviceId/schedules',
+      resourcePath: ApiEndpoints.schedules(userGroupId, deviceId),
       method: HttpMethod.get,
       isLoggedInContent: true,
       successCallback: (data) {
@@ -48,8 +47,7 @@ class ScheduleRepository {
   }) async {
     Result? response;
     await _dioClient.sendRequest(
-      resourcePath:
-          '${ApiEndpoints.userGroups}/$userGroupId/devices/$deviceId/schedules',
+      resourcePath: ApiEndpoints.schedules(userGroupId, deviceId),
       method: HttpMethod.post,
       isLoggedInContent: true,
       body: {
@@ -78,7 +76,7 @@ class ScheduleRepository {
     Result? response;
     await _dioClient.sendRequest(
       resourcePath:
-          '${ApiEndpoints.userGroups}/$userGroupId/devices/$deviceId/schedules/$scheduleId',
+          '${ApiEndpoints.schedules(userGroupId, deviceId)}/$scheduleId',
       method: HttpMethod.patch,
       isLoggedInContent: true,
       body: {
@@ -105,7 +103,7 @@ class ScheduleRepository {
     Result? response;
     await _dioClient.sendRequest(
       resourcePath:
-          '${ApiEndpoints.userGroups}/$userGroupId/devices/$deviceId/schedules/$scheduleId/enabled',
+          '${ApiEndpoints.schedules(userGroupId, deviceId)}/$scheduleId/enabled',
       method: HttpMethod.patch,
       isLoggedInContent: true,
       body: {'isEnabled': isEnabled},
@@ -127,7 +125,7 @@ class ScheduleRepository {
     Result? response;
     await _dioClient.sendRequest(
       resourcePath:
-          '${ApiEndpoints.userGroups}/$userGroupId/devices/$deviceId/schedules/$scheduleId',
+          '${ApiEndpoints.schedules(userGroupId, deviceId)}/$scheduleId',
       method: HttpMethod.delete,
       isLoggedInContent: true,
       successCallback: (data) {

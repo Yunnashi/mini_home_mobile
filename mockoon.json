@@ -1,7 +1,7 @@
 {
   "uuid": "df3167c2-8929-44de-b55b-e5fd24a54a93",
   "lastMigration": 33,
-  "name": "users API Docs",
+  "name": "miniHome Mock API",
   "endpointPrefix": "",
   "latency": 0,
   "port": 3001,
@@ -372,207 +372,15 @@
       "streamingInterval": 0
     },
     {
-      "uuid": "1cada4ea-30b8-4ddd-9520-0a4bddc5dccf",
-      "type": "http",
-      "documentation": "ユーザーに紐づくデバイスの詳細を取得",
-      "method": "get",
-      "endpoint": "v1/users/user-groups/:userGroupId/devices/:deviceId",
-      "responses": [
-        {
-          "uuid": "072c4015-2b06-4403-aafc-5a11f8bbc8c5",
-          "body": "{\n  \"id\": 1,\n  \"externalDeviceId\": \"ELFFFC01\",\n  \"nickname\": \"ELFFFC01\",\n  \"chargingAmpere\": 6.0,\n  \"temperature\": 45.0,\n  \"evseState\": 0,\n  \"isOffline\": false\n}",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "Success",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true,
-          "crudKey": "id",
-          "callbacks": []
-        },
-        {
-          "uuid": "97cca8c6-0a35-4c03-b53a-c8e546bd4862",
-          "body": "{\n  \"statusCode\": 400,\n  \"message\": \"password should not be empty\",\n  \"error\": \"Bad Request\",\n  \"errorCode\": \"GL_AU_01\"\n}",
-          "latency": 0,
-          "statusCode": 404,
-          "label": "ユーザーが存在しない",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false,
-          "crudKey": "id",
-          "callbacks": []
-        },
-        {
-          "uuid": "f7ad35b2-d69d-4d29-beb7-df7ba8e4fcf6",
-          "body": "{\n  \"statusCode\": 400,\n  \"message\": \"password should not be empty\",\n  \"error\": \"Bad Request\",\n  \"errorCode\": \"GL_AU_01\"\n}",
-          "latency": 0,
-          "statusCode": 409,
-          "label": "ユーザーがユーザーグループのメンバーではない",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false,
-          "crudKey": "id",
-          "callbacks": []
-        }
-      ],
-      "responseMode": null,
-      "streamingMode": null,
-      "streamingInterval": 0
-    },
-    {
-      "uuid": "4d22b8d6-f00b-4b14-b30c-8e5df2a678e5",
-      "type": "http",
-      "documentation": "デバイス情報の更新",
-      "method": "put",
-      "endpoint": "v1/users/user-groups/:userGroupId/devices/:deviceId",
-      "responses": [
-        {
-          "uuid": "b12bf94f-2086-49c6-a171-e28101f39adb",
-          "body": "",
-          "latency": 0,
-          "statusCode": 204,
-          "label": "Success",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true,
-          "crudKey": "id",
-          "callbacks": []
-        },
-        {
-          "uuid": "9583c1f2-3dec-405b-b2b9-bfb4fd6de00b",
-          "body": "{\n  \"statusCode\": 400,\n  \"message\": \"password should not be empty\",\n  \"error\": \"Bad Request\",\n  \"errorCode\": \"GL_AU_01\"\n}",
-          "latency": 0,
-          "statusCode": 400,
-          "label": "バリデーションエラー",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false,
-          "crudKey": "id",
-          "callbacks": []
-        },
-        {
-          "uuid": "85be3f78-5d5b-4c85-baeb-45bf6c8da1f7",
-          "body": "{\n  \"statusCode\": 400,\n  \"message\": \"password should not be empty\",\n  \"error\": \"Bad Request\",\n  \"errorCode\": \"GL_AU_01\"\n}",
-          "latency": 0,
-          "statusCode": 403,
-          "label": "ユーザーがユーザーグループのメンバーではない",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false,
-          "crudKey": "id",
-          "callbacks": []
-        },
-        {
-          "uuid": "3077eff8-aced-4838-aa59-eba8f7058013",
-          "body": "{\n  \"statusCode\": 400,\n  \"message\": \"password should not be empty\",\n  \"error\": \"Bad Request\",\n  \"errorCode\": \"GL_AU_01\"\n}",
-          "latency": 0,
-          "statusCode": 404,
-          "label": "デバイスが存在しない",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false,
-          "crudKey": "id",
-          "callbacks": []
-        }
-      ],
-      "responseMode": null,
-      "streamingMode": null,
-      "streamingInterval": 0
-    },
-    {
       "uuid": "f33cc44f-9af9-42cf-aeb1-aa0091033060",
       "type": "http",
-      "documentation": "ユーザーグループに紐づくデバイスを作成",
+      "documentation": "Add a miniHome device from a QR code",
       "method": "post",
-      "endpoint": "v1/users/user-groups/:id/devices",
+      "endpoint": "v1/homes/:homeId/devices/scan",
       "responses": [
         {
           "uuid": "aa04c86d-f277-445f-8a03-ff4733ae08ba",
-          "body": "{\n  \"id\": 1,\n  \"externalDeviceId\": \"aaa\",\n  \"userGroupId\": 1,\n  \"evseState\": 1,\n  \"tempareture\": 40,\n  \"mode\": \"aaa\",\n  \"is_offline\": false\n}",
+          "body": "{\"id\":4,\"externalDeviceId\":\"scanned-light-4\",\"homeId\":1,\"roomId\":1,\"name\":\"Scanned light\",\"type\":\"light\",\"isOnline\":true,\"isPowerOn\":false,\"lightState\":{\"brightness\":50,\"colorTemperature\":4000},\"airConditionerState\":null}",
           "latency": 0,
           "statusCode": 201,
           "label": "Success",
@@ -623,7 +431,7 @@
           "body": "{\n  \"statusCode\": 400,\n  \"message\": \"password should not be empty\",\n  \"error\": \"Bad Request\",\n  \"errorCode\": \"GL_AU_01\"\n}",
           "latency": 0,
           "statusCode": 403,
-          "label": "ユーザーがユーザーグループのメンバーではない",
+          "label": "Home access denied",
           "headers": [
             {
               "key": "Content-Type",
@@ -647,7 +455,7 @@
           "body": "{\n  \"statusCode\": 400,\n  \"message\": \"password should not be empty\",\n  \"error\": \"Bad Request\",\n  \"errorCode\": \"GL_AU_01\"\n}",
           "latency": 0,
           "statusCode": 404,
-          "label": "ユーザーグループが存在しない",
+          "label": "Home not found",
           "headers": [
             {
               "key": "Content-Type",
@@ -698,13 +506,13 @@
     {
       "uuid": "ce11561b-0bf3-47ea-af8c-6ffe6a02b231",
       "type": "http",
-      "documentation": "ユーザー新規登録",
+      "documentation": "miniHome account registration",
       "method": "post",
-      "endpoint": "v1/users/registration",
+      "endpoint": "v1/auth/sign-up",
       "responses": [
         {
           "uuid": "5e5bae19-273e-4d5c-a841-ead2b30cbb46",
-          "body": "{\n  \"user\": {\n    \"id\": 1,\n    \"email\": \"sample@example.com\",\n    \"userGroups\": [\n      {\n        \"id\":1,\n        \"name\": null\n      }\n    ],\n    \"createdAt\": \"2024-05-30T08:10:44.127Z\",\n    \"updatedAt\": \"2024-05-30T08:10:44.127Z\"\n  }\n}",
+          "body": "{\"user\":{\"id\":1,\"email\":\"demo@minihome.app\",\"defaultHomeId\":1,\"createdAt\":\"2026-01-01T00:00:00.000Z\",\"updatedAt\":\"2026-01-01T00:00:00.000Z\"}}",
           "latency": 0,
           "statusCode": 200,
           "label": "Success",
@@ -758,13 +566,13 @@
     {
       "uuid": "87cd6d91-cd2e-4ca8-a882-f2ce7d27f236",
       "type": "http",
-      "documentation": "ユーザーサインイン",
+      "documentation": "miniHome sign in",
       "method": "post",
-      "endpoint": "v1/users/sign-in",
+      "endpoint": "v1/auth/sign-in",
       "responses": [
         {
           "uuid": "7e7d0bcb-e77d-4004-abc8-3ec98b147a85",
-          "body": "{\n  \"user\": {\n    \"id\": 1,\n    \"email\": \"test@example.com\",\n    \"userGroups\": [\n      {\n        \"id\": 1,\n        \"name\": null\n      }\n    ],\n    \"createdAt\": \"2021-01-01T00:00:00.000Z\",\n    \"updatedAt\": \"2021-01-01T00:00:00.000Z\"\n  },\n  \"token\": {\n    \"accessToken\": \"demo-access-token\",\n    \"refreshToken\": \"demo-refresh-token\"\n  }\n}",
+          "body": "{\"user\":{\"id\":1,\"email\":\"demo@minihome.app\",\"defaultHomeId\":1,\"createdAt\":\"2026-01-01T00:00:00.000Z\",\"updatedAt\":\"2026-01-01T00:00:00.000Z\"},\"token\":{\"accessToken\":\"demo-access-token\",\"refreshToken\":\"demo-refresh-token\"}}",
           "latency": 0,
           "statusCode": 200,
           "label": "Success",
@@ -818,13 +626,13 @@
     {
       "uuid": "624a088e-7fe3-4283-967e-96f253c4f64e",
       "type": "http",
-      "documentation": "アクセストークンの更新",
+      "documentation": "miniHome token refresh",
       "method": "post",
-      "endpoint": "v1/users/refresh-token",
+      "endpoint": "v1/auth/refresh",
       "responses": [
         {
           "uuid": "e42a0f01-d675-4ab0-a0e0-38ef9360f23e",
-          "body": "{\n  \"token\": {\n    \"accessToken\": \"newAccessToken\",\n    \"refreshToken\": \"newRefreshToken\"\n  },\n  \"user\": {\n    \"id\": 1,\n    \"email\": \"sample@example.com\",\n        \"userGroups\": [\n      {\n        \"id\": 1,\n        \"name\": null\n      }\n      ],\n    \"createdAt\": \"2025-05-30T08:10:44.127Z\",\n    \"updatedAt\": \"2025-05-30T08:10:44.127Z\"\n  }\n}",
+          "body": "{\"user\":{\"id\":1,\"email\":\"demo@minihome.app\",\"defaultHomeId\":1},\"token\":{\"accessToken\":\"demo-access-token-refreshed\",\"refreshToken\":\"demo-refresh-token\"}}",
           "latency": 0,
           "statusCode": 200,
           "label": "Success",
@@ -902,9 +710,9 @@
     {
       "uuid": "debca1ce-40a4-4c06-becc-73f0ff1489ad",
       "type": "http",
-      "documentation": "ユーザー退会",
-      "method": "post",
-      "endpoint": "v1/users/withdraw",
+      "documentation": "Delete miniHome account",
+      "method": "delete",
+      "endpoint": "v1/account",
       "responses": [
         {
           "uuid": "4d51f8ad-0d00-4848-a6ce-87da69683cd7",
@@ -962,9 +770,9 @@
     {
       "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
       "type": "http",
-      "documentation": "パスワード変更",
+      "documentation": "Change miniHome password",
       "method": "patch",
-      "endpoint": "v1/users/password",
+      "endpoint": "v1/auth/password",
       "responses": [
         {
           "uuid": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
@@ -1068,311 +876,11 @@
       "streamingInterval": 0
     },
     {
-      "uuid": "7dbc5667-f81c-46dd-bfb8-a741dadfe753",
-      "type": "http",
-      "documentation": "ユーザーグループの詳細を取得",
-      "method": "get",
-      "endpoint": "v1/users/user-groups/:userGroupId",
-      "responses": [
-        {
-          "uuid": "f7cf282f-16f0-41b3-9b76-a75b7e3c829a",
-          "body": "{\n  \"id\": 1,\n  \"name\": \"ユーザーグループ名\",\n  \"devices\": [\n    {\n      \"id\": 1,\n      \"externalDeviceId\": \"ELFFFC01\",\n      \"nickname\": \"ELFFFC01\",\n      \"chargingAmpere\": 6.0,\n      \"temperature\": 45.0,\n      \"evseState\": 0,\n      \"isOffline\": false\n    }\n  ]\n}",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "Success",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true,
-          "crudKey": "id",
-          "callbacks": []
-        },
-        {
-          "uuid": "705988bb-ccdc-4333-9cb8-ba251b61561e",
-          "body": "{\n  \"statusCode\": 400,\n  \"message\": \"password should not be empty\",\n  \"error\": \"Bad Request\",\n  \"errorCode\": \"GL_AU_01\"\n}",
-          "latency": 0,
-          "statusCode": 403,
-          "label": "ユーザーがユーザーグループのメンバーではない",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false,
-          "crudKey": "id",
-          "callbacks": []
-        },
-        {
-          "uuid": "6f6e0c95-79f2-4147-9f48-02f6fb1d593f",
-          "body": "{\n  \"statusCode\": 400,\n  \"message\": \"password should not be empty\",\n  \"error\": \"Bad Request\",\n  \"errorCode\": \"GL_AU_01\"\n}",
-          "latency": 0,
-          "statusCode": 404,
-          "label": "ユーザーグループが存在しない",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false,
-          "crudKey": "id",
-          "callbacks": []
-        }
-      ],
-      "responseMode": null,
-      "streamingMode": null,
-      "streamingInterval": 0
-    },
-    {
-      "uuid": "f6bbcc30-0312-4395-89f6-405bf00d6785",
-      "type": "http",
-      "documentation": "ユーザーグループに紐づく使用履歴を取得",
-      "method": "get",
-      "endpoint": "v1/users/user-groups/:id/usages",
-      "responses": [
-        {
-          "uuid": "efa3bb5b-eca7-4c2d-974c-aa895f012e3a",
-          "body": "{\n  \"meta\": 1,\n  \"page\": 1,\n  \"data\":[\n    {\n      \"id\": 1,\n      \"device\": {\n        \"id\": 1,\n        \"deviceId\": \"DEV-001\",\n        \"nickname\": \"リビング充電器\"\n      },\n      \"transactionId\": \"0001\",\n      \"startedAt\": \"2025-07-17T08:00:00.000+09:00\",\n      \"finishedAt\": \"2025-07-17T09:00:00.000+09:00\",\n      \"isFinalized\": true,\n      \"kwHour\": 5.2,\n      \"chargingSeconds\": 3600,\n      \"createdAt\": \"2025-07-17T08:00:00.000+09:00\",\n      \"updatedAt\": \"2025-07-17T09:00:01.000+09:00\"\n    },\n    {\n      \"id\": 2,\n      \"device\": {\n        \"id\": 2,\n        \"deviceId\": \"DEV-002\",\n        \"nickname\": \"ガレージ充電器\"\n      },\n      \"transactionId\": \"0002\",\n      \"startedAt\": \"2025-07-16T14:30:00.000+09:00\",\n      \"finishedAt\": \"2025-07-15T07:10:00.000+09:00\",\n      \"isFinalized\": true,\n      \"kwHour\": 2.8,\n      \"chargingSeconds\": 1800,\n      \"createdAt\": \"2025-07-16T14:30:00.000+09:00\",\n      \"updatedAt\": \"2025-07-16T15:00:00.000+09:00\"\n    },\n    {\n      \"id\": 3,\n      \"device\": {\n        \"id\": 3,\n        \"deviceId\": \"DEV-003\",\n        \"nickname\": \"オフィス充電器\"\n      },\n      \"transactionId\": \"0003\",\n      \"startedAt\": \"2025-07-15T06:45:00.000+09:00\",\n      \"finishedAt\": \"2025-07-15T07:10:00.000+09:00\",\n      \"isFinalized\": true,\n      \"kwHour\": 1.9,\n      \"chargingSeconds\": 1500,\n      \"createdAt\": \"2025-07-15T06:45:00.000+09:00\",\n      \"updatedAt\": \"2025-07-15T07:10:01.000+09:00\"\n    }\n  ]\n}",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "Success",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true,
-          "crudKey": "id",
-          "callbacks": []
-        },
-        {
-          "uuid": "04d13e53-3ad2-42e5-9acd-adf9a808e20a",
-          "body": "{\n  \"statusCode\": 400,\n  \"message\": \"password should not be empty\",\n  \"error\": \"Bad Request\",\n  \"errorCode\": \"GL_AU_01\"\n}",
-          "latency": 0,
-          "statusCode": 400,
-          "label": "リクエストデータが不正",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false,
-          "crudKey": "id",
-          "callbacks": []
-        },
-        {
-          "uuid": "eb76f4bf-c0a9-4e61-a475-f4716eb2749d",
-          "body": "{\n  \"statusCode\": 400,\n  \"message\": \"password should not be empty\",\n  \"error\": \"Bad Request\",\n  \"errorCode\": \"GL_AU_01\"\n}",
-          "latency": 0,
-          "statusCode": 403,
-          "label": "ログインユーザーが指定されたユーザーグループのメンバーではない",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false,
-          "crudKey": "id",
-          "callbacks": []
-        },
-        {
-          "uuid": "6822ee37-56a8-4589-ba1e-589aa872572c",
-          "body": "{\n  \"statusCode\": 400,\n  \"message\": \"password should not be empty\",\n  \"error\": \"Bad Request\",\n  \"errorCode\": \"GL_AU_01\"\n}",
-          "latency": 0,
-          "statusCode": 404,
-          "label": "ユーザーグループが存在しない",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false,
-          "crudKey": "id",
-          "callbacks": []
-        }
-      ],
-      "responseMode": null,
-      "streamingMode": null,
-      "streamingInterval": 0
-    },
-    {
-      "uuid": "be01d256-d6b6-479f-b998-a7209c0d82ac",
-      "type": "http",
-      "documentation": "",
-      "method": "get",
-      "endpoint": "users/web/withdrawal",
-      "responses": [
-        {
-          "uuid": "23c5f2b3-afa6-4b34-8bba-e910445c8cd1",
-          "body": "",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true,
-          "crudKey": "id",
-          "callbacks": []
-        }
-      ],
-      "responseMode": null,
-      "streamingMode": null,
-      "streamingInterval": 0
-    },
-    {
-      "uuid": "57ec4362-40cd-4cec-90c4-9c94fef4a552",
-      "type": "http",
-      "documentation": "",
-      "method": "post",
-      "endpoint": "users/web/withdrawal",
-      "responses": [
-        {
-          "uuid": "86355344-cfdc-4e35-b023-6185392589ca",
-          "body": "",
-          "latency": 0,
-          "statusCode": 201,
-          "label": "",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true,
-          "crudKey": "id",
-          "callbacks": []
-        }
-      ],
-      "responseMode": null,
-      "streamingMode": null,
-      "streamingInterval": 0
-    },
-    {
-      "uuid": "97f4df8a-767d-4b07-8515-b40e1462895b",
-      "type": "http",
-      "documentation": "",
-      "method": "get",
-      "endpoint": "users/web/withdrawal/completed",
-      "responses": [
-        {
-          "uuid": "c9c9b3b7-5acf-482c-a94e-8d5445131eb5",
-          "body": "",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true,
-          "crudKey": "id",
-          "callbacks": []
-        }
-      ],
-      "responseMode": null,
-      "streamingMode": null,
-      "streamingInterval": 0
-    },
-    {
       "uuid": "bd71ee19-acc6-4693-959b-310484a46e9a",
       "type": "http",
       "documentation": "スケジュール登録",
       "method": "post",
-      "endpoint": "v1/users/user-groups/:userGroupId/devices/:deviceId/schedules",
+      "endpoint": "v1/homes/:homeId/devices/:deviceId/schedules",
       "responses": [
         {
           "uuid": "a4c4dee2-de00-45a0-b1a9-ccdcd46567e0",
@@ -1427,7 +935,7 @@
           "body": "{\n  \"statusCode\": 400,\n  \"message\": \"password should not be empty\",\n  \"error\": \"Bad Request\",\n  \"errorCode\": \"GL_AU_01\"\n}",
           "latency": 0,
           "statusCode": 403,
-          "label": "ユーザーがユーザーグループのメンバーではない",
+          "label": "Home access denied",
           "headers": [
             {
               "key": "Content-Type",
@@ -1480,7 +988,7 @@
       "type": "http",
       "documentation": "スケジュール一覧取得",
       "method": "get",
-      "endpoint": "v1/users/user-groups/:userGroupId/devices/:deviceId/schedules",
+      "endpoint": "v1/homes/:homeId/devices/:deviceId/schedules",
       "responses": [
         {
           "uuid": "a95fca05-26a6-46ac-8656-a27d169e85b1",
@@ -1511,7 +1019,7 @@
           "body": "{\n  \"statusCode\": 400,\n  \"message\": \"password should not be empty\",\n  \"error\": \"Bad Request\",\n  \"errorCode\": \"GL_AU_01\"\n}",
           "latency": 0,
           "statusCode": 403,
-          "label": "ユーザーがユーザーグループのメンバーではない",
+          "label": "Home access denied",
           "headers": [
             {
               "key": "Content-Type",
@@ -1564,7 +1072,7 @@
       "type": "http",
       "documentation": "スケジュール更新",
       "method": "patch",
-      "endpoint": "v1/users/user-groups/:userGroupId/devices/:deviceId/schedules/:scheduleId",
+      "endpoint": "v1/homes/:homeId/devices/:deviceId/schedules/:scheduleId",
       "responses": [
         {
           "uuid": "ff7d7b64-7b38-4d0e-b163-9df249b593f2",
@@ -1619,7 +1127,7 @@
           "body": "{\n  \"statusCode\": 400,\n  \"message\": \"password should not be empty\",\n  \"error\": \"Bad Request\",\n  \"errorCode\": \"GL_AU_01\"\n}",
           "latency": 0,
           "statusCode": 403,
-          "label": "ユーザーがユーザーグループのメンバーではない",
+          "label": "Home access denied",
           "headers": [
             {
               "key": "Content-Type",
@@ -1672,7 +1180,7 @@
       "type": "http",
       "documentation": "スケジュール削除",
       "method": "delete",
-      "endpoint": "v1/users/user-groups/:userGroupId/devices/:deviceId/schedules/:scheduleId",
+      "endpoint": "v1/homes/:homeId/devices/:deviceId/schedules/:scheduleId",
       "responses": [
         {
           "uuid": "d541c9bf-1619-4404-a0df-acaaaa405660",
@@ -1703,7 +1211,7 @@
           "body": "{\n  \"statusCode\": 400,\n  \"message\": \"password should not be empty\",\n  \"error\": \"Bad Request\",\n  \"errorCode\": \"GL_AU_01\"\n}",
           "latency": 0,
           "statusCode": 403,
-          "label": "ユーザーがユーザーグループのメンバーではない",
+          "label": "Home access denied",
           "headers": [
             {
               "key": "Content-Type",
@@ -1756,7 +1264,7 @@
       "type": "http",
       "documentation": "スケジュール有効/無効切り替え",
       "method": "patch",
-      "endpoint": "v1/users/user-groups/:userGroupId/devices/:deviceId/schedules/:scheduleId/enabled",
+      "endpoint": "v1/homes/:homeId/devices/:deviceId/schedules/:scheduleId/enabled",
       "responses": [
         {
           "uuid": "5accff09-c9f6-42a1-a813-9912588d8598",
@@ -1811,7 +1319,7 @@
           "body": "{\n  \"statusCode\": 400,\n  \"message\": \"password should not be empty\",\n  \"error\": \"Bad Request\",\n  \"errorCode\": \"GL_AU_01\"\n}",
           "latency": 0,
           "statusCode": 403,
-          "label": "ユーザーがユーザーグループのメンバーではない",
+          "label": "Home access denied",
           "headers": [
             {
               "key": "Content-Type",
@@ -1858,81 +1366,117 @@
       "responseMode": null,
       "streamingMode": null,
       "streamingInterval": 0
+    },
+    {
+      "uuid": "4dc4f185-9075-4a59-9359-000000000101",
+      "type": "http",
+      "documentation": "Send miniHome password reset email",
+      "method": "post",
+      "endpoint": "v1/auth/password/reset",
+      "responses": [
+        {
+          "uuid": "4dc4f185-9075-4a59-9359-000000000111",
+          "body": "{}",
+          "latency": 80,
+          "statusCode": 200,
+          "label": "Success",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "4dc4f185-9075-4a59-9359-000000000102",
+      "type": "http",
+      "documentation": "Resend miniHome verification email",
+      "method": "post",
+      "endpoint": "v1/auth/verification/resend",
+      "responses": [
+        {
+          "uuid": "4dc4f185-9075-4a59-9359-000000000112",
+          "body": "{}",
+          "latency": 80,
+          "statusCode": 200,
+          "label": "Success",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "4dc4f185-9075-4a59-9359-000000000103",
+      "type": "http",
+      "documentation": "Issue demo OTP for BLE reboot",
+      "method": "post",
+      "endpoint": "v1/homes/:homeId/devices/:deviceId/reboot-otp",
+      "responses": [
+        {
+          "uuid": "4dc4f185-9075-4a59-9359-000000000113",
+          "body": "{\"otp\":\"ZGVtby1vdHA=\"}",
+          "latency": 80,
+          "statusCode": 200,
+          "label": "Success",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     }
   ],
   "rootChildren": [
-    {
-      "type": "route",
-      "uuid": "f33cc44f-9af9-42cf-aeb1-aa0091033060"
-    },
-    {
-      "type": "route",
-      "uuid": "ce11561b-0bf3-47ea-af8c-6ffe6a02b231"
-    },
-    {
-      "type": "route",
-      "uuid": "87cd6d91-cd2e-4ca8-a882-f2ce7d27f236"
-    },
-    {
-      "type": "route",
-      "uuid": "624a088e-7fe3-4283-967e-96f253c4f64e"
-    },
-    {
-      "type": "route",
-      "uuid": "debca1ce-40a4-4c06-becc-73f0ff1489ad"
-    },
-    {
-      "type": "route",
-      "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-    },
-    {
-      "type": "route",
-      "uuid": "1cada4ea-30b8-4ddd-9520-0a4bddc5dccf"
-    },
-    {
-      "type": "route",
-      "uuid": "4d22b8d6-f00b-4b14-b30c-8e5df2a678e5"
-    },
-    {
-      "type": "route",
-      "uuid": "7dbc5667-f81c-46dd-bfb8-a741dadfe753"
-    },
-    {
-      "type": "route",
-      "uuid": "f6bbcc30-0312-4395-89f6-405bf00d6785"
-    },
-    {
-      "type": "route",
-      "uuid": "be01d256-d6b6-479f-b998-a7209c0d82ac"
-    },
-    {
-      "type": "route",
-      "uuid": "57ec4362-40cd-4cec-90c4-9c94fef4a552"
-    },
-    {
-      "type": "route",
-      "uuid": "97f4df8a-767d-4b07-8515-b40e1462895b"
-    },
-    {
-      "type": "route",
-      "uuid": "bd71ee19-acc6-4693-959b-310484a46e9a"
-    },
-    {
-      "type": "route",
-      "uuid": "2a9ea42f-722e-47a5-b832-11e1dfc72656"
-    },
-    {
-      "type": "route",
-      "uuid": "704cb5e5-41e3-404f-b3e9-7fb440d7b3fd"
-    },
-    {
-      "type": "route",
-      "uuid": "53942965-adb0-4d9a-8e36-91e68b5c9f26"
-    },
-    {
-      "type": "route",
-      "uuid": "95c867f8-4b44-4669-bbe3-e8d99fb39e3e"
-    },
     {
       "type": "route",
       "uuid": "4dc4f185-9075-4a59-9359-000000000001"
@@ -1959,11 +1503,67 @@
     },
     {
       "type": "route",
+      "uuid": "4dc4f185-9075-4a59-9359-000000000008"
+    },
+    {
+      "type": "route",
       "uuid": "4dc4f185-9075-4a59-9359-000000000007"
     },
     {
       "type": "route",
-      "uuid": "4dc4f185-9075-4a59-9359-000000000008"
+      "uuid": "f33cc44f-9af9-42cf-aeb1-aa0091033060"
+    },
+    {
+      "type": "route",
+      "uuid": "ce11561b-0bf3-47ea-af8c-6ffe6a02b231"
+    },
+    {
+      "type": "route",
+      "uuid": "87cd6d91-cd2e-4ca8-a882-f2ce7d27f236"
+    },
+    {
+      "type": "route",
+      "uuid": "624a088e-7fe3-4283-967e-96f253c4f64e"
+    },
+    {
+      "type": "route",
+      "uuid": "debca1ce-40a4-4c06-becc-73f0ff1489ad"
+    },
+    {
+      "type": "route",
+      "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    },
+    {
+      "type": "route",
+      "uuid": "bd71ee19-acc6-4693-959b-310484a46e9a"
+    },
+    {
+      "type": "route",
+      "uuid": "2a9ea42f-722e-47a5-b832-11e1dfc72656"
+    },
+    {
+      "type": "route",
+      "uuid": "704cb5e5-41e3-404f-b3e9-7fb440d7b3fd"
+    },
+    {
+      "type": "route",
+      "uuid": "53942965-adb0-4d9a-8e36-91e68b5c9f26"
+    },
+    {
+      "type": "route",
+      "uuid": "95c867f8-4b44-4669-bbe3-e8d99fb39e3e"
+    },
+    {
+      "type": "route",
+      "uuid": "4dc4f185-9075-4a59-9359-000000000101"
+    },
+    {
+      "type": "route",
+      "uuid": "4dc4f185-9075-4a59-9359-000000000102"
+    },
+    {
+      "type": "route",
+      "uuid": "4dc4f185-9075-4a59-9359-000000000103"
     }
   ],
   "proxyMode": false,

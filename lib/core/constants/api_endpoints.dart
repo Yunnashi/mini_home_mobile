@@ -2,18 +2,22 @@ class ApiEndpoints {
   ApiEndpoints._();
 
   // ========== 認証関連エンドポイント ==========
-  static const String signIn = '/v1/users/sign-in';
-  static const String signUp = '/v1/users/registration';
-  static const String withdrawUser = '/v1/users/withdraw';
-  static const String refreshToken = '/v1/users/refresh-token';
-  static const String resendConfirmEmail = '/v1/users/confirmation/resend';
-  static const String passwordResetInstructions =
-      '/v1/users/password/reset-instructions';
-  static const String changePassword = '/v1/users/password';
+  static const String signIn = '/v1/auth/sign-in';
+  static const String signUp = '/v1/auth/sign-up';
+  static const String withdrawUser = '/v1/account';
+  static const String refreshToken = '/v1/auth/refresh';
+  static const String resendConfirmEmail = '/v1/auth/verification/resend';
+  static const String passwordResetInstructions = '/v1/auth/password/reset';
+  static const String changePassword = '/v1/auth/password';
 
-  // ========= ユーザーグループ関連エンドポイント ==========
-  static const String userGroups = '/v1/users/user-groups';
   static const String homes = '/v1/homes';
+
+  static String home(int homeId) => '$homes/$homeId';
+  static String devices(int homeId) => '${home(homeId)}/devices';
+  static String device(int homeId, int deviceId) =>
+      '${devices(homeId)}/$deviceId';
+  static String schedules(int homeId, int deviceId) =>
+      '${device(homeId, deviceId)}/schedules';
 
   // その他のエンドポイントはここに追加
 }

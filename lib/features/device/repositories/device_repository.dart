@@ -21,7 +21,7 @@ class DeviceRepository {
   Future<Result> getDevices({required int homeId}) async {
     Result? response;
     await _dioClient.sendRequest(
-      resourcePath: '${ApiEndpoints.homes}/$homeId/devices',
+      resourcePath: ApiEndpoints.devices(homeId),
       method: HttpMethod.get,
       isLoggedInContent: true,
       successCallback: (data) => response = Success(data),
@@ -37,7 +37,7 @@ class DeviceRepository {
   }) async {
     Result? response;
     await _dioClient.sendRequest(
-      resourcePath: '${ApiEndpoints.homes}/$homeId/devices/$deviceId',
+      resourcePath: ApiEndpoints.device(homeId, deviceId),
       method: HttpMethod.patch,
       isLoggedInContent: true,
       body: {'isPowerOn': isPowerOn},
@@ -53,7 +53,7 @@ class DeviceRepository {
   }) async {
     Result? response;
     await _dioClient.sendRequest(
-      resourcePath: '${ApiEndpoints.homes}/$homeId/devices/$deviceId',
+      resourcePath: ApiEndpoints.device(homeId, deviceId),
       method: HttpMethod.get,
       isLoggedInContent: true,
       successCallback: (data) => response = Success(data),
@@ -70,8 +70,7 @@ class DeviceRepository {
   }) async {
     Result? response;
     await _dioClient.sendRequest(
-      resourcePath:
-          '${ApiEndpoints.homes}/$homeId/devices/$deviceId/light-state',
+      resourcePath: '${ApiEndpoints.device(homeId, deviceId)}/light-state',
       method: HttpMethod.patch,
       isLoggedInContent: true,
       body: {
@@ -94,7 +93,7 @@ class DeviceRepository {
     Result? response;
     await _dioClient.sendRequest(
       resourcePath:
-          '${ApiEndpoints.homes}/$homeId/devices/$deviceId/air-conditioner-state',
+          '${ApiEndpoints.device(homeId, deviceId)}/air-conditioner-state',
       method: HttpMethod.patch,
       isLoggedInContent: true,
       body: {
@@ -116,7 +115,7 @@ class DeviceRepository {
   }) async {
     Result? response;
     await _dioClient.sendRequest(
-      resourcePath: '${ApiEndpoints.homes}/$homeId/devices/$deviceId',
+      resourcePath: ApiEndpoints.device(homeId, deviceId),
       method: HttpMethod.patch,
       isLoggedInContent: true,
       body: {'name': name, 'roomId': roomId},
@@ -132,7 +131,7 @@ class DeviceRepository {
   }) async {
     Result? response;
     await _dioClient.sendRequest(
-      resourcePath: '${ApiEndpoints.homes}/$homeId/devices/$deviceId',
+      resourcePath: ApiEndpoints.device(homeId, deviceId),
       method: HttpMethod.delete,
       isLoggedInContent: true,
       successCallback: (data) => response = Success(data),
@@ -147,7 +146,7 @@ class DeviceRepository {
   }) async {
     Result? response;
     await _dioClient.sendRequest(
-      resourcePath: '${ApiEndpoints.userGroups}/$userGroupId/devices/$deviceId',
+      resourcePath: ApiEndpoints.device(userGroupId, deviceId),
       method: HttpMethod.get,
       isLoggedInContent: true,
       successCallback: (data) {
@@ -170,7 +169,7 @@ class DeviceRepository {
     Result? response;
 
     await _dioClient.sendRequest(
-      resourcePath: '${ApiEndpoints.userGroups}/$userGroupId/devices',
+      resourcePath: '${ApiEndpoints.devices(userGroupId)}/scan',
       method: HttpMethod.post,
       isLoggedInContent: true,
       body: {
@@ -198,7 +197,7 @@ class DeviceRepository {
     Result? response;
     await _dioClient.sendRequest(
       resourcePath:
-          '${ApiEndpoints.userGroups}/$userGroupId/devices/$deviceId/charging-ampere',
+          '${ApiEndpoints.device(userGroupId, deviceId)}/charging-ampere',
       method: HttpMethod.patch,
       isLoggedInContent: true,
       body: {'chargingAmpere': chargingAmpere},
@@ -219,8 +218,7 @@ class DeviceRepository {
   }) async {
     Result? response;
     await _dioClient.sendRequest(
-      resourcePath:
-          '${ApiEndpoints.userGroups}/$userGroupId/devices/$deviceId/nickname',
+      resourcePath: '${ApiEndpoints.device(userGroupId, deviceId)}/nickname',
       method: HttpMethod.patch,
       isLoggedInContent: true,
       body: {'nickname': nickname},
@@ -240,8 +238,7 @@ class DeviceRepository {
   }) async {
     Result? response;
     await _dioClient.sendRequest(
-      resourcePath:
-          '${ApiEndpoints.userGroups}/$userGroupId/devices/$deviceId/fw-update',
+      resourcePath: '${ApiEndpoints.device(userGroupId, deviceId)}/fw-update',
       method: HttpMethod.patch,
       isLoggedInContent: true,
       successCallback: (data) {
@@ -261,8 +258,7 @@ class DeviceRepository {
   }) async {
     Result? response;
     await _dioClient.sendRequest(
-      resourcePath:
-          '${ApiEndpoints.userGroups}/$userGroupId/devices/$deviceId/reboot-otp',
+      resourcePath: '${ApiEndpoints.device(userGroupId, deviceId)}/reboot-otp',
       method: HttpMethod.post,
       isLoggedInContent: true,
       body: {'deviceChallenge': deviceChallenge},
