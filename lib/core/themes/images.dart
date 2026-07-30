@@ -12,7 +12,6 @@ AppImages appImages(Ref ref) {
 
 class AppImages {
   final String brandingPath;
-  final commonPath = "assets/common";
 
   // White Label別に掲載する画像が違う場合はすべてbrandingから取得
   AppImages({required String appCode})
@@ -22,17 +21,4 @@ class AppImages {
   String get splash => "$brandingPath/images/splash.png";
 
   String get mainImage => "$brandingPath/images/main_image.png";
-
-  String get deviceElla => "$brandingPath/images/device_ella.png";
-  String get deviceIndustrial => "$brandingPath/images/device_industrial.png";
-  String get deviceNadiya => "$brandingPath/images/device_nadiya.png";
-
-  // 共通
-  String get noDevice => "$commonPath/images/no_device.png";
-
-  String get iconElla => "$commonPath/images/icon_ella.png";
-  String get iconIndustrial => "$commonPath/images/icon_industrial.png";
-  String get iconNadiya => "$commonPath/images/icon_nadiya.png";
-
-  String get promotionBanner => "$commonPath/images/promotion_banner.png";
 }
