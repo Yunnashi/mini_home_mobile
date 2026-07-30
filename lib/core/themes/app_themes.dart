@@ -17,6 +17,16 @@ class AppTheme {
       error: AppColors.red,
     ),
     dividerColor: AppColors.border,
+    sliderTheme: SliderThemeData(
+      activeTrackColor: AppColors.primary,
+      inactiveTrackColor: AppColors.primaryContainer,
+      thumbColor: AppColors.primary,
+      overlayColor: AppColors.primary.withValues(alpha: 0.12),
+      activeTickMarkColor: AppColors.white,
+      inactiveTickMarkColor: AppColors.primary.withValues(alpha: 0.35),
+      valueIndicatorColor: AppColors.primary,
+      valueIndicatorTextStyle: const TextStyle(color: AppColors.whiteText),
+    ),
     cardTheme: const CardThemeData(
       color: AppColors.white,
       elevation: 0,

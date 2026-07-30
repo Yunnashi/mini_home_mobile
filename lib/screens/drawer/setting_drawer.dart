@@ -16,7 +16,12 @@ import 'package:mini_home/utils/string_utils.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SettingDrawer extends ConsumerWidget {
-  SettingDrawer({Key? key}) : super(key: key);
+  const SettingDrawer({
+    this.embedded = false,
+    Key? key,
+  }) : super(key: key);
+
+  final bool embedded;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -30,19 +35,61 @@ class SettingDrawer extends ConsumerWidget {
     return packageInfoAsync.when(
       data: (packageInfo) => LayoutBuilder(
         builder: (context, constraints) {
-          // 画面の高さから、上部のpadding（SafeArea + 64px）を引いた高さをdrawerの高さとする
+          if (embedded) {
+            return Container(
+              color: AppColors.white,
+              child: SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                padding: EdgeInsets.fromLTRB(
+                  20,
+                  24,
+                  20,
+                  bottomPadding + 24,
+                ),
+                child: Column(
+                  children: [
+                    authStateAsync.when(
+                      data: (state) => state.isLoggedIn
+                          ? _LoggedInContents(
+                              state: state,
+                              packageInfo: packageInfo,
+                            )
+                          : _NotLoggedInContents(
+                              packageInfo: packageInfo,
+                            ),
+                      loading: () => const CircularProgressIndicator(
+                        color: AppColors.grey,
+                      ),
+                      error: (e, __) {
+                        safeDebugPrint("Error loading auth state: $e");
+                        return const Text("");
+                      },
+                    ),
+                    SizedBox(height: 40 + bottomPadding),
+                    Text(
+                      "Version: ${packageInfo.generateVersionString()}",
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }
+
           final screenHeight = MediaQuery.of(context).size.height;
           final topPadding = MediaQuery.of(context).padding.top;
           final drawerHeight = screenHeight - topPadding - 64;
 
           return Container(
             height: drawerHeight,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               color: AppColors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(32),
-                topRight: Radius.circular(32),
-              ),
+              borderRadius: embedded
+                  ? BorderRadius.zero
+                  : const BorderRadius.only(
+                      topLeft: Radius.circular(32),
+                      topRight: Radius.circular(32),
+                    ),
             ),
             child: Stack(
               children: [
@@ -52,13 +99,14 @@ class SettingDrawer extends ConsumerWidget {
                   child: SingleChildScrollView(
                     physics: const AlwaysScrollableScrollPhysics(),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 80),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: embedded ? 24 : 80,
+                      ),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          // 右上のバツボタンのスペースを確保
-                          const SizedBox(height: 40),
+                          if (!embedded) const SizedBox(height: 40),
                           authStateAsync.when(
                             data: (state) => state.isLoggedIn
                                 ? _LoggedInContents(
@@ -83,28 +131,28 @@ class SettingDrawer extends ConsumerWidget {
                     ),
                   ),
                 ),
-                // 右上のバツボタン（上部右に固定）
-                Positioned(
-                  top: 40,
-                  right: 20,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
-                      border: Border.all(color: AppColors.border),
-                    ),
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.close,
-                        color: AppColors.text,
-                        size: 24.0,
+                if (!embedded)
+                  Positioned(
+                    top: 40,
+                    right: 20,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                        border: Border.all(color: AppColors.border),
                       ),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.close,
+                          color: AppColors.text,
+                          size: 24.0,
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
                     ),
                   ),
-                ),
                 // バージョン情報（下に固定）
                 Positioned(
                   bottom: 0,
@@ -351,12 +399,16 @@ class _ListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
-      horizontalTitleGap: -5,
+      horizontalTitleGap: icon != null ? 12 : -5,
       leading: icon != null
-          ? Icon(
-              icon,
-              size: 24,
-              color: AppColors.text,
+          ? SizedBox(
+              width: 24,
+              height: 24,
+              child: Icon(
+                icon,
+                color: AppColors.text,
+                size: 24,
+              ),
             )
           : null,
       title: Text(
