@@ -12,7 +12,7 @@ class ScheduleService extends _$ScheduleService {
   void build() {}
 
   Future<void> getSchedulesByDevice({
-    required int userGroupId,
+    required int homeId,
     required int deviceId,
     Function(List<Schedule>)? successCallback,
     Function(String?, String?)? errorCallback,
@@ -20,7 +20,7 @@ class ScheduleService extends _$ScheduleService {
     try {
       final scheduleRepository = ref.read(scheduleRepositoryProvider);
       final response = await scheduleRepository.getSchedules(
-        userGroupId: userGroupId,
+        homeId: homeId,
         deviceId: deviceId,
       );
       if (response is Success) {
@@ -40,7 +40,7 @@ class ScheduleService extends _$ScheduleService {
   }
 
   Future<void> createSchedule({
-    required int userGroupId,
+    required int homeId,
     required int deviceId,
     required Schedule schedule,
     Function(Schedule)? successCallback,
@@ -51,7 +51,7 @@ class ScheduleService extends _$ScheduleService {
       final scheduleRepository = ref.read(scheduleRepositoryProvider);
 
       final response = await scheduleRepository.createSchedule(
-          userGroupId: userGroupId,
+          homeId: homeId,
           deviceId: deviceId,
           startAt: schedule.startAt,
           finishAt: schedule.finishAt,
@@ -73,7 +73,7 @@ class ScheduleService extends _$ScheduleService {
   }
 
   Future<void> updateSchedule({
-    required int userGroupId,
+    required int homeId,
     required int deviceId,
     required Schedule schedule,
     Function(Schedule)? successCallback,
@@ -84,7 +84,7 @@ class ScheduleService extends _$ScheduleService {
       final scheduleRepository = ref.read(scheduleRepositoryProvider);
 
       final response = await scheduleRepository.updateSchedule(
-          userGroupId: userGroupId,
+          homeId: homeId,
           deviceId: deviceId,
           scheduleId: schedule.id,
           startAt: schedule.startAt,
@@ -107,7 +107,7 @@ class ScheduleService extends _$ScheduleService {
   }
 
   Future<void> toggleScheduleEnabled({
-    required int userGroupId,
+    required int homeId,
     required int deviceId,
     required String scheduleId,
     required bool isEnabled,
@@ -119,7 +119,7 @@ class ScheduleService extends _$ScheduleService {
       final scheduleRepository = ref.read(scheduleRepositoryProvider);
 
       final response = await scheduleRepository.toggleScheduleEnabled(
-        userGroupId: userGroupId,
+        homeId: homeId,
         deviceId: deviceId,
         scheduleId: scheduleId,
         isEnabled: isEnabled,
@@ -141,7 +141,7 @@ class ScheduleService extends _$ScheduleService {
   }
 
   Future<void> deleteSchedule({
-    required int userGroupId,
+    required int homeId,
     required int deviceId,
     required String scheduleId,
     Function()? successCallback,
@@ -152,7 +152,7 @@ class ScheduleService extends _$ScheduleService {
       final scheduleRepository = ref.read(scheduleRepositoryProvider);
 
       final response = await scheduleRepository.deleteSchedule(
-        userGroupId: userGroupId,
+        homeId: homeId,
         deviceId: deviceId,
         scheduleId: scheduleId,
       );

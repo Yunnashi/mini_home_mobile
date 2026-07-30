@@ -9,6 +9,7 @@ part of 'usage.dart';
 _UsageDevice _$UsageDeviceFromJson(Map<String, dynamic> json) => _UsageDevice(
       id: (json['id'] as num).toInt(),
       deviceId: json['deviceId'] as String,
+      name: json['name'] as String?,
       nickname: json['nickname'] as String?,
     );
 
@@ -16,6 +17,7 @@ Map<String, dynamic> _$UsageDeviceToJson(_UsageDevice instance) =>
     <String, dynamic>{
       'id': instance.id,
       'deviceId': instance.deviceId,
+      'name': instance.name,
       'nickname': instance.nickname,
     };
 
@@ -25,8 +27,9 @@ _Usage _$UsageFromJson(Map<String, dynamic> json) => _Usage(
       startedAt: json['startedAt'] as String?,
       finishedAt: json['finishedAt'] as String?,
       isFinalized: json['isFinalized'] as bool,
-      kwHour: (json['kwHour'] as num).toDouble(),
-      chargingSeconds: (json['chargingSeconds'] as num).toInt(),
+      activityType: json['activityType'] as String,
+      energyKwh: (json['energyKwh'] as num).toDouble(),
+      durationSeconds: (json['durationSeconds'] as num).toInt(),
       createdAt: json['createdAt'] as String?,
       updatedAt: json['updatedAt'] as String?,
     );
@@ -37,8 +40,9 @@ Map<String, dynamic> _$UsageToJson(_Usage instance) => <String, dynamic>{
       'startedAt': instance.startedAt,
       'finishedAt': instance.finishedAt,
       'isFinalized': instance.isFinalized,
-      'kwHour': instance.kwHour,
-      'chargingSeconds': instance.chargingSeconds,
+      'activityType': instance.activityType,
+      'energyKwh': instance.energyKwh,
+      'durationSeconds': instance.durationSeconds,
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
     };

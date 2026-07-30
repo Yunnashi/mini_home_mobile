@@ -16,6 +16,7 @@ T _$identity<T>(T value) => value;
 mixin _$Home {
   int get id;
   String get name;
+  HomeSummary? get summary;
   List<Room> get rooms;
 
   /// Create a copy of Home
@@ -35,17 +36,18 @@ mixin _$Home {
             other is Home &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.summary, summary) || other.summary == summary) &&
             const DeepCollectionEquality().equals(other.rooms, rooms));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, name, const DeepCollectionEquality().hash(rooms));
+  int get hashCode => Object.hash(runtimeType, id, name, summary,
+      const DeepCollectionEquality().hash(rooms));
 
   @override
   String toString() {
-    return 'Home(id: $id, name: $name, rooms: $rooms)';
+    return 'Home(id: $id, name: $name, summary: $summary, rooms: $rooms)';
   }
 }
 
@@ -54,7 +56,9 @@ abstract mixin class $HomeCopyWith<$Res> {
   factory $HomeCopyWith(Home value, $Res Function(Home) _then) =
       _$HomeCopyWithImpl;
   @useResult
-  $Res call({int id, String name, List<Room> rooms});
+  $Res call({int id, String name, HomeSummary? summary, List<Room> rooms});
+
+  $HomeSummaryCopyWith<$Res>? get summary;
 }
 
 /// @nodoc
@@ -71,6 +75,7 @@ class _$HomeCopyWithImpl<$Res> implements $HomeCopyWith<$Res> {
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? summary = freezed,
     Object? rooms = null,
   }) {
     return _then(_self.copyWith(
@@ -82,11 +87,29 @@ class _$HomeCopyWithImpl<$Res> implements $HomeCopyWith<$Res> {
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      summary: freezed == summary
+          ? _self.summary
+          : summary // ignore: cast_nullable_to_non_nullable
+              as HomeSummary?,
       rooms: null == rooms
           ? _self.rooms
           : rooms // ignore: cast_nullable_to_non_nullable
               as List<Room>,
     ));
+  }
+
+  /// Create a copy of Home
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $HomeSummaryCopyWith<$Res>? get summary {
+    if (_self.summary == null) {
+      return null;
+    }
+
+    return $HomeSummaryCopyWith<$Res>(_self.summary!, (value) {
+      return _then(_self.copyWith(summary: value));
+    });
   }
 }
 
@@ -183,13 +206,15 @@ extension HomePatterns on Home {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(int id, String name, List<Room> rooms)? $default, {
+    TResult Function(
+            int id, String name, HomeSummary? summary, List<Room> rooms)?
+        $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
       case _Home() when $default != null:
-        return $default(_that.id, _that.name, _that.rooms);
+        return $default(_that.id, _that.name, _that.summary, _that.rooms);
       case _:
         return orElse();
     }
@@ -210,12 +235,14 @@ extension HomePatterns on Home {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(int id, String name, List<Room> rooms) $default,
+    TResult Function(
+            int id, String name, HomeSummary? summary, List<Room> rooms)
+        $default,
   ) {
     final _that = this;
     switch (_that) {
       case _Home():
-        return $default(_that.id, _that.name, _that.rooms);
+        return $default(_that.id, _that.name, _that.summary, _that.rooms);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -235,12 +262,14 @@ extension HomePatterns on Home {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(int id, String name, List<Room> rooms)? $default,
+    TResult? Function(
+            int id, String name, HomeSummary? summary, List<Room> rooms)?
+        $default,
   ) {
     final _that = this;
     switch (_that) {
       case _Home() when $default != null:
-        return $default(_that.id, _that.name, _that.rooms);
+        return $default(_that.id, _that.name, _that.summary, _that.rooms);
       case _:
         return null;
     }
@@ -253,6 +282,7 @@ class _Home implements Home {
   const _Home(
       {required this.id,
       required this.name,
+      this.summary,
       final List<Room> rooms = const <Room>[]})
       : _rooms = rooms;
   factory _Home.fromJson(Map<String, dynamic> json) => _$HomeFromJson(json);
@@ -261,6 +291,8 @@ class _Home implements Home {
   final int id;
   @override
   final String name;
+  @override
+  final HomeSummary? summary;
   final List<Room> _rooms;
   @override
   @JsonKey()
@@ -292,17 +324,18 @@ class _Home implements Home {
             other is _Home &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.summary, summary) || other.summary == summary) &&
             const DeepCollectionEquality().equals(other._rooms, _rooms));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, name, const DeepCollectionEquality().hash(_rooms));
+  int get hashCode => Object.hash(runtimeType, id, name, summary,
+      const DeepCollectionEquality().hash(_rooms));
 
   @override
   String toString() {
-    return 'Home(id: $id, name: $name, rooms: $rooms)';
+    return 'Home(id: $id, name: $name, summary: $summary, rooms: $rooms)';
   }
 }
 
@@ -312,7 +345,10 @@ abstract mixin class _$HomeCopyWith<$Res> implements $HomeCopyWith<$Res> {
       __$HomeCopyWithImpl;
   @override
   @useResult
-  $Res call({int id, String name, List<Room> rooms});
+  $Res call({int id, String name, HomeSummary? summary, List<Room> rooms});
+
+  @override
+  $HomeSummaryCopyWith<$Res>? get summary;
 }
 
 /// @nodoc
@@ -329,6 +365,7 @@ class __$HomeCopyWithImpl<$Res> implements _$HomeCopyWith<$Res> {
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? summary = freezed,
     Object? rooms = null,
   }) {
     return _then(_Home(
@@ -340,11 +377,29 @@ class __$HomeCopyWithImpl<$Res> implements _$HomeCopyWith<$Res> {
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      summary: freezed == summary
+          ? _self.summary
+          : summary // ignore: cast_nullable_to_non_nullable
+              as HomeSummary?,
       rooms: null == rooms
           ? _self._rooms
           : rooms // ignore: cast_nullable_to_non_nullable
               as List<Room>,
     ));
+  }
+
+  /// Create a copy of Home
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $HomeSummaryCopyWith<$Res>? get summary {
+    if (_self.summary == null) {
+      return null;
+    }
+
+    return $HomeSummaryCopyWith<$Res>(_self.summary!, (value) {
+      return _then(_self.copyWith(summary: value));
+    });
   }
 }
 

@@ -19,7 +19,7 @@ class UsageRepository {
   UsageRepository._(this._dioClient);
 
   Future<Result> getUsages({
-    required int userGroupId,
+    required int homeId,
     required String externalDeviceId,
     int pageSize = 3,
     int pageNum = 1,
@@ -35,7 +35,7 @@ class UsageRepository {
       'sort_order': sortOrder,
     };
     await _dioClient.sendRequest(
-      resourcePath: '${ApiEndpoints.home(userGroupId)}/usages',
+      resourcePath: '${ApiEndpoints.home(homeId)}/usages',
       method: HttpMethod.get,
       isLoggedInContent: true,
       queryParameters: queryParams,

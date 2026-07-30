@@ -5,9 +5,9 @@
       "password": "パスワード",
       "terms": "利用規約",
       "privacy_policy": "プライバシーポリシー",
-      "charging_result_time": "合計充電時間",
-      "charging_result_kwh": "合計充電量(目安)",
-      "connecting_result_time": "最終経過時間"
+      "activity_type": "アクティビティ",
+      "activity_duration": "利用時間",
+      "activity_energy": "消費電力量(目安)"
     },
     "actions": {
       "save": "保存",
@@ -56,8 +56,7 @@
         "month_day_without_seconds": "M月dd日 HH:mm",
         "month_day_only": "M月dd日",
         "year_month_only": "yyyy年M月"
-      },
-      "charging_time": "{hour}時間{minute}分{second}秒"
+      }
     },
     "permissions": {
       "error_title": "必要な権限が不足しています",
@@ -140,14 +139,33 @@
     "confirm_password": "新しいパスワード（確認）",
     "success_message": "パスワードを変更しました。"
   },
+  "navigation": {
+    "home": "ホーム",
+    "scene": "シーン",
+    "support": "サポート",
+    "store": "ストア",
+    "my": "マイ"
+  },
   "home": {
     "all_rooms": "すべて",
     "online": "オンライン",
+    "working": "稼働中",
     "offline": "オフライン",
     "brightness": "明るさ {value}%",
     "target_temperature": "設定温度 {value}°C",
     "no_devices_title": "デバイスがありません",
-    "no_devices_message": "ライトまたはエアコンを追加してスマートホームを始めましょう。"
+    "no_devices_message": "ライトまたはエアコンを追加してスマートホームを始めましょう。",
+    "active_devices": "{count} 台稼働中",
+    "indoor_temperature": "室内 {value}°C",
+    "today_energy": "今日 {value} kWh",
+    "tabs": {
+      "device": "デバイス",
+      "group": "グループ"
+    },
+    "scenes": {
+      "good_morning": "Good Morning",
+      "good_night": "Good Night"
+    }
   },
   "welcome": {
       "title": "ようこそ!",
@@ -163,6 +181,8 @@
     "operation_mode": "運転モード",
     "fan_speed": "風量",
     "offline_message": "デバイスはオフラインです。現在操作できません。",
+    "power_state": {"on": "ON", "off": "OFF"},
+    "color_presets": {"warm": "暖色", "neutral": "自然色", "cool": "寒色"},
     "modes": {"auto": "自動", "cooling": "冷房", "heating": "暖房", "fan": "送風"},
     "fans": {"low": "弱", "medium": "中", "high": "強"},
     "settings": {
@@ -198,10 +218,6 @@
     "setting_power": "設定電力",
     "temperature": "温度",
     "fetch_error": "充電器情報の取得に失敗しました。",
-    "no_device": {
-      "description": "充電器を追加して\n新しい生活を始めましょう",
-      "add_device": "QRで充電器を追加する"
-    },
     "add_device": "充電器を追加"
 
   },
@@ -248,9 +264,15 @@
     }
   },
   "usage_history": {
-    "title": "利用履歴",
-    "month_group": "{month}分",
-    "empty": "利用履歴がありません"
+    "title": "アクティビティ履歴",
+    "month_group": "{month}",
+    "empty": "履歴はまだありません",
+    "activities": {
+      "lightOn": "ライトをオン",
+      "cooling": "冷房運転",
+      "brightnessChanged": "明るさを変更",
+      "powerOff": "電源オフ"
+    }
   },
   "device_settings": {
     "reboot": {

@@ -149,9 +149,26 @@ class DeviceRegistrationScreen extends HookConsumerWidget {
       required VoidCallback onSuccess,
       required ValueNotifier<bool> isProcessing,
     }) async {
+      final homeId = authState.defaultHomeId;
+      if (homeId == null) {
+        BasicDialog.show(
+          context: context,
+          title: AppStrings.error,
+          content: Text(AppStrings.deviceIdError),
+          barrierDismissible: false,
+          buttons: [
+            BasicDialogButton.ok(
+              callback: () {
+                context.pop();
+              },
+            ),
+          ],
+        );
+        return;
+      }
       isProcessing.value = true;
-      await ref.read(deviceServiceProvider.notifier).createDeviceToUserGroup(
-            userGroupId: authState.defaultUserGroup!.id,
+      await ref.read(deviceServiceProvider.notifier).createDeviceToHome(
+            homeId: homeId,
             encryptedDeviceId: encryptedDeviceId,
             successCallback: (data) {
               onSuccess();

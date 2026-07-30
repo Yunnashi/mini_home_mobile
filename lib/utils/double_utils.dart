@@ -1,16 +1,16 @@
-import 'package:mini_home/core/themes/strings.dart';
 import 'package:intl/intl.dart';
 import 'dart:math';
 
 extension DoubleUtils on double? {
   /// 秒数を時・分・秒のフォーマットに変換
   String formatDuration() {
-    if (this == null) return AppStrings.timeCharging(0, 0, 0);
+    if (this == null) return '0:00:00';
     int secondsInt = this!.toInt();
     int hours = secondsInt ~/ 3600;
     int minutes = (secondsInt % 3600) ~/ 60;
     int remainingSeconds = secondsInt % 60;
-    return AppStrings.timeCharging(hours, minutes, remainingSeconds);
+    return '$hours:${minutes.toString().padLeft(2, '0')}:'
+        '${remainingSeconds.toString().padLeft(2, '0')}';
   }
 
   /// 整数なら小数点なし、小数ならそのままのシンプルな文字列に変換

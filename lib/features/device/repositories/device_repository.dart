@@ -162,14 +162,14 @@ class DeviceRepository {
     return response ?? Failure('Unknown error');
   }
 
-  Future<Result> createDeviceToUserGroup({
-    required int userGroupId,
+  Future<Result> createDeviceToHome({
+    required int homeId,
     required String encryptedDeviceId,
   }) async {
     Result? response;
 
     await _dioClient.sendRequest(
-      resourcePath: '${ApiEndpoints.devices(userGroupId)}/scan',
+      resourcePath: '${ApiEndpoints.devices(homeId)}/scan',
       method: HttpMethod.post,
       isLoggedInContent: true,
       body: {

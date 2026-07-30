@@ -1,4 +1,5 @@
 import 'package:mini_home/core/network/models/result.dart';
+import 'package:mini_home/features/auth/services/auth_state_service.dart';
 import 'package:mini_home/features/device/models/air_conditioner_state.dart';
 import 'package:mini_home/features/device/models/device.dart';
 import 'package:mini_home/features/device/models/light_state.dart';
@@ -9,14 +10,19 @@ part 'smart_device_service.g.dart';
 
 @riverpod
 class SmartDeviceService extends _$SmartDeviceService {
-  static const int demoHomeId = 1;
-
   @override
-  Future<Device> build(int deviceId) => _fetch(deviceId);
+  Future<Device> build(int deviceId) async {
+    final authState = await ref.watch(authStateServiceProvider.future);
+    final homeId = authState.defaultHomeId;
+    if (homeId == null) {
+      throw Exception('Default home is not configured');
+    }
+    return _fetch(homeId: homeId, deviceId: deviceId);
+  }
 
-  Future<Device> _fetch(int deviceId) async {
+  Future<Device> _fetch({required int homeId, required int deviceId}) async {
     final result = await ref.read(deviceRepositoryProvider).getSmartDevice(
-          homeId: demoHomeId,
+          homeId: homeId,
           deviceId: deviceId,
         );
     if (result case Success(value: final value)) {
@@ -27,7 +33,14 @@ class SmartDeviceService extends _$SmartDeviceService {
 
   Future<void> refresh() async {
     state = const AsyncLoading();
-    state = await AsyncValue.guard(() => _fetch(deviceId));
+    final authState = await ref.read(authStateServiceProvider.future);
+    final homeId = authState.defaultHomeId;
+    state = await AsyncValue.guard(() async {
+      if (homeId == null) {
+        throw Exception('Default home is not configured');
+      }
+      return _fetch(homeId: homeId, deviceId: deviceId);
+    });
   }
 
   Future<void> setPower(bool value) async {

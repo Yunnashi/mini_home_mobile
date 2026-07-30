@@ -20,12 +20,12 @@ class ScheduleRepository {
   ScheduleRepository._(this._dioClient);
 
   Future<Result> getSchedules({
-    required int userGroupId,
+    required int homeId,
     required int deviceId,
   }) async {
     Result? response;
     await _dioClient.sendRequest(
-      resourcePath: ApiEndpoints.schedules(userGroupId, deviceId),
+      resourcePath: ApiEndpoints.schedules(homeId, deviceId),
       method: HttpMethod.get,
       isLoggedInContent: true,
       successCallback: (data) {
@@ -39,7 +39,7 @@ class ScheduleRepository {
   }
 
   Future<Result> createSchedule({
-    required int userGroupId,
+    required int homeId,
     required int deviceId,
     required String startAt,
     required String finishAt,
@@ -47,7 +47,7 @@ class ScheduleRepository {
   }) async {
     Result? response;
     await _dioClient.sendRequest(
-      resourcePath: ApiEndpoints.schedules(userGroupId, deviceId),
+      resourcePath: ApiEndpoints.schedules(homeId, deviceId),
       method: HttpMethod.post,
       isLoggedInContent: true,
       body: {
@@ -66,7 +66,7 @@ class ScheduleRepository {
   }
 
   Future<Result> updateSchedule({
-    required int userGroupId,
+    required int homeId,
     required int deviceId,
     required String scheduleId,
     required String startAt,
@@ -76,7 +76,7 @@ class ScheduleRepository {
     Result? response;
     await _dioClient.sendRequest(
       resourcePath:
-          '${ApiEndpoints.schedules(userGroupId, deviceId)}/$scheduleId',
+          '${ApiEndpoints.schedules(homeId, deviceId)}/$scheduleId',
       method: HttpMethod.patch,
       isLoggedInContent: true,
       body: {
@@ -95,7 +95,7 @@ class ScheduleRepository {
   }
 
   Future<Result> toggleScheduleEnabled({
-    required int userGroupId,
+    required int homeId,
     required int deviceId,
     required String scheduleId,
     required bool isEnabled,
@@ -103,7 +103,7 @@ class ScheduleRepository {
     Result? response;
     await _dioClient.sendRequest(
       resourcePath:
-          '${ApiEndpoints.schedules(userGroupId, deviceId)}/$scheduleId/enabled',
+          '${ApiEndpoints.schedules(homeId, deviceId)}/$scheduleId/enabled',
       method: HttpMethod.patch,
       isLoggedInContent: true,
       body: {'isEnabled': isEnabled},
@@ -118,14 +118,14 @@ class ScheduleRepository {
   }
 
   Future<Result> deleteSchedule({
-    required int userGroupId,
+    required int homeId,
     required int deviceId,
     required String scheduleId,
   }) async {
     Result? response;
     await _dioClient.sendRequest(
       resourcePath:
-          '${ApiEndpoints.schedules(userGroupId, deviceId)}/$scheduleId',
+          '${ApiEndpoints.schedules(homeId, deviceId)}/$scheduleId',
       method: HttpMethod.delete,
       isLoggedInContent: true,
       successCallback: (data) {

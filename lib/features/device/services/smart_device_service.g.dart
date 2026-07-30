@@ -7,7 +7,7 @@ part of 'smart_device_service.dart';
 // **************************************************************************
 
 String _$smartDeviceServiceHash() =>
-    r'238850e64804618127412e3027cf67a3a6a62acf';
+    r'e943160ec81d00c0ba54da5a546ade7e16429350';
 
 /// Copied from Dart SDK
 class _SystemHash {

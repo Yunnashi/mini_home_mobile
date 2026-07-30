@@ -42,9 +42,9 @@ class DeviceService extends _$DeviceService {
     }
   }
 
-  /// ユーザーグループにデバイスを追加
-  Future<void> createDeviceToUserGroup({
-    required int userGroupId,
+  /// ホームにデバイスを追加
+  Future<void> createDeviceToHome({
+    required int homeId,
     required String encryptedDeviceId,
     Function(dynamic)? successCallback,
     Function(String?, String?)? errorCallback,
@@ -52,8 +52,8 @@ class DeviceService extends _$DeviceService {
     try {
       Loading().show();
       final deviceRepository = ref.read(deviceRepositoryProvider);
-      final response = await deviceRepository.createDeviceToUserGroup(
-        userGroupId: userGroupId,
+      final response = await deviceRepository.createDeviceToHome(
+        homeId: homeId,
         encryptedDeviceId: encryptedDeviceId,
       );
 
@@ -68,7 +68,7 @@ class DeviceService extends _$DeviceService {
       }
     } catch (e) {
       Loading().dismiss();
-      errorCallback?.call(e.toString(), 'CREATE_DEVICE_TO_USER_GROUP_ERROR');
+      errorCallback?.call(e.toString(), 'CREATE_DEVICE_TO_HOME_ERROR');
     }
   }
 

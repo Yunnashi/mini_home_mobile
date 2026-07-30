@@ -4,6 +4,7 @@ class AppStrings {
   static String get allRooms => "home.all_rooms".tr();
   static String get online => "home.online".tr();
   static String get offline => "home.offline".tr();
+  static String get working => "home.working".tr();
   static String get noDevicesTitle => "home.no_devices_title".tr();
   static String get noDevicesMessage => "home.no_devices_message".tr();
   static String brightnessValue(int value) =>
@@ -24,6 +25,11 @@ class AppStrings {
   static String get mediumFan => "smart_device.fans.medium".tr();
   static String get highFan => "smart_device.fans.high".tr();
   static String get offlineMessage => "smart_device.offline_message".tr();
+  static String get powerOn => "smart_device.power_state.on".tr();
+  static String get powerOff => "smart_device.power_state.off".tr();
+  static String get warmLight => "smart_device.color_presets.warm".tr();
+  static String get neutralLight => "smart_device.color_presets.neutral".tr();
+  static String get coolLight => "smart_device.color_presets.cool".tr();
   static String get deviceName => "smart_device.settings.name".tr();
   static String get room => "smart_device.settings.room".tr();
   static String get deviceInformation =>
@@ -53,14 +59,15 @@ class AppStrings {
 
   static String get lblPrivacyPolicy => "commons.labels.privacy_policy".tr();
 
-  static String get chargingResultTimeTitle =>
-      "commons.labels.charging_result_time".tr();
+  static String get activityDurationTitle =>
+      "commons.labels.activity_duration".tr();
 
-  static String get chargingResultKwhTitle =>
-      "commons.labels.charging_result_kwh".tr();
+  static String get activityEnergyTitle => "commons.labels.activity_energy".tr();
 
-  static String get connectingResultTimeTitle =>
-      "commons.labels.connecting_result_time".tr();
+  static String get activityTypeTitle => "commons.labels.activity_type".tr();
+
+  static String activityType(String value) =>
+      "usage_history.activities.$value".tr();
 
   //-------------------Commons - actions -------------------
   static String get ok => "OK";
@@ -89,12 +96,6 @@ class AppStrings {
   static String formatDouble(double value) =>
       value == 0 ? '-' : "${value % 1 == 0 ? value.toInt() : value}";
 
-  static String timeCharging(int hour, int minute, int second) =>
-      "commons.formats.charging_time".tr(namedArgs: {
-        "hour": hour.toString(),
-        "minute": minute.toString().padLeft(2, '0'),
-        "second": second.toString().padLeft(2, '0'),
-      });
   //-------------------Commons - input validations-------------------
   static String messageMinLengthError(String fieldTitle, int minLength) =>
       "commons.validations.min_length".tr(namedArgs: {
@@ -316,13 +317,34 @@ class AppStrings {
 
   static String get deviceListFetchError => "device_list.fetch_error".tr();
 
-  static String get noDeviceDescription =>
-      "device_list.no_device.description".tr();
-
-  static String get noDeviceAddDevice =>
-      "device_list.no_device.add_device".tr();
-
   static String get addDevice => "device_list.add_device".tr();
+
+  static String get homeTab => "navigation.home".tr();
+
+  static String get sceneTab => "navigation.scene".tr();
+
+  static String get supportTab => "navigation.support".tr();
+
+  static String get storeTab => "navigation.store".tr();
+
+  static String get myTab => "navigation.my".tr();
+
+  static String get deviceTab => "home.tabs.device".tr();
+
+  static String get groupTab => "home.tabs.group".tr();
+
+  static String activeDevices(int count) =>
+      "home.active_devices".tr(namedArgs: {'count': '$count'});
+
+  static String indoorTemperature(int value) =>
+      "home.indoor_temperature".tr(namedArgs: {'value': '$value'});
+
+  static String todayEnergy(double value) =>
+      "home.today_energy".tr(namedArgs: {'value': formatDouble(value)});
+
+  static String get goodMorningScene => "home.scenes.good_morning".tr();
+
+  static String get goodNightScene => "home.scenes.good_night".tr();
 
   //-------------------Device Detail Screen-------------------
   static String get deviceDetailTitle => "device_detail.title".tr();

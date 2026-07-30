@@ -30,8 +30,8 @@ class ScheduleEditScreen extends HookConsumerWidget {
     final authStateAsync = ref.watch(authStateServiceProvider);
     final validateForm = useRef<bool Function()?>(null);
 
-    void saveSchedule(int? userGroupId) async {
-      if (userGroupId == null) return;
+    void saveSchedule(int? homeId) async {
+      if (homeId == null) return;
 
       // バリデーション実行
       final isValid = validateForm.value?.call() ?? false;
@@ -39,7 +39,7 @@ class ScheduleEditScreen extends HookConsumerWidget {
 
       final scheduleService = ref.read(scheduleServiceProvider.notifier);
       await scheduleService.updateSchedule(
-        userGroupId: userGroupId,
+        homeId: homeId,
         deviceId: deviceId,
         schedule: editingSchedule.value,
         successCallback: (updatedSchedule) {
@@ -58,8 +58,8 @@ class ScheduleEditScreen extends HookConsumerWidget {
       );
     }
 
-    void deleteSchedule(int? userGroupId) async {
-      if (userGroupId == null) return;
+    void deleteSchedule(int? homeId) async {
+      if (homeId == null) return;
 
       // 削除確認ダイアログを表示
       bool confirmed = false;
@@ -84,7 +84,7 @@ class ScheduleEditScreen extends HookConsumerWidget {
       // スケジュール削除処理
       final scheduleService = ref.read(scheduleServiceProvider.notifier);
       await scheduleService.deleteSchedule(
-        userGroupId: userGroupId,
+        homeId: homeId,
         deviceId: deviceId,
         scheduleId: editingSchedule.value.id,
         successCallback: () {
@@ -105,7 +105,7 @@ class ScheduleEditScreen extends HookConsumerWidget {
 
     return authStateAsync.when(
       data: (authState) {
-        final userGroupId = authState.defaultUserGroup?.id;
+        final homeId = authState.defaultHomeId;
 
         return GestureDetector(
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -115,7 +115,7 @@ class ScheduleEditScreen extends HookConsumerWidget {
               titleAppBar: AppStrings.scheduleEditTitle,
               onBackPressed: () => context.pop(),
               rightIcon: TextButton(
-                onPressed: () => deleteSchedule(userGroupId),
+                onPressed: () => deleteSchedule(homeId),
                 style: TextButton.styleFrom(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
@@ -136,7 +136,7 @@ class ScheduleEditScreen extends HookConsumerWidget {
               onValidatorReady: (validator) {
                 validateForm.value = validator;
               },
-              onSavePressed: () => saveSchedule(userGroupId),
+              onSavePressed: () => saveSchedule(homeId),
             ),
           ),
         );

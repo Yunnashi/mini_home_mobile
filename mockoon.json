@@ -17,7 +17,7 @@
       "responses": [
         {
           "uuid": "4dc4f185-9075-4a59-9359-000000000011",
-          "body": "{\n  \"id\": 1,\n  \"name\": \"My Home\",\n  \"rooms\": [\n    {\"id\": 1, \"name\": \"Living room\", \"displayOrder\": 1},\n    {\"id\": 2, \"name\": \"Bedroom\", \"displayOrder\": 2}\n  ]\n}",
+          "body": "{\n  \"id\": 1,\n  \"name\": \"My Home\",\n  \"summary\": {\n    \"activeDeviceCount\": 1,\n    \"indoorTemperature\": 27,\n    \"todayEnergyKwh\": 3.6\n  },\n  \"rooms\": [\n    {\"id\": 1, \"name\": \"Living room\", \"displayOrder\": 1},\n    {\"id\": 2, \"name\": \"Bedroom\", \"displayOrder\": 2}\n  ]\n}",
           "latency": 120,
           "statusCode": 200,
           "label": "Success",
@@ -193,7 +193,7 @@
       "responses": [
         {
           "uuid": "4dc4f185-9075-4a59-9359-000000000041",
-          "body": "{{bodyRaw}}",
+          "body": "{\"ok\":true}",
           "latency": 120,
           "statusCode": 200,
           "label": "Success",
@@ -221,6 +221,106 @@
       "streamingInterval": 0
     },
     {
+      "uuid": "4dc4f185-9075-4a59-9359-000000000009",
+      "type": "http",
+      "documentation": "miniHome activity history",
+      "method": "get",
+      "endpoint": "v1/homes/:homeId/usages",
+      "responses": [
+        {
+          "uuid": "4dc4f185-9075-4a59-9359-000000000091",
+          "body": "{\n  \"data\": [\n    {\"id\": 1, \"device\": {\"id\": 1, \"deviceId\": \"demo-light-1\", \"name\": \"Living room light\"}, \"activityType\": \"lightOn\", \"startedAt\": \"2026-07-30T08:00:00.000+0000\", \"finishedAt\": \"2026-07-30T09:30:00.000+0000\", \"isFinalized\": true, \"energyKwh\": 1.2, \"durationSeconds\": 5400, \"createdAt\": \"2026-07-30T09:30:00.000+0000\", \"updatedAt\": \"2026-07-30T09:30:00.000+0000\"},\n    {\"id\": 2, \"device\": {\"id\": 2, \"deviceId\": \"demo-ac-1\", \"name\": \"Living room AC\"}, \"activityType\": \"cooling\", \"startedAt\": \"2026-07-29T10:00:00.000+0000\", \"finishedAt\": \"2026-07-29T12:15:00.000+0000\", \"isFinalized\": true, \"energyKwh\": 2.4, \"durationSeconds\": 8100, \"createdAt\": \"2026-07-29T12:15:00.000+0000\", \"updatedAt\": \"2026-07-29T12:15:00.000+0000\"}\n  ]\n}",
+          "latency": 120,
+          "statusCode": 200,
+          "label": "Success",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "4dc4f185-9075-4a59-9359-000000000092",
+          "body": "{\"data\": []}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Empty history",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "empty",
+              "value": "true",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "4dc4f185-9075-4a59-9359-000000000093",
+          "body": "{\"statusCode\":500,\"message\":\"Failed to load activity history\",\"error\":\"Internal Server Error\",\"errorCode\":\"MH_USAGE_500\"}",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Server error",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "error",
+              "value": "true",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
       "uuid": "4dc4f185-9075-4a59-9359-000000000006",
       "type": "http",
       "documentation": "miniHome light controls",
@@ -229,7 +329,7 @@
       "responses": [
         {
           "uuid": "4dc4f185-9075-4a59-9359-000000000061",
-          "body": "{{bodyRaw}}",
+          "body": "{\"ok\":true}",
           "latency": 100,
           "statusCode": 200,
           "label": "Success",
@@ -320,7 +420,7 @@
       "responses": [
         {
           "uuid": "4dc4f185-9075-4a59-9359-000000000071",
-          "body": "{{bodyRaw}}",
+          "body": "{\"ok\":true}",
           "latency": 100,
           "statusCode": 200,
           "label": "Success",
@@ -1564,6 +1664,10 @@
     {
       "type": "route",
       "uuid": "4dc4f185-9075-4a59-9359-000000000103"
+    },
+    {
+      "type": "route",
+      "uuid": "4dc4f185-9075-4a59-9359-000000000009"
     }
   ],
   "proxyMode": false,

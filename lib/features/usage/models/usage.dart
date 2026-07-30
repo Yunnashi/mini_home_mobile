@@ -9,6 +9,7 @@ abstract class UsageDevice with _$UsageDevice {
   const factory UsageDevice({
     required int id,
     required String deviceId, // 実際はexternalDeviceId
+    String? name,
     String? nickname,
   }) = _UsageDevice;
 
@@ -24,8 +25,9 @@ abstract class Usage with _$Usage {
     String? startedAt,
     String? finishedAt,
     required bool isFinalized,
-    required double kwHour,
-    required int chargingSeconds,
+    required String activityType,
+    required double energyKwh,
+    required int durationSeconds,
     required String? createdAt,
     required String? updatedAt,
   }) = _Usage;

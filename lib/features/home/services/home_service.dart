@@ -1,4 +1,5 @@
 import 'package:mini_home/core/network/models/result.dart';
+import 'package:mini_home/features/auth/services/auth_state_service.dart';
 import 'package:mini_home/features/device/models/device.dart';
 import 'package:mini_home/features/device/repositories/device_repository.dart';
 import 'package:mini_home/features/home/models/home.dart';
@@ -39,25 +40,30 @@ class HomeDashboardState {
 
 @Riverpod(keepAlive: true)
 class HomeService extends _$HomeService {
-  static const int demoHomeId = 1;
-
   @override
-  Future<HomeDashboardState> build() => _load();
+  Future<HomeDashboardState> build() async {
+    final authState = await ref.watch(authStateServiceProvider.future);
+    final homeId = authState.defaultHomeId;
+    if (homeId == null) {
+      throw Exception('Default home is not configured');
+    }
+    return _load(homeId);
+  }
 
-  Future<HomeDashboardState> _load() async {
-    final homeResult =
-        await ref.read(homeRepositoryProvider).getHome(demoHomeId);
+  Future<HomeDashboardState> _load(int homeId) async {
+    final homeResult = await ref.read(homeRepositoryProvider).getHome(homeId);
     final devicesResult =
-        await ref.read(deviceRepositoryProvider).getDevices(homeId: demoHomeId);
+        await ref.read(deviceRepositoryProvider).getDevices(homeId: homeId);
 
     if (homeResult case Success(value: final value)) {
       if (devicesResult case Success(value: final deviceData)) {
+        final homeMap = value as Map<String, dynamic>;
         final map = deviceData as Map<String, dynamic>;
         final devices = (map['devices'] as List<dynamic>? ?? const [])
             .map((json) => Device.fromJson(json as Map<String, dynamic>))
             .toList();
         return HomeDashboardState(
-          home: Home.fromJson(value as Map<String, dynamic>),
+          home: Home.fromJson(homeMap),
           devices: devices,
         );
       }
@@ -71,7 +77,14 @@ class HomeService extends _$HomeService {
 
   Future<void> refresh() async {
     state = const AsyncLoading();
-    state = await AsyncValue.guard(_load);
+    final authState = await ref.read(authStateServiceProvider.future);
+    final homeId = authState.defaultHomeId;
+    state = await AsyncValue.guard(() async {
+      if (homeId == null) {
+        throw Exception('Default home is not configured');
+      }
+      return _load(homeId);
+    });
   }
 
   void selectRoom(int? roomId) {

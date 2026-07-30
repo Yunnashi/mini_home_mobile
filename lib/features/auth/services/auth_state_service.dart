@@ -8,22 +8,32 @@ part 'auth_state_service.g.dart';
 class AuthState {
   final bool isLoggedIn;
   final String email;
+  final int? defaultHomeId;
   final UserGroup? defaultUserGroup;
 
-  const AuthState(
-      {required this.isLoggedIn, required this.email, this.defaultUserGroup});
+  const AuthState({
+    required this.isLoggedIn,
+    required this.email,
+    this.defaultHomeId,
+    this.defaultUserGroup,
+  });
 
-  AuthState copyWith(
-      {bool? isLoggedIn, String? email, UserGroup? defaultUserGroup}) {
+  AuthState copyWith({
+    bool? isLoggedIn,
+    String? email,
+    int? defaultHomeId,
+    UserGroup? defaultUserGroup,
+  }) {
     return AuthState(
       isLoggedIn: isLoggedIn ?? this.isLoggedIn,
       email: email ?? this.email,
+      defaultHomeId: defaultHomeId ?? this.defaultHomeId,
       defaultUserGroup: defaultUserGroup ?? this.defaultUserGroup,
     );
   }
 
   factory AuthState.initial() =>
-      const AuthState(isLoggedIn: false, email: "", defaultUserGroup: null);
+      const AuthState(isLoggedIn: false, email: "", defaultHomeId: null);
 }
 
 @riverpod
@@ -35,14 +45,25 @@ class AuthStateService extends _$AuthStateService {
 
     if (isLoggedIn) {
       final user = await userService.getCurrentUser();
+      final defaultHomeId = user?.defaultHomeId;
+      final userGroups = user?.userGroups ?? const <UserGroup>[];
+      final matchedDefaultHome = [
+        for (final group in userGroups)
+          if (group.id == defaultHomeId) group,
+      ];
+      final defaultUserGroup = defaultHomeId != null
+          ? matchedDefaultHome.isNotEmpty
+              ? matchedDefaultHome.first
+              : UserGroup(id: defaultHomeId, name: '')
+          : userGroups.isNotEmpty
+              ? userGroups.first
+              : null;
       return AuthState(
-          isLoggedIn: true,
-          email: user?.email ?? "",
-          defaultUserGroup: user?.defaultHomeId != null
-              ? UserGroup(id: user!.defaultHomeId!, name: 'My Home')
-              : user?.userGroups?.isNotEmpty == true
-                  ? user?.userGroups!.first
-                  : null);
+        isLoggedIn: true,
+        email: user?.email ?? "",
+        defaultHomeId: defaultHomeId ?? defaultUserGroup?.id,
+        defaultUserGroup: defaultUserGroup,
+      );
     } else {
       return AuthState.initial();
     }

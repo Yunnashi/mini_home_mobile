@@ -33,8 +33,8 @@ class ScheduleCreateScreen extends HookConsumerWidget {
     final authStateAsync = ref.watch(authStateServiceProvider);
     final validateForm = useRef<bool Function()?>(null);
 
-    void saveSchedule(int? userGroupId) async {
-      if (userGroupId == null) return;
+    void saveSchedule(int? homeId) async {
+      if (homeId == null) return;
 
       // バリデーション実行
       final isValid = validateForm.value?.call() ?? false;
@@ -44,7 +44,7 @@ class ScheduleCreateScreen extends HookConsumerWidget {
 
       final scheduleService = ref.read(scheduleServiceProvider.notifier);
       await scheduleService.createSchedule(
-        userGroupId: userGroupId,
+        homeId: homeId,
         deviceId: deviceId,
         schedule: schedule.value,
         successCallback: (schedule) {
@@ -65,7 +65,7 @@ class ScheduleCreateScreen extends HookConsumerWidget {
 
     return authStateAsync.when(
       data: (authState) {
-        final userGroupId = authState.defaultUserGroup?.id;
+        final homeId = authState.defaultHomeId;
 
         return GestureDetector(
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -83,7 +83,7 @@ class ScheduleCreateScreen extends HookConsumerWidget {
               onValidatorReady: (validator) {
                 validateForm.value = validator;
               },
-              onSavePressed: () => saveSchedule(userGroupId),
+              onSavePressed: () => saveSchedule(homeId),
             ),
           ),
         );

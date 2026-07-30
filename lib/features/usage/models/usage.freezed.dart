@@ -16,6 +16,7 @@ T _$identity<T>(T value) => value;
 mixin _$UsageDevice {
   int get id;
   String get deviceId; // 実際はexternalDeviceId
+  String? get name;
   String? get nickname;
 
   /// Create a copy of UsageDevice
@@ -36,17 +37,18 @@ mixin _$UsageDevice {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.deviceId, deviceId) ||
                 other.deviceId == deviceId) &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.nickname, nickname) ||
                 other.nickname == nickname));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, deviceId, nickname);
+  int get hashCode => Object.hash(runtimeType, id, deviceId, name, nickname);
 
   @override
   String toString() {
-    return 'UsageDevice(id: $id, deviceId: $deviceId, nickname: $nickname)';
+    return 'UsageDevice(id: $id, deviceId: $deviceId, name: $name, nickname: $nickname)';
   }
 }
 
@@ -56,7 +58,7 @@ abstract mixin class $UsageDeviceCopyWith<$Res> {
           UsageDevice value, $Res Function(UsageDevice) _then) =
       _$UsageDeviceCopyWithImpl;
   @useResult
-  $Res call({int id, String deviceId, String? nickname});
+  $Res call({int id, String deviceId, String? name, String? nickname});
 }
 
 /// @nodoc
@@ -73,6 +75,7 @@ class _$UsageDeviceCopyWithImpl<$Res> implements $UsageDeviceCopyWith<$Res> {
   $Res call({
     Object? id = null,
     Object? deviceId = null,
+    Object? name = freezed,
     Object? nickname = freezed,
   }) {
     return _then(_self.copyWith(
@@ -84,6 +87,10 @@ class _$UsageDeviceCopyWithImpl<$Res> implements $UsageDeviceCopyWith<$Res> {
           ? _self.deviceId
           : deviceId // ignore: cast_nullable_to_non_nullable
               as String,
+      name: freezed == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
       nickname: freezed == nickname
           ? _self.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
@@ -185,13 +192,14 @@ extension UsageDevicePatterns on UsageDevice {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(int id, String deviceId, String? nickname)? $default, {
+    TResult Function(int id, String deviceId, String? name, String? nickname)?
+        $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
       case _UsageDevice() when $default != null:
-        return $default(_that.id, _that.deviceId, _that.nickname);
+        return $default(_that.id, _that.deviceId, _that.name, _that.nickname);
       case _:
         return orElse();
     }
@@ -212,12 +220,13 @@ extension UsageDevicePatterns on UsageDevice {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(int id, String deviceId, String? nickname) $default,
+    TResult Function(int id, String deviceId, String? name, String? nickname)
+        $default,
   ) {
     final _that = this;
     switch (_that) {
       case _UsageDevice():
-        return $default(_that.id, _that.deviceId, _that.nickname);
+        return $default(_that.id, _that.deviceId, _that.name, _that.nickname);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -237,12 +246,13 @@ extension UsageDevicePatterns on UsageDevice {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(int id, String deviceId, String? nickname)? $default,
+    TResult? Function(int id, String deviceId, String? name, String? nickname)?
+        $default,
   ) {
     final _that = this;
     switch (_that) {
       case _UsageDevice() when $default != null:
-        return $default(_that.id, _that.deviceId, _that.nickname);
+        return $default(_that.id, _that.deviceId, _that.name, _that.nickname);
       case _:
         return null;
     }
@@ -252,7 +262,8 @@ extension UsageDevicePatterns on UsageDevice {
 /// @nodoc
 @JsonSerializable()
 class _UsageDevice implements UsageDevice {
-  const _UsageDevice({required this.id, required this.deviceId, this.nickname});
+  const _UsageDevice(
+      {required this.id, required this.deviceId, this.name, this.nickname});
   factory _UsageDevice.fromJson(Map<String, dynamic> json) =>
       _$UsageDeviceFromJson(json);
 
@@ -261,6 +272,8 @@ class _UsageDevice implements UsageDevice {
   @override
   final String deviceId;
 // 実際はexternalDeviceId
+  @override
+  final String? name;
   @override
   final String? nickname;
 
@@ -287,17 +300,18 @@ class _UsageDevice implements UsageDevice {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.deviceId, deviceId) ||
                 other.deviceId == deviceId) &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.nickname, nickname) ||
                 other.nickname == nickname));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, deviceId, nickname);
+  int get hashCode => Object.hash(runtimeType, id, deviceId, name, nickname);
 
   @override
   String toString() {
-    return 'UsageDevice(id: $id, deviceId: $deviceId, nickname: $nickname)';
+    return 'UsageDevice(id: $id, deviceId: $deviceId, name: $name, nickname: $nickname)';
   }
 }
 
@@ -309,7 +323,7 @@ abstract mixin class _$UsageDeviceCopyWith<$Res>
       __$UsageDeviceCopyWithImpl;
   @override
   @useResult
-  $Res call({int id, String deviceId, String? nickname});
+  $Res call({int id, String deviceId, String? name, String? nickname});
 }
 
 /// @nodoc
@@ -326,6 +340,7 @@ class __$UsageDeviceCopyWithImpl<$Res> implements _$UsageDeviceCopyWith<$Res> {
   $Res call({
     Object? id = null,
     Object? deviceId = null,
+    Object? name = freezed,
     Object? nickname = freezed,
   }) {
     return _then(_UsageDevice(
@@ -337,6 +352,10 @@ class __$UsageDeviceCopyWithImpl<$Res> implements _$UsageDeviceCopyWith<$Res> {
           ? _self.deviceId
           : deviceId // ignore: cast_nullable_to_non_nullable
               as String,
+      name: freezed == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
       nickname: freezed == nickname
           ? _self.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
@@ -352,8 +371,9 @@ mixin _$Usage {
   String? get startedAt;
   String? get finishedAt;
   bool get isFinalized;
-  double get kwHour;
-  int get chargingSeconds;
+  String get activityType;
+  double get energyKwh;
+  int get durationSeconds;
   String? get createdAt;
   String? get updatedAt;
 
@@ -380,9 +400,12 @@ mixin _$Usage {
                 other.finishedAt == finishedAt) &&
             (identical(other.isFinalized, isFinalized) ||
                 other.isFinalized == isFinalized) &&
-            (identical(other.kwHour, kwHour) || other.kwHour == kwHour) &&
-            (identical(other.chargingSeconds, chargingSeconds) ||
-                other.chargingSeconds == chargingSeconds) &&
+            (identical(other.activityType, activityType) ||
+                other.activityType == activityType) &&
+            (identical(other.energyKwh, energyKwh) ||
+                other.energyKwh == energyKwh) &&
+            (identical(other.durationSeconds, durationSeconds) ||
+                other.durationSeconds == durationSeconds) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -391,12 +414,22 @@ mixin _$Usage {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, device, startedAt,
-      finishedAt, isFinalized, kwHour, chargingSeconds, createdAt, updatedAt);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      device,
+      startedAt,
+      finishedAt,
+      isFinalized,
+      activityType,
+      energyKwh,
+      durationSeconds,
+      createdAt,
+      updatedAt);
 
   @override
   String toString() {
-    return 'Usage(id: $id, device: $device, startedAt: $startedAt, finishedAt: $finishedAt, isFinalized: $isFinalized, kwHour: $kwHour, chargingSeconds: $chargingSeconds, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Usage(id: $id, device: $device, startedAt: $startedAt, finishedAt: $finishedAt, isFinalized: $isFinalized, activityType: $activityType, energyKwh: $energyKwh, durationSeconds: $durationSeconds, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 }
 
@@ -411,8 +444,9 @@ abstract mixin class $UsageCopyWith<$Res> {
       String? startedAt,
       String? finishedAt,
       bool isFinalized,
-      double kwHour,
-      int chargingSeconds,
+      String activityType,
+      double energyKwh,
+      int durationSeconds,
       String? createdAt,
       String? updatedAt});
 
@@ -436,8 +470,9 @@ class _$UsageCopyWithImpl<$Res> implements $UsageCopyWith<$Res> {
     Object? startedAt = freezed,
     Object? finishedAt = freezed,
     Object? isFinalized = null,
-    Object? kwHour = null,
-    Object? chargingSeconds = null,
+    Object? activityType = null,
+    Object? energyKwh = null,
+    Object? durationSeconds = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -462,13 +497,17 @@ class _$UsageCopyWithImpl<$Res> implements $UsageCopyWith<$Res> {
           ? _self.isFinalized
           : isFinalized // ignore: cast_nullable_to_non_nullable
               as bool,
-      kwHour: null == kwHour
-          ? _self.kwHour
-          : kwHour // ignore: cast_nullable_to_non_nullable
+      activityType: null == activityType
+          ? _self.activityType
+          : activityType // ignore: cast_nullable_to_non_nullable
+              as String,
+      energyKwh: null == energyKwh
+          ? _self.energyKwh
+          : energyKwh // ignore: cast_nullable_to_non_nullable
               as double,
-      chargingSeconds: null == chargingSeconds
-          ? _self.chargingSeconds
-          : chargingSeconds // ignore: cast_nullable_to_non_nullable
+      durationSeconds: null == durationSeconds
+          ? _self.durationSeconds
+          : durationSeconds // ignore: cast_nullable_to_non_nullable
               as int,
       createdAt: freezed == createdAt
           ? _self.createdAt
@@ -591,8 +630,9 @@ extension UsagePatterns on Usage {
             String? startedAt,
             String? finishedAt,
             bool isFinalized,
-            double kwHour,
-            int chargingSeconds,
+            String activityType,
+            double energyKwh,
+            int durationSeconds,
             String? createdAt,
             String? updatedAt)?
         $default, {
@@ -607,8 +647,9 @@ extension UsagePatterns on Usage {
             _that.startedAt,
             _that.finishedAt,
             _that.isFinalized,
-            _that.kwHour,
-            _that.chargingSeconds,
+            _that.activityType,
+            _that.energyKwh,
+            _that.durationSeconds,
             _that.createdAt,
             _that.updatedAt);
       case _:
@@ -637,8 +678,9 @@ extension UsagePatterns on Usage {
             String? startedAt,
             String? finishedAt,
             bool isFinalized,
-            double kwHour,
-            int chargingSeconds,
+            String activityType,
+            double energyKwh,
+            int durationSeconds,
             String? createdAt,
             String? updatedAt)
         $default,
@@ -652,8 +694,9 @@ extension UsagePatterns on Usage {
             _that.startedAt,
             _that.finishedAt,
             _that.isFinalized,
-            _that.kwHour,
-            _that.chargingSeconds,
+            _that.activityType,
+            _that.energyKwh,
+            _that.durationSeconds,
             _that.createdAt,
             _that.updatedAt);
       case _:
@@ -681,8 +724,9 @@ extension UsagePatterns on Usage {
             String? startedAt,
             String? finishedAt,
             bool isFinalized,
-            double kwHour,
-            int chargingSeconds,
+            String activityType,
+            double energyKwh,
+            int durationSeconds,
             String? createdAt,
             String? updatedAt)?
         $default,
@@ -696,8 +740,9 @@ extension UsagePatterns on Usage {
             _that.startedAt,
             _that.finishedAt,
             _that.isFinalized,
-            _that.kwHour,
-            _that.chargingSeconds,
+            _that.activityType,
+            _that.energyKwh,
+            _that.durationSeconds,
             _that.createdAt,
             _that.updatedAt);
       case _:
@@ -715,8 +760,9 @@ class _Usage implements Usage {
       this.startedAt,
       this.finishedAt,
       required this.isFinalized,
-      required this.kwHour,
-      required this.chargingSeconds,
+      required this.activityType,
+      required this.energyKwh,
+      required this.durationSeconds,
       required this.createdAt,
       required this.updatedAt});
   factory _Usage.fromJson(Map<String, dynamic> json) => _$UsageFromJson(json);
@@ -732,9 +778,11 @@ class _Usage implements Usage {
   @override
   final bool isFinalized;
   @override
-  final double kwHour;
+  final String activityType;
   @override
-  final int chargingSeconds;
+  final double energyKwh;
+  @override
+  final int durationSeconds;
   @override
   final String? createdAt;
   @override
@@ -768,9 +816,12 @@ class _Usage implements Usage {
                 other.finishedAt == finishedAt) &&
             (identical(other.isFinalized, isFinalized) ||
                 other.isFinalized == isFinalized) &&
-            (identical(other.kwHour, kwHour) || other.kwHour == kwHour) &&
-            (identical(other.chargingSeconds, chargingSeconds) ||
-                other.chargingSeconds == chargingSeconds) &&
+            (identical(other.activityType, activityType) ||
+                other.activityType == activityType) &&
+            (identical(other.energyKwh, energyKwh) ||
+                other.energyKwh == energyKwh) &&
+            (identical(other.durationSeconds, durationSeconds) ||
+                other.durationSeconds == durationSeconds) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -779,12 +830,22 @@ class _Usage implements Usage {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, device, startedAt,
-      finishedAt, isFinalized, kwHour, chargingSeconds, createdAt, updatedAt);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      device,
+      startedAt,
+      finishedAt,
+      isFinalized,
+      activityType,
+      energyKwh,
+      durationSeconds,
+      createdAt,
+      updatedAt);
 
   @override
   String toString() {
-    return 'Usage(id: $id, device: $device, startedAt: $startedAt, finishedAt: $finishedAt, isFinalized: $isFinalized, kwHour: $kwHour, chargingSeconds: $chargingSeconds, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Usage(id: $id, device: $device, startedAt: $startedAt, finishedAt: $finishedAt, isFinalized: $isFinalized, activityType: $activityType, energyKwh: $energyKwh, durationSeconds: $durationSeconds, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 }
 
@@ -800,8 +861,9 @@ abstract mixin class _$UsageCopyWith<$Res> implements $UsageCopyWith<$Res> {
       String? startedAt,
       String? finishedAt,
       bool isFinalized,
-      double kwHour,
-      int chargingSeconds,
+      String activityType,
+      double energyKwh,
+      int durationSeconds,
       String? createdAt,
       String? updatedAt});
 
@@ -826,8 +888,9 @@ class __$UsageCopyWithImpl<$Res> implements _$UsageCopyWith<$Res> {
     Object? startedAt = freezed,
     Object? finishedAt = freezed,
     Object? isFinalized = null,
-    Object? kwHour = null,
-    Object? chargingSeconds = null,
+    Object? activityType = null,
+    Object? energyKwh = null,
+    Object? durationSeconds = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -852,13 +915,17 @@ class __$UsageCopyWithImpl<$Res> implements _$UsageCopyWith<$Res> {
           ? _self.isFinalized
           : isFinalized // ignore: cast_nullable_to_non_nullable
               as bool,
-      kwHour: null == kwHour
-          ? _self.kwHour
-          : kwHour // ignore: cast_nullable_to_non_nullable
+      activityType: null == activityType
+          ? _self.activityType
+          : activityType // ignore: cast_nullable_to_non_nullable
+              as String,
+      energyKwh: null == energyKwh
+          ? _self.energyKwh
+          : energyKwh // ignore: cast_nullable_to_non_nullable
               as double,
-      chargingSeconds: null == chargingSeconds
-          ? _self.chargingSeconds
-          : chargingSeconds // ignore: cast_nullable_to_non_nullable
+      durationSeconds: null == durationSeconds
+          ? _self.durationSeconds
+          : durationSeconds // ignore: cast_nullable_to_non_nullable
               as int,
       createdAt: freezed == createdAt
           ? _self.createdAt
