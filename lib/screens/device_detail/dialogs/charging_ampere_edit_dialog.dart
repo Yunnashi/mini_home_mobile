@@ -82,9 +82,10 @@ class ChargingAmpereEditDialog extends StatelessWidget {
                           padding: EdgeInsets.zero,
                           activeTrackColor: AppColors.primary,
                           inactiveTrackColor:
-                              AppColors.primary.withOpacity(0.2),
+                              AppColors.primary.withValues(alpha: 0.2),
                           thumbColor: AppColors.white,
-                          overlayColor: AppColors.primary.withOpacity(0.1),
+                          overlayColor:
+                              AppColors.primary.withValues(alpha: 0.1),
                           thumbShape: const RoundSliderThumbShape(
                               enabledThumbRadius: 20.0),
                         ),
@@ -112,7 +113,7 @@ class ChargingAmpereEditDialog extends StatelessWidget {
                             height: 12,
                             color: isInteger
                                 ? AppColors.primary
-                                : AppColors.primary.withOpacity(0.3),
+                                : AppColors.primary.withValues(alpha: 0.3),
                           );
                         }),
                       ),

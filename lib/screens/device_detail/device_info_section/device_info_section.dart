@@ -73,8 +73,8 @@ class DeviceInfoSection extends StatelessWidget {
               children: [
                 const SizedBox(height: 220),
                 DeviceImageWidget(
-                  device: device.value!,
-                  ref: ref,
+                  deviceType: device.value!.type,
+                  statusColor: device.value!.status.color,
                 ),
                 Positioned(
                   right: 0,

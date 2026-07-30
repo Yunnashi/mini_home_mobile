@@ -50,10 +50,10 @@ class UsageCard extends StatelessWidget {
                   children: [
                     TableRow(
                       children: [
-                        Text(AppStrings.connectingResultTimeTitle,
+                        Text(AppStrings.activityTypeTitle,
                             style: AppTextStyle.body3TextGrey),
                         const SizedBox(width: 32),
-                        Text(usage.chargingSeconds.toDouble().formatDuration(),
+                        Text(AppStrings.activityType(usage.activityType),
                             style: AppTextStyle.body2),
                       ],
                     ),
@@ -66,10 +66,10 @@ class UsageCard extends StatelessWidget {
                     ),
                     TableRow(
                       children: [
-                        Text(AppStrings.chargingResultTimeTitle,
+                        Text(AppStrings.activityDurationTitle,
                             style: AppTextStyle.body3TextGrey),
                         const SizedBox(width: 32),
-                        Text(usage.chargingSeconds.toDouble().formatDuration(),
+                        Text(usage.durationSeconds.toDouble().formatDuration(),
                             style: AppTextStyle.body2),
                       ],
                     ),
@@ -82,10 +82,11 @@ class UsageCard extends StatelessWidget {
                     ),
                     TableRow(
                       children: [
-                        Text(AppStrings.chargingResultKwhTitle,
+                        Text(AppStrings.activityEnergyTitle,
                             style: AppTextStyle.body3TextGrey),
                         const SizedBox(width: 32),
-                        Text("${usage.kwHour}kWh", style: AppTextStyle.body2),
+                        Text("${AppStrings.formatDouble(usage.energyKwh)} kWh",
+                            style: AppTextStyle.body2),
                       ],
                     ),
                   ],

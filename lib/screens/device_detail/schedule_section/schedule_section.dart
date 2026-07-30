@@ -14,12 +14,12 @@ import 'package:mini_home/router/router.dart';
 class ScheduleSection extends StatelessWidget {
   final BuildContext context;
   final WidgetRef ref;
-  final int? userGroupId;
+  final int? homeId;
   final ValueNotifier<Device?> device;
   final AsyncValue<List<Schedule>> scheduleListAsync;
-  final Future<void> Function(int userGroupId, int deviceId) fetchScheduleList;
+  final Future<void> Function(int homeId, int deviceId) fetchScheduleList;
   final Future<void> Function({
-    required int userGroupId,
+    required int homeId,
     required int deviceId,
     required Schedule schedule,
     required bool isEnabled,
@@ -30,7 +30,7 @@ class ScheduleSection extends StatelessWidget {
     super.key,
     required this.context,
     required this.ref,
-    required this.userGroupId,
+    required this.homeId,
     required this.device,
     required this.scheduleListAsync,
     required this.fetchScheduleList,
@@ -62,11 +62,11 @@ class ScheduleSection extends StatelessWidget {
       );
     }
 
-    if (userGroupId == null || device.value == null) return;
+    if (homeId == null || device.value == null) return;
 
     // 保存・削除が成功した場合のみスケジュールリストを再取得
     if (result == true) {
-      await fetchScheduleList(userGroupId!, device.value!.id);
+      await fetchScheduleList(homeId!, device.value!.id);
     }
   }
 
@@ -78,10 +78,10 @@ class ScheduleSection extends StatelessWidget {
         // タイトル
         Text(AppStrings.deviceDetailChargingSchedule,
             style: AppTextStyle.body1),
-        SizedBox(height: 8),
+        const SizedBox(height: 6),
         isLoading
             ? Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: 6.0),
                 child: Skeleton(height: 80),
               )
             : _buildScheduleScroll(context),
@@ -103,7 +103,7 @@ class ScheduleSection extends StatelessWidget {
     final scheduleList = scheduleListAsync.value ?? [];
 
     return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
+      padding: const EdgeInsets.only(bottom: 6.0),
       child: SizedBox(
         height: 80,
         child: SingleChildScrollView(
@@ -126,7 +126,7 @@ class ScheduleSection extends StatelessWidget {
                       },
                       onToggleChanged: () {
                         updateScheduleEnabled(
-                          userGroupId: userGroupId!,
+                          homeId: homeId!,
                           deviceId: device.value!.id,
                           schedule: scheduleList[i],
                           isEnabled: !scheduleList[i].isEnabled,

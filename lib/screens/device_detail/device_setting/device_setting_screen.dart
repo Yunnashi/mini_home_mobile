@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mini_home/core/themes/colors.dart';
 import 'package:mini_home/core/themes/design_tokens.dart';
 import 'package:mini_home/core/themes/strings.dart';
+import 'package:mini_home/core/widgets/app_bar/basic_app_bar.dart';
+import 'package:mini_home/core/widgets/basic_dialog.dart';
+import 'package:mini_home/core/widgets/basic_screen.dart';
+import 'package:mini_home/core/widgets/basic_textfield.dart';
 import 'package:mini_home/core/widgets/basic_toast.dart';
+import 'package:mini_home/core/widgets/button/basic_button.dart';
+import 'package:mini_home/core/widgets/error_message_view.dart';
 import 'package:mini_home/features/device/services/smart_device_service.dart';
 import 'package:mini_home/features/home/services/home_service.dart';
 import 'package:mini_home/router/router.dart';
@@ -55,54 +62,69 @@ class DeviceSettingScreen extends HookConsumerWidget {
     }
 
     Future<void> deleteDevice() async {
-      final confirmed = await showDialog<bool>(
+      await BasicDialog.show(
         context: context,
-        builder: (context) => AlertDialog(
-          title: Text(AppStrings.deleteDeviceTitle),
-          content: Text(AppStrings.deleteDeviceMessage),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context, false),
-              child: Text(AppStrings.cancel),
-            ),
-            FilledButton(
-              style: FilledButton.styleFrom(backgroundColor: AppColors.red),
-              onPressed: () => Navigator.pop(context, true),
-              child: Text(AppStrings.deleteDevice),
-            ),
-          ],
-        ),
+        title: AppStrings.deleteDeviceTitle,
+        content: Text(AppStrings.deleteDeviceMessage),
+        buttons: [
+          BasicDialogButton.cancel(),
+          BasicButton.buildLarge(
+            text: AppStrings.deleteDevice,
+            color: AppColors.red,
+            onPressed: () async {
+              try {
+                await ref
+                    .read(smartDeviceServiceProvider(deviceId).notifier)
+                    .deleteDevice();
+                await ref.read(homeServiceProvider.notifier).refresh();
+                if (context.mounted) context.goNamed(AppRoutes.home);
+              } catch (_) {
+                BasicToast.showToast(
+                    AppStrings.deviceDetailUpdateError, ToastType.error);
+              }
+            },
+          ),
+        ],
       );
-      if (confirmed != true) return;
-      try {
-        await ref
-            .read(smartDeviceServiceProvider(deviceId).notifier)
-            .deleteDevice();
-        await ref.read(homeServiceProvider.notifier).refresh();
-        if (context.mounted) context.goNamed(AppRoutes.home);
-      } catch (_) {
-        BasicToast.showToast(
-            AppStrings.deviceDetailUpdateError, ToastType.error);
-      }
     }
 
-    return Scaffold(
-      appBar: AppBar(title: Text(AppStrings.deviceSettingsTitle)),
+    return BasicScreen(
+      backgroundColor: AppColors.background,
+      appBar: BasicAppBar.buildPushStyle(
+        context: context,
+        titleAppBar: AppStrings.deviceSettingsTitle,
+      ),
       body: deviceAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, _) => Center(child: Text('$error')),
+        error: (_, __) => ErrorMessageView(
+          message: AppStrings.deviceDetailFetchError,
+        ),
         data: (device) => ListView(
           padding: const EdgeInsets.all(AppSpacing.md),
           children: [
-            TextField(
+            BasicTextField(
               controller: nameController,
-              decoration: InputDecoration(labelText: AppStrings.deviceName),
-              maxLength: 24,
+              labelText: AppStrings.deviceName,
+              borderColor: AppColors.border,
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(24),
+              ],
             ),
             const SizedBox(height: AppSpacing.md),
             DropdownButtonFormField<int>(
-              value: selectedRoomId.value,
-              decoration: InputDecoration(labelText: AppStrings.room),
+              initialValue: selectedRoomId.value,
+              decoration: InputDecoration(
+                labelText: AppStrings.room,
+                filled: true,
+                fillColor: AppColors.white,
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(AppRadius.control),
+                  borderSide: const BorderSide(color: AppColors.border),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(AppRadius.control),
+                ),
+              ),
               items: [
                 for (final room in homeAsync.value?.home.rooms ?? const [])
                   DropdownMenuItem(value: room.id, child: Text(room.name)),
@@ -110,39 +132,36 @@ class DeviceSettingScreen extends HookConsumerWidget {
               onChanged: (value) => selectedRoomId.value = value,
             ),
             const SizedBox(height: AppSpacing.lg),
-            FilledButton(
-              onPressed: saving.value ? null : save,
-              child: saving.value
-                  ? const SizedBox.square(
-                      dimension: 20,
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    )
-                  : Text(AppStrings.save),
+            BasicButton.buildLarge(
+              text: AppStrings.save,
+              onPressed: saving.value ? () {} : save,
             ),
             const SizedBox(height: AppSpacing.xl),
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(AppSpacing.md),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      AppStrings.deviceInformation,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    const SizedBox(height: AppSpacing.sm),
-                    Text('ID: ${device.externalDeviceId}'),
-                    Text('Type: ${device.type.name}'),
-                  ],
-                ),
+            Container(
+              padding: const EdgeInsets.all(AppSpacing.md),
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.circular(AppRadius.card),
+                border: Border.all(color: AppColors.border),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    AppStrings.deviceInformation,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  const SizedBox(height: AppSpacing.sm),
+                  Text('ID: ${device.externalDeviceId}'),
+                  Text('Type: ${device.type.name}'),
+                ],
               ),
             ),
             const SizedBox(height: AppSpacing.xl),
-            OutlinedButton.icon(
+            BasicButton.buildLarge(
+              text: AppStrings.deleteDevice,
+              color: AppColors.red,
               onPressed: deleteDevice,
-              icon: const Icon(Icons.delete_outline),
-              label: Text(AppStrings.deleteDevice),
-              style: OutlinedButton.styleFrom(foregroundColor: AppColors.red),
             ),
           ],
         ),

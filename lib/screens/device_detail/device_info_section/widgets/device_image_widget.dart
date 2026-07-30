@@ -1,15 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:mini_home/features/device/models/device.dart';
-import 'package:mini_home/core/themes/images.dart';
+import 'package:mini_home/core/themes/colors.dart';
+import 'package:mini_home/features/device/models/device_type.dart';
 
 class DeviceImageWidget extends StatelessWidget {
-  final Device device;
-  final WidgetRef ref;
-  const DeviceImageWidget({super.key, required this.device, required this.ref});
+  final DeviceType deviceType;
+  final Color statusColor;
+
+  const DeviceImageWidget({
+    super.key,
+    required this.deviceType,
+    required this.statusColor,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final isAirConditioner = deviceType == DeviceType.airConditioner;
+    final icon =
+        isAirConditioner ? Icons.air_rounded : Icons.lightbulb_outline_rounded;
+    final color =
+        isAirConditioner ? AppColors.airConditioner : AppColors.primary;
+
     return Stack(
       children: [
         Align(
@@ -22,7 +32,7 @@ class DeviceImageWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(120),
               boxShadow: [
                 BoxShadow(
-                  color: device.status.color.withOpacity(0.4),
+                  color: statusColor.withValues(alpha: 0.4),
                   blurRadius: 40,
                   spreadRadius: -30,
                 ),
@@ -32,10 +42,18 @@ class DeviceImageWidget extends StatelessWidget {
         ),
         Center(
           child: SizedBox(
-            width: double.infinity,
-            child: Image.asset(
-              device.model.getImagePath(ref.watch(appImagesProvider)),
-              fit: BoxFit.contain,
+            width: 180,
+            height: 180,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                color: color.withValues(alpha: 0.12),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                icon,
+                color: color,
+                size: 92,
+              ),
             ),
           ),
         ),

@@ -7,9 +7,8 @@ import 'package:mini_home/core/themes/text_style.dart';
 import 'package:mini_home/core/widgets/app_bar/basic_app_bar.dart';
 import 'package:mini_home/core/widgets/basic_screen.dart';
 import 'package:mini_home/core/widgets/error_message_view.dart';
-import 'package:mini_home/features/auth/services/auth_state_service.dart';
 import 'package:mini_home/features/device/models/device.dart';
-import 'package:mini_home/features/device/services/device_service.dart';
+import 'package:mini_home/features/device/services/smart_device_service.dart';
 import 'package:mini_home/features/usage/models/usage.dart';
 import 'package:mini_home/features/usage/services/usage_service.dart';
 import 'package:mini_home/screens/device_detail/usage_list_section/usage_grouping_widget.dart';
@@ -39,7 +38,7 @@ class UsagesScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authStateAsync = ref.watch(authStateServiceProvider);
+    final deviceAsync = ref.watch(smartDeviceServiceProvider(deviceId));
     final device = useState<Device?>(null);
     final groups = useState<List<_UsageGroup>>([]);
     final isLoading = useState<bool>(true);
@@ -131,21 +130,9 @@ class UsagesScreen extends HookConsumerWidget {
       return result;
     }
 
-    Future<void> fetchDevice(int userGroupId) async {
-      await ref.read(deviceServiceProvider.notifier).getDeviceById(
-            userGroupId: userGroupId,
-            deviceId: deviceId,
-            successCallback: (d) {
-              device.value = d;
-            },
-            errorCallback: handleFetchError,
-          );
-    }
-
     Future<void> fetchUsages({bool loadMore = false}) async {
-      final userGroupId = authStateAsync.valueOrNull?.defaultUserGroup?.id;
       final d = device.value;
-      if (userGroupId == null || d == null) return;
+      if (d == null) return;
 
       if (loadMore) {
         if (isLoadingMore.value || !hasMore.value) return;
@@ -160,7 +147,7 @@ class UsagesScreen extends HookConsumerWidget {
       final page = loadMore ? currentPage.value : 1;
 
       await ref.read(usageServiceProvider.notifier).getUsagesByDevice(
-            userGroupId: userGroupId,
+            homeId: d.homeId,
             externalDeviceId: d.externalDeviceId,
             pageSize: _pageSize,
             pageNum: page,
@@ -208,21 +195,16 @@ class UsagesScreen extends HookConsumerWidget {
     }, [hasMore.value, isLoadingMore.value]);
 
     useEffect(() {
-      authStateAsync.whenData((authState) async {
-        final userGroupId = authState.defaultUserGroup?.id;
-        if (userGroupId == null) {
-          errorMessage.value = "${AppStrings.deviceListFetchError}\n"
-              "defaultUserGroupId is null";
-          isLoading.value = false;
-          return;
-        }
-        await fetchDevice(userGroupId);
-        if (device.value != null) {
-          await fetchUsages();
-        }
+      deviceAsync.whenData((value) async {
+        device.value = value;
+        await fetchUsages();
       });
+      if (deviceAsync.hasError) {
+        errorMessage.value = AppStrings.deviceDetailFetchError;
+        isLoading.value = false;
+      }
       return null;
-    }, [authStateAsync]);
+    }, [deviceAsync]);
 
     return BasicScreen(
       appBar: BasicAppBar.buildPushStyle(
@@ -230,10 +212,19 @@ class UsagesScreen extends HookConsumerWidget {
         titleAppBar: AppStrings.usageHistoryTitle,
         onBackPressed: () => GoRouter.of(context).pop(),
       ),
-      body: authStateAsync.when(
+      body: deviceAsync.when(
         data: (_) {
           if (errorMessage.value != null) {
-            return ErrorMessageView(message: errorMessage.value!);
+            return RefreshIndicator(
+              onRefresh: () async {
+                errorMessage.value = null;
+                await ref
+                    .read(smartDeviceServiceProvider(deviceId).notifier)
+                    .refresh();
+                await fetchUsages();
+              },
+              child: ErrorMessageView(message: errorMessage.value!),
+            );
           }
           if (isLoading.value) {
             return const Center(
@@ -251,6 +242,9 @@ class UsagesScreen extends HookConsumerWidget {
           return RefreshIndicator(
             onRefresh: () async {
               errorMessage.value = null;
+              await ref
+                  .read(smartDeviceServiceProvider(deviceId).notifier)
+                  .refresh();
               await fetchUsages();
             },
             child: ListView.builder(
@@ -295,7 +289,15 @@ class UsagesScreen extends HookConsumerWidget {
         ),
         error: (e, _) {
           safeDebugPrint("Error loading usages screen: $e");
-          return const SizedBox();
+          return RefreshIndicator(
+            onRefresh: () async {
+              errorMessage.value = null;
+              await ref
+                  .read(smartDeviceServiceProvider(deviceId).notifier)
+                  .refresh();
+            },
+            child: ErrorMessageView(message: AppStrings.deviceDetailFetchError),
+          );
         },
       ),
     );
