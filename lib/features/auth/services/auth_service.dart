@@ -3,7 +3,6 @@ import 'package:mini_home/core/network/models/result.dart';
 import 'package:mini_home/features/auth/models/sign_in_response.dart';
 import 'package:mini_home/features/auth/repositories/auth_repository.dart';
 import 'package:mini_home/features/auth/services/auth_state_service.dart';
-import 'package:mini_home/features/device/repositories/charging_ampere_storage_repository.dart';
 import 'package:mini_home/features/device/repositories/fw_update_requested_at_storage_repository.dart';
 import 'package:mini_home/utils/loading.dart';
 import 'package:mini_home/utils/logger.dart';
@@ -120,8 +119,6 @@ class AuthService extends _$AuthService {
   Future<void> signout() async {
     await _authStorageRepository.clearCurrentTokens();
     await ref.read(userServiceProvider.notifier).clearCurrentUser();
-    // 変更中を表示させるためにセットしているstorageも削除
-    await ChargingAmpereStorage.clearAll();
     // FW更新リクエスト日時を削除
     await FwUpdateRequestedAtStorage.clearAll();
     // 認証状態を更新

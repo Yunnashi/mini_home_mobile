@@ -1540,6 +1540,42 @@
       "streamingInterval": 0
     },
     {
+      "uuid": "4dc4f185-9075-4a59-9359-000000000104",
+      "type": "http",
+      "documentation": "Request miniHome device firmware update",
+      "method": "patch",
+      "endpoint": "v1/homes/:homeId/devices/:deviceId/fw-update",
+      "responses": [
+        {
+          "uuid": "4dc4f185-9075-4a59-9359-000000000114",
+          "body": "{}",
+          "latency": 80,
+          "statusCode": 200,
+          "label": "Success",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
       "uuid": "4dc4f185-9075-4a59-9359-000000000103",
       "type": "http",
       "documentation": "Issue demo OTP for BLE reboot",
@@ -1664,6 +1700,10 @@
     {
       "type": "route",
       "uuid": "4dc4f185-9075-4a59-9359-000000000103"
+    },
+    {
+      "type": "route",
+      "uuid": "4dc4f185-9075-4a59-9359-000000000104"
     },
     {
       "type": "route",

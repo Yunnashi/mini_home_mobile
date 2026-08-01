@@ -1,8 +1,6 @@
 {
   "dart.flutterSdkPath": ".fvm/flutter_sdk",
     "cSpell.words": [
-      "cplt",
-      "evse",
       "miniHome",
       "riverpod"
     ]

@@ -25,17 +25,9 @@ mixin _$Device {
   LightState? get lightState;
   AirConditionerState? get airConditionerState;
   String? get nickname;
-  double? get chargingAmpere;
-  double? get maxChargingAmpere;
-  @EvseStateConverter()
-  EvseState get evseState;
-  @EllaStateConverter()
-  EllaState get ellaState;
   double? get temperature;
   String? get mode;
   bool get isOffline;
-  bool get cplt;
-  DeviceModel get model;
   String? get fwVersion;
   DateTime? get lastPingedAt;
 
@@ -71,21 +63,11 @@ mixin _$Device {
                 other.airConditionerState == airConditionerState) &&
             (identical(other.nickname, nickname) ||
                 other.nickname == nickname) &&
-            (identical(other.chargingAmpere, chargingAmpere) ||
-                other.chargingAmpere == chargingAmpere) &&
-            (identical(other.maxChargingAmpere, maxChargingAmpere) ||
-                other.maxChargingAmpere == maxChargingAmpere) &&
-            (identical(other.evseState, evseState) ||
-                other.evseState == evseState) &&
-            (identical(other.ellaState, ellaState) ||
-                other.ellaState == ellaState) &&
             (identical(other.temperature, temperature) ||
                 other.temperature == temperature) &&
             (identical(other.mode, mode) || other.mode == mode) &&
             (identical(other.isOffline, isOffline) ||
                 other.isOffline == isOffline) &&
-            (identical(other.cplt, cplt) || other.cplt == cplt) &&
-            (identical(other.model, model) || other.model == model) &&
             (identical(other.fwVersion, fwVersion) ||
                 other.fwVersion == fwVersion) &&
             (identical(other.lastPingedAt, lastPingedAt) ||
@@ -94,35 +76,28 @@ mixin _$Device {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hashAll([
-        runtimeType,
-        id,
-        externalDeviceId,
-        homeId,
-        roomId,
-        name,
-        type,
-        isOnline,
-        isPowerOn,
-        lightState,
-        airConditionerState,
-        nickname,
-        chargingAmpere,
-        maxChargingAmpere,
-        evseState,
-        ellaState,
-        temperature,
-        mode,
-        isOffline,
-        cplt,
-        model,
-        fwVersion,
-        lastPingedAt
-      ]);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      externalDeviceId,
+      homeId,
+      roomId,
+      name,
+      type,
+      isOnline,
+      isPowerOn,
+      lightState,
+      airConditionerState,
+      nickname,
+      temperature,
+      mode,
+      isOffline,
+      fwVersion,
+      lastPingedAt);
 
   @override
   String toString() {
-    return 'Device(id: $id, externalDeviceId: $externalDeviceId, homeId: $homeId, roomId: $roomId, name: $name, type: $type, isOnline: $isOnline, isPowerOn: $isPowerOn, lightState: $lightState, airConditionerState: $airConditionerState, nickname: $nickname, chargingAmpere: $chargingAmpere, maxChargingAmpere: $maxChargingAmpere, evseState: $evseState, ellaState: $ellaState, temperature: $temperature, mode: $mode, isOffline: $isOffline, cplt: $cplt, model: $model, fwVersion: $fwVersion, lastPingedAt: $lastPingedAt)';
+    return 'Device(id: $id, externalDeviceId: $externalDeviceId, homeId: $homeId, roomId: $roomId, name: $name, type: $type, isOnline: $isOnline, isPowerOn: $isPowerOn, lightState: $lightState, airConditionerState: $airConditionerState, nickname: $nickname, temperature: $temperature, mode: $mode, isOffline: $isOffline, fwVersion: $fwVersion, lastPingedAt: $lastPingedAt)';
   }
 }
 
@@ -143,15 +118,9 @@ abstract mixin class $DeviceCopyWith<$Res> {
       LightState? lightState,
       AirConditionerState? airConditionerState,
       String? nickname,
-      double? chargingAmpere,
-      double? maxChargingAmpere,
-      @EvseStateConverter() EvseState evseState,
-      @EllaStateConverter() EllaState ellaState,
       double? temperature,
       String? mode,
       bool isOffline,
-      bool cplt,
-      DeviceModel model,
       String? fwVersion,
       DateTime? lastPingedAt});
 
@@ -182,15 +151,9 @@ class _$DeviceCopyWithImpl<$Res> implements $DeviceCopyWith<$Res> {
     Object? lightState = freezed,
     Object? airConditionerState = freezed,
     Object? nickname = freezed,
-    Object? chargingAmpere = freezed,
-    Object? maxChargingAmpere = freezed,
-    Object? evseState = null,
-    Object? ellaState = null,
     Object? temperature = freezed,
     Object? mode = freezed,
     Object? isOffline = null,
-    Object? cplt = null,
-    Object? model = null,
     Object? fwVersion = freezed,
     Object? lastPingedAt = freezed,
   }) {
@@ -239,22 +202,6 @@ class _$DeviceCopyWithImpl<$Res> implements $DeviceCopyWith<$Res> {
           ? _self.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
               as String?,
-      chargingAmpere: freezed == chargingAmpere
-          ? _self.chargingAmpere
-          : chargingAmpere // ignore: cast_nullable_to_non_nullable
-              as double?,
-      maxChargingAmpere: freezed == maxChargingAmpere
-          ? _self.maxChargingAmpere
-          : maxChargingAmpere // ignore: cast_nullable_to_non_nullable
-              as double?,
-      evseState: null == evseState
-          ? _self.evseState
-          : evseState // ignore: cast_nullable_to_non_nullable
-              as EvseState,
-      ellaState: null == ellaState
-          ? _self.ellaState
-          : ellaState // ignore: cast_nullable_to_non_nullable
-              as EllaState,
       temperature: freezed == temperature
           ? _self.temperature
           : temperature // ignore: cast_nullable_to_non_nullable
@@ -267,14 +214,6 @@ class _$DeviceCopyWithImpl<$Res> implements $DeviceCopyWith<$Res> {
           ? _self.isOffline
           : isOffline // ignore: cast_nullable_to_non_nullable
               as bool,
-      cplt: null == cplt
-          ? _self.cplt
-          : cplt // ignore: cast_nullable_to_non_nullable
-              as bool,
-      model: null == model
-          ? _self.model
-          : model // ignore: cast_nullable_to_non_nullable
-              as DeviceModel,
       fwVersion: freezed == fwVersion
           ? _self.fwVersion
           : fwVersion // ignore: cast_nullable_to_non_nullable
@@ -419,15 +358,9 @@ extension DevicePatterns on Device {
             LightState? lightState,
             AirConditionerState? airConditionerState,
             String? nickname,
-            double? chargingAmpere,
-            double? maxChargingAmpere,
-            @EvseStateConverter() EvseState evseState,
-            @EllaStateConverter() EllaState ellaState,
             double? temperature,
             String? mode,
             bool isOffline,
-            bool cplt,
-            DeviceModel model,
             String? fwVersion,
             DateTime? lastPingedAt)?
         $default, {
@@ -448,15 +381,9 @@ extension DevicePatterns on Device {
             _that.lightState,
             _that.airConditionerState,
             _that.nickname,
-            _that.chargingAmpere,
-            _that.maxChargingAmpere,
-            _that.evseState,
-            _that.ellaState,
             _that.temperature,
             _that.mode,
             _that.isOffline,
-            _that.cplt,
-            _that.model,
             _that.fwVersion,
             _that.lastPingedAt);
       case _:
@@ -491,15 +418,9 @@ extension DevicePatterns on Device {
             LightState? lightState,
             AirConditionerState? airConditionerState,
             String? nickname,
-            double? chargingAmpere,
-            double? maxChargingAmpere,
-            @EvseStateConverter() EvseState evseState,
-            @EllaStateConverter() EllaState ellaState,
             double? temperature,
             String? mode,
             bool isOffline,
-            bool cplt,
-            DeviceModel model,
             String? fwVersion,
             DateTime? lastPingedAt)
         $default,
@@ -519,15 +440,9 @@ extension DevicePatterns on Device {
             _that.lightState,
             _that.airConditionerState,
             _that.nickname,
-            _that.chargingAmpere,
-            _that.maxChargingAmpere,
-            _that.evseState,
-            _that.ellaState,
             _that.temperature,
             _that.mode,
             _that.isOffline,
-            _that.cplt,
-            _that.model,
             _that.fwVersion,
             _that.lastPingedAt);
     }
@@ -559,15 +474,9 @@ extension DevicePatterns on Device {
             LightState? lightState,
             AirConditionerState? airConditionerState,
             String? nickname,
-            double? chargingAmpere,
-            double? maxChargingAmpere,
-            @EvseStateConverter() EvseState evseState,
-            @EllaStateConverter() EllaState ellaState,
             double? temperature,
             String? mode,
             bool isOffline,
-            bool cplt,
-            DeviceModel model,
             String? fwVersion,
             DateTime? lastPingedAt)?
         $default,
@@ -587,15 +496,9 @@ extension DevicePatterns on Device {
             _that.lightState,
             _that.airConditionerState,
             _that.nickname,
-            _that.chargingAmpere,
-            _that.maxChargingAmpere,
-            _that.evseState,
-            _that.ellaState,
             _that.temperature,
             _that.mode,
             _that.isOffline,
-            _that.cplt,
-            _that.model,
             _that.fwVersion,
             _that.lastPingedAt);
       case _:
@@ -619,15 +522,9 @@ class _Device extends Device {
       this.lightState,
       this.airConditionerState,
       this.nickname,
-      this.chargingAmpere,
-      this.maxChargingAmpere,
-      @EvseStateConverter() this.evseState = EvseState.unknown,
-      @EllaStateConverter() this.ellaState = EllaState.unknown,
       this.temperature,
       this.mode,
       this.isOffline = false,
-      this.cplt = false,
-      this.model = DeviceModel.nadiya,
       this.fwVersion,
       this.lastPingedAt})
       : super._();
@@ -661,30 +558,12 @@ class _Device extends Device {
   @override
   final String? nickname;
   @override
-  final double? chargingAmpere;
-  @override
-  final double? maxChargingAmpere;
-  @override
-  @JsonKey()
-  @EvseStateConverter()
-  final EvseState evseState;
-  @override
-  @JsonKey()
-  @EllaStateConverter()
-  final EllaState ellaState;
-  @override
   final double? temperature;
   @override
   final String? mode;
   @override
   @JsonKey()
   final bool isOffline;
-  @override
-  @JsonKey()
-  final bool cplt;
-  @override
-  @JsonKey()
-  final DeviceModel model;
   @override
   final String? fwVersion;
   @override
@@ -727,21 +606,11 @@ class _Device extends Device {
                 other.airConditionerState == airConditionerState) &&
             (identical(other.nickname, nickname) ||
                 other.nickname == nickname) &&
-            (identical(other.chargingAmpere, chargingAmpere) ||
-                other.chargingAmpere == chargingAmpere) &&
-            (identical(other.maxChargingAmpere, maxChargingAmpere) ||
-                other.maxChargingAmpere == maxChargingAmpere) &&
-            (identical(other.evseState, evseState) ||
-                other.evseState == evseState) &&
-            (identical(other.ellaState, ellaState) ||
-                other.ellaState == ellaState) &&
             (identical(other.temperature, temperature) ||
                 other.temperature == temperature) &&
             (identical(other.mode, mode) || other.mode == mode) &&
             (identical(other.isOffline, isOffline) ||
                 other.isOffline == isOffline) &&
-            (identical(other.cplt, cplt) || other.cplt == cplt) &&
-            (identical(other.model, model) || other.model == model) &&
             (identical(other.fwVersion, fwVersion) ||
                 other.fwVersion == fwVersion) &&
             (identical(other.lastPingedAt, lastPingedAt) ||
@@ -750,35 +619,28 @@ class _Device extends Device {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hashAll([
-        runtimeType,
-        id,
-        externalDeviceId,
-        homeId,
-        roomId,
-        name,
-        type,
-        isOnline,
-        isPowerOn,
-        lightState,
-        airConditionerState,
-        nickname,
-        chargingAmpere,
-        maxChargingAmpere,
-        evseState,
-        ellaState,
-        temperature,
-        mode,
-        isOffline,
-        cplt,
-        model,
-        fwVersion,
-        lastPingedAt
-      ]);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      externalDeviceId,
+      homeId,
+      roomId,
+      name,
+      type,
+      isOnline,
+      isPowerOn,
+      lightState,
+      airConditionerState,
+      nickname,
+      temperature,
+      mode,
+      isOffline,
+      fwVersion,
+      lastPingedAt);
 
   @override
   String toString() {
-    return 'Device(id: $id, externalDeviceId: $externalDeviceId, homeId: $homeId, roomId: $roomId, name: $name, type: $type, isOnline: $isOnline, isPowerOn: $isPowerOn, lightState: $lightState, airConditionerState: $airConditionerState, nickname: $nickname, chargingAmpere: $chargingAmpere, maxChargingAmpere: $maxChargingAmpere, evseState: $evseState, ellaState: $ellaState, temperature: $temperature, mode: $mode, isOffline: $isOffline, cplt: $cplt, model: $model, fwVersion: $fwVersion, lastPingedAt: $lastPingedAt)';
+    return 'Device(id: $id, externalDeviceId: $externalDeviceId, homeId: $homeId, roomId: $roomId, name: $name, type: $type, isOnline: $isOnline, isPowerOn: $isPowerOn, lightState: $lightState, airConditionerState: $airConditionerState, nickname: $nickname, temperature: $temperature, mode: $mode, isOffline: $isOffline, fwVersion: $fwVersion, lastPingedAt: $lastPingedAt)';
   }
 }
 
@@ -800,15 +662,9 @@ abstract mixin class _$DeviceCopyWith<$Res> implements $DeviceCopyWith<$Res> {
       LightState? lightState,
       AirConditionerState? airConditionerState,
       String? nickname,
-      double? chargingAmpere,
-      double? maxChargingAmpere,
-      @EvseStateConverter() EvseState evseState,
-      @EllaStateConverter() EllaState ellaState,
       double? temperature,
       String? mode,
       bool isOffline,
-      bool cplt,
-      DeviceModel model,
       String? fwVersion,
       DateTime? lastPingedAt});
 
@@ -841,15 +697,9 @@ class __$DeviceCopyWithImpl<$Res> implements _$DeviceCopyWith<$Res> {
     Object? lightState = freezed,
     Object? airConditionerState = freezed,
     Object? nickname = freezed,
-    Object? chargingAmpere = freezed,
-    Object? maxChargingAmpere = freezed,
-    Object? evseState = null,
-    Object? ellaState = null,
     Object? temperature = freezed,
     Object? mode = freezed,
     Object? isOffline = null,
-    Object? cplt = null,
-    Object? model = null,
     Object? fwVersion = freezed,
     Object? lastPingedAt = freezed,
   }) {
@@ -898,22 +748,6 @@ class __$DeviceCopyWithImpl<$Res> implements _$DeviceCopyWith<$Res> {
           ? _self.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
               as String?,
-      chargingAmpere: freezed == chargingAmpere
-          ? _self.chargingAmpere
-          : chargingAmpere // ignore: cast_nullable_to_non_nullable
-              as double?,
-      maxChargingAmpere: freezed == maxChargingAmpere
-          ? _self.maxChargingAmpere
-          : maxChargingAmpere // ignore: cast_nullable_to_non_nullable
-              as double?,
-      evseState: null == evseState
-          ? _self.evseState
-          : evseState // ignore: cast_nullable_to_non_nullable
-              as EvseState,
-      ellaState: null == ellaState
-          ? _self.ellaState
-          : ellaState // ignore: cast_nullable_to_non_nullable
-              as EllaState,
       temperature: freezed == temperature
           ? _self.temperature
           : temperature // ignore: cast_nullable_to_non_nullable
@@ -926,14 +760,6 @@ class __$DeviceCopyWithImpl<$Res> implements _$DeviceCopyWith<$Res> {
           ? _self.isOffline
           : isOffline // ignore: cast_nullable_to_non_nullable
               as bool,
-      cplt: null == cplt
-          ? _self.cplt
-          : cplt // ignore: cast_nullable_to_non_nullable
-              as bool,
-      model: null == model
-          ? _self.model
-          : model // ignore: cast_nullable_to_non_nullable
-              as DeviceModel,
       fwVersion: freezed == fwVersion
           ? _self.fwVersion
           : fwVersion // ignore: cast_nullable_to_non_nullable

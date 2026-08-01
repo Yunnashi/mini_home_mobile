@@ -15,9 +15,9 @@ class DeviceService extends _$DeviceService {
     return _device;
   }
 
-  /// ユーザーグループ配下のデバイス詳細を取得
+  /// ホーム配下のデバイス詳細を取得
   Future<void> getDeviceById({
-    required int userGroupId,
+    required int homeId,
     required int deviceId,
     Function(Device)? successCallback,
     Function(String?, String?)? errorCallback,
@@ -25,7 +25,7 @@ class DeviceService extends _$DeviceService {
     try {
       final deviceRepository = ref.read(deviceRepositoryProvider);
       final response = await deviceRepository.getDeviceById(
-        userGroupId: userGroupId,
+        homeId: homeId,
         deviceId: deviceId,
       );
 
@@ -38,7 +38,7 @@ class DeviceService extends _$DeviceService {
         errorCallback?.call(response.message, response.code);
       }
     } catch (e) {
-      errorCallback?.call(e.toString(), 'USER_GROUP_DEVICE_DETAIL_ERROR');
+      errorCallback?.call(e.toString(), 'HOME_DEVICE_DETAIL_ERROR');
     }
   }
 
@@ -69,35 +69,6 @@ class DeviceService extends _$DeviceService {
     } catch (e) {
       Loading().dismiss();
       errorCallback?.call(e.toString(), 'CREATE_DEVICE_TO_HOME_ERROR');
-    }
-  }
-
-  /// デバイスの充電アンペアを更新
-  Future<void> updateChargingAmpere({
-    required int userGroupId,
-    required int deviceId,
-    required double chargingAmpere,
-    Function()? successCallback,
-    Function(String?, String?)? errorCallback,
-  }) async {
-    try {
-      Loading().show();
-      final deviceRepository = ref.read(deviceRepositoryProvider);
-      final response = await deviceRepository.updateChargingAmpere(
-        userGroupId: userGroupId,
-        deviceId: deviceId,
-        chargingAmpere: chargingAmpere,
-      );
-      if (response is Success) {
-        Loading().dismiss();
-        successCallback?.call();
-      } else if (response is Failure) {
-        Loading().dismiss();
-        errorCallback?.call(response.message, response.code);
-      }
-    } catch (e) {
-      Loading().dismiss();
-      errorCallback?.call(e.toString(), 'UPDATE_CHARGING_AMPERE_ERROR');
     }
   }
 
@@ -134,7 +105,7 @@ class DeviceService extends _$DeviceService {
 
   /// デバイスのファームウェアをアップデートをリクエスト
   Future<void> requestFwUpdate({
-    required int userGroupId,
+    required int homeId,
     required int deviceId,
     Function()? successCallback,
     Function(String?, String?)? errorCallback,
@@ -143,7 +114,7 @@ class DeviceService extends _$DeviceService {
       Loading().show();
       final deviceRepository = ref.read(deviceRepositoryProvider);
       final response = await deviceRepository.requestFwUpdate(
-        userGroupId: userGroupId,
+        homeId: homeId,
         deviceId: deviceId,
       );
       if (response is Success) {

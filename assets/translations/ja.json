@@ -189,6 +189,8 @@
       "name": "デバイス名",
       "room": "部屋",
       "information": "デバイス情報",
+      "maintenance": "メンテナンス",
+      "type": "種類",
       "delete": "デバイスを削除",
       "delete_title": "デバイスを削除しますか？",
       "delete_message": "マイホームからデバイスを削除します。この操作は元に戻せません。",
@@ -214,49 +216,46 @@
     }
   },
   "device_list": {
-    "device": "EV充電器",
-    "setting_power": "設定電力",
+    "device": "デバイス",
+    "setting_power": "設定",
     "temperature": "温度",
-    "fetch_error": "充電器情報の取得に失敗しました。",
-    "add_device": "充電器を追加"
+    "fetch_error": "デバイス情報の取得に失敗しました。",
+    "add_device": "デバイスを追加"
 
   },
   "device_detail": {
-    "title": "充電器詳細",
-    "fetch_error": "充電器詳細の取得に失敗しました",
+    "title": "デバイス詳細",
+    "fetch_error": "デバイス詳細の取得に失敗しました",
     "update_error": "設定の更新に失敗しました。お手数ですがはじめからやり直してください。",
-    "is_offline_error": "充電器がオフライン状態のため、この機能はご利用いただけません。",
-    "device_info": "充電器の情報",
+    "is_offline_error": "デバイスがオフライン状態のため、この機能はご利用いただけません。",
+    "device_info": "デバイス情報",
     "device_id": "デバイスID",
     "device_nickname_title": "名前を変更する",
-    "device_nickname": "充電器の名前",
+    "device_nickname": "デバイス名",
     "device_nickname_short": "名前",
     "device_nickname_placeholder": "24文字まで入力できます",
     "settings_title": "設定",
     "fw_version": "ファームウェア",
     "device_status": "状況",
     "temperature": "内部温度",
-    "change_charging_ampere": "出力変更",
-    "change_charging_ampere_title": "出力を変更する",
-    "change_charging_ampere_note": "ご自宅の電力契約や他の電化製品の使用状況をお確かめの上、変更を行なってください。",
     "pending_changes": "変更中",
     "latest_usage": "直近の利用履歴",
     "more_usage": "もっと見る",
-    "charging_schedule": "充電スケジュール",
-    "charging_schedule_description": "充電スケジュールをONにしている場合は、\n設定時間中のみ充電が行われます。\n充電器を車両に接続していても、設定時間外には充電が行われません。\n設定変更後、充電器に反映されるまでお時間がかかる場合があります。",
-    "status_help_title": "充電器の状況について",
-    "status_help_content_disconnected": "充電器を車両に接続していない状態です。",
-    "status_help_content_connected": "充電器を車両に接続した状態です。",
-    "status_help_content_charging": "車両に充電中の状態です。",
-    "status_help_content_ota_in_progress": "ファームウェアのアップデート中です。\nアップデート中は充電は一時停止します。",
-    "status_help_content_error": "充電器を使用できない状態です。\n「充電スケジュール機能」がONになっている場合、設定時間外はこの状況になります。",
-    "status_help_content_charging_stopped": "満充電や車両設定などの理由により、車両の充電を一時停止している状態です。",
-    "status_help_content_offline": "充電器がネットワークに接続されていないか、電源が入っていない状態です。\n充電器の再起動後(停電からの復帰等を含む)は、ネットワーク接続に時間がかかる場合がございます。\nしばらくお待ちいただくか、充電器本体の再起動を再度お試しください。",
+    "charging_schedule": "スケジュール",
+    "charging_schedule_description": "スケジュールをONにしている場合は、設定時間中のみデバイスが動作します。設定変更後、デバイスに反映されるまで時間がかかる場合があります。",
+    "status_help_title": "デバイスの状況について",
+    "status_help_content_disconnected": "デバイスは現在使用されていません。",
+    "status_help_content_connected": "デバイスは接続されています。",
+    "status_help_content_charging": "デバイスは動作中です。",
+    "status_help_content_ota_in_progress": "ファームウェアのアップデート中です。",
+    "status_help_content_error": "デバイスを使用できない状態です。",
+    "status_help_content_charging_stopped": "デバイスは一時停止しています。",
+    "status_help_content_offline": "デバイスがネットワークに接続されていないか、電源が入っていない状態です。しばらく待ってから再度お試しください。",
     "fw_update": {
       "dialog": {
         "title": "ファームウェアのアップデート",
         "content": "新しいファームウェアバージョンが利用可能です。\nアップデートするには、「アップデート」ボタンをタップしてください",
-        "caution": "※ アップデートには5~10分程かかる場合があります。\n※ アップデート中は車両の充電は一時停止します",
+        "caution": "※ アップデートには5〜10分程かかる場合があります。\n※ アップデート中はデバイスを一時的に操作できません",
         "button": "アップデート"
       },
       "timeout": "アップデートがタイムアウトしました。再度お試しください。",
@@ -277,12 +276,12 @@
   "device_settings": {
     "reboot": {
       "label": "再起動",
-      "do_reboot": "充電器を再起動",
-      "success": "充電器を再起動しました"
+      "do_reboot": "デバイスを再起動",
+      "success": "デバイスを再起動しました"
     }
   },
   "ble": {
-    "search_failed": "充電器が見つかりませんでした。Bluetoothをオンにし、充電器の近くで再度お試しください。",
+    "search_failed": "デバイスが見つかりませんでした。Bluetoothをオンにし、デバイスの近くで再度お試しください。",
     "bluetooth_off": "Bluetoothをオンにしてください",
     "permission_denied": "Bluetoothの権限を有効にしてください",
     "invalid_device_id": "デバイスIDが正しくありません。設定をご確認ください。"

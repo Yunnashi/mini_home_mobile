@@ -1,8 +1,6 @@
 import 'dart:ui';
 
 import 'package:mini_home/core/themes/strings.dart';
-import 'package:mini_home/features/device/models/ella_state.dart';
-import 'package:mini_home/features/device/models/evse_state.dart';
 
 enum DeviceStatus {
   disconnected('disconnected', Color(0xFF0F80D8)),
@@ -40,33 +38,17 @@ enum DeviceStatus {
     }
   }
 
-  static DeviceStatus fromEvseStateAndCplt(
-      EvseState evseState, EllaState ellaState, bool cplt, bool isOffline) {
-    if (isOffline) {
+  static DeviceStatus fromDeviceState({
+    required bool isOnline,
+    required bool isPowerOn,
+    required bool isOffline,
+  }) {
+    if (isOffline || !isOnline) {
       return DeviceStatus.offline;
     }
-
-    if (ellaState == EllaState.otaInProgress) {
-      return DeviceStatus.otaInProgress;
+    if (isPowerOn) {
+      return DeviceStatus.charging;
     }
-
-    switch (evseState) {
-      case EvseState.disconnected:
-        return DeviceStatus.disconnected;
-      case EvseState.connected:
-        if (cplt) {
-          return DeviceStatus.chargingStopped;
-        }
-        return DeviceStatus.connected;
-      case EvseState.charging1:
-      case EvseState.charging2:
-        return DeviceStatus.charging;
-      case EvseState.error1:
-      case EvseState.error2:
-      case EvseState.error3:
-        return DeviceStatus.error;
-      case EvseState.unknown:
-        return DeviceStatus.unknown;
-    }
+    return DeviceStatus.connected;
   }
 }

@@ -34,6 +34,9 @@ class AppStrings {
   static String get room => "smart_device.settings.room".tr();
   static String get deviceInformation =>
       "smart_device.settings.information".tr();
+  static String get deviceMaintenance =>
+      "smart_device.settings.maintenance".tr();
+  static String get deviceTypeLabel => "smart_device.settings.type".tr();
   static String get deleteDevice => "smart_device.settings.delete".tr();
   static String get deleteDeviceTitle =>
       "smart_device.settings.delete_title".tr();
@@ -62,7 +65,8 @@ class AppStrings {
   static String get activityDurationTitle =>
       "commons.labels.activity_duration".tr();
 
-  static String get activityEnergyTitle => "commons.labels.activity_energy".tr();
+  static String get activityEnergyTitle =>
+      "commons.labels.activity_energy".tr();
 
   static String get activityTypeTitle => "commons.labels.activity_type".tr();
 
@@ -396,15 +400,6 @@ class AppStrings {
   static String get deviceStatus => "device_detail.device_status".tr();
 
   static String get deviceTemperature => "device_detail.temperature".tr();
-
-  static String get deviceDetailChangeChargingAmpere =>
-      "device_detail.change_charging_ampere".tr();
-
-  static String get deviceDetailChangeChargingAmpereTitle =>
-      "device_detail.change_charging_ampere_title".tr();
-
-  static String get deviceDetailChangeChargingAmpereNote =>
-      "device_detail.change_charging_ampere_note".tr();
 
   static String get deviceDetailLatestUsage =>
       "device_detail.latest_usage".tr();

@@ -24,22 +24,9 @@ _Device _$DeviceFromJson(Map<String, dynamic> json) => _Device(
           : AirConditionerState.fromJson(
               json['airConditionerState'] as Map<String, dynamic>),
       nickname: json['nickname'] as String?,
-      chargingAmpere: (json['chargingAmpere'] as num?)?.toDouble(),
-      maxChargingAmpere: (json['maxChargingAmpere'] as num?)?.toDouble(),
-      evseState: json['evseState'] == null
-          ? EvseState.unknown
-          : const EvseStateConverter()
-              .fromJson((json['evseState'] as num).toInt()),
-      ellaState: json['ellaState'] == null
-          ? EllaState.unknown
-          : const EllaStateConverter()
-              .fromJson((json['ellaState'] as num).toInt()),
       temperature: (json['temperature'] as num?)?.toDouble(),
       mode: json['mode'] as String?,
       isOffline: json['isOffline'] as bool? ?? false,
-      cplt: json['cplt'] as bool? ?? false,
-      model: $enumDecodeNullable(_$DeviceModelEnumMap, json['model']) ??
-          DeviceModel.nadiya,
       fwVersion: json['fwVersion'] as String?,
       lastPingedAt: json['lastPingedAt'] == null
           ? null
@@ -58,15 +45,9 @@ Map<String, dynamic> _$DeviceToJson(_Device instance) => <String, dynamic>{
       'lightState': instance.lightState,
       'airConditionerState': instance.airConditionerState,
       'nickname': instance.nickname,
-      'chargingAmpere': instance.chargingAmpere,
-      'maxChargingAmpere': instance.maxChargingAmpere,
-      'evseState': const EvseStateConverter().toJson(instance.evseState),
-      'ellaState': const EllaStateConverter().toJson(instance.ellaState),
       'temperature': instance.temperature,
       'mode': instance.mode,
       'isOffline': instance.isOffline,
-      'cplt': instance.cplt,
-      'model': _$DeviceModelEnumMap[instance.model]!,
       'fwVersion': instance.fwVersion,
       'lastPingedAt': instance.lastPingedAt?.toIso8601String(),
     };
@@ -74,11 +55,4 @@ Map<String, dynamic> _$DeviceToJson(_Device instance) => <String, dynamic>{
 const _$DeviceTypeEnumMap = {
   DeviceType.light: 'light',
   DeviceType.airConditioner: 'airConditioner',
-};
-
-const _$DeviceModelEnumMap = {
-  DeviceModel.legacyElla: 'LEGACY_ELLA',
-  DeviceModel.ella: 'ELLA',
-  DeviceModel.industrial: 'INDUSTRIAL',
-  DeviceModel.nadiya: 'NADIYA',
 };

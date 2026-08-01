@@ -10,8 +10,9 @@ import 'package:mini_home/core/widgets/basic_dialog.dart';
 import 'package:mini_home/utils/logger.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-final ellaBleServiceProvider = Provider.autoDispose<EllaBleService>((ref) {
-  final service = EllaBleService();
+final deviceBleProvisioningServiceProvider =
+    Provider.autoDispose<DeviceBleProvisioningService>((ref) {
+  final service = DeviceBleProvisioningService();
   ref.onDispose(() {
     unawaited(service.disconnect());
   });
@@ -19,7 +20,7 @@ final ellaBleServiceProvider = Provider.autoDispose<EllaBleService>((ref) {
 });
 
 /// BLE 検索〜OTP 書き込みまでの失敗理由。呼び出し元でメッセージ表示に利用する。
-enum EllaBleSearchFailureReason {
+enum DeviceBleProvisioningFailureReason {
   permissionDenied,
   bluetoothOff,
   invalidDeviceId,
@@ -28,14 +29,14 @@ enum EllaBleSearchFailureReason {
   writeOtpFailed,
 }
 
-class EllaBleConfig {
+class DeviceBleProvisioningConfig {
   final String serviceUuidIOS;
   final String serviceUuidAndroid;
   final String serviceDataKey;
   final String challengeUuid;
   final String otpUuid;
 
-  const EllaBleConfig({
+  const DeviceBleProvisioningConfig({
     this.serviceUuidIOS = 'FD8B',
     this.serviceUuidAndroid = '0000FD8B-0000-1000-8000-00805F9B34FB',
     this.serviceDataKey = 'FD8B',
@@ -44,11 +45,12 @@ class EllaBleConfig {
   });
 }
 
-class EllaBleService {
-  EllaBleService({EllaBleConfig config = const EllaBleConfig()})
-      : _config = config;
+class DeviceBleProvisioningService {
+  DeviceBleProvisioningService({
+    DeviceBleProvisioningConfig config = const DeviceBleProvisioningConfig(),
+  }) : _config = config;
 
-  final EllaBleConfig _config;
+  final DeviceBleProvisioningConfig _config;
   BluetoothDevice? _device;
 
   BluetoothDevice? get device => _device;
@@ -59,8 +61,10 @@ class EllaBleService {
   ) async {
     final normalizedDeviceId = _normalizeDeviceId(targetDeviceId);
     if (normalizedDeviceId.length < 6) {
-      safeDebugPrint('[EllaBLE] targetDeviceId is too short: $targetDeviceId');
-      _showBleError(context, EllaBleSearchFailureReason.invalidDeviceId);
+      safeDebugPrint(
+          '[DeviceBLE] targetDeviceId is too short: $targetDeviceId');
+      _showBleError(
+          context, DeviceBleProvisioningFailureReason.invalidDeviceId);
       return false;
     }
 
@@ -72,7 +76,7 @@ class EllaBleService {
 
     final isBluetoothOn = await _ensureBluetoothOn();
     if (!isBluetoothOn) {
-      _showBleError(context, EllaBleSearchFailureReason.bluetoothOff);
+      _showBleError(context, DeviceBleProvisioningFailureReason.bluetoothOff);
       return false;
     }
 
@@ -94,7 +98,7 @@ class EllaBleService {
         );
         subscription = FlutterBluePlus.scanResults.listen((results) {
           if (completed) return;
-          safeDebugPrint('[EllaBLE] Android scanResults: ${results.length}');
+          safeDebugPrint('[DeviceBLE] Android scanResults: ${results.length}');
           for (final result in results) {
             if (_isTargetDevice(result, normalizedDeviceId)) {
               completed = true;
@@ -104,7 +108,7 @@ class EllaBleService {
           }
         });
       } catch (e) {
-        safeDebugPrint('[EllaBLE] Android startScan failed: $e');
+        safeDebugPrint('[DeviceBLE] Android startScan failed: $e');
         rethrow;
       }
     } else {
@@ -134,14 +138,15 @@ class EllaBleService {
         onTimeout: () => null,
       );
       if (foundDevice == null) {
-        _showBleError(context, EllaBleSearchFailureReason.deviceNotFound);
+        _showBleError(
+            context, DeviceBleProvisioningFailureReason.deviceNotFound);
         return false;
       }
       _device = foundDevice;
       return true;
     } catch (e) {
-      safeDebugPrint('[EllaBLE] Search failed: $e');
-      _showBleError(context, EllaBleSearchFailureReason.deviceNotFound);
+      safeDebugPrint('[DeviceBLE] Search failed: $e');
+      _showBleError(context, DeviceBleProvisioningFailureReason.deviceNotFound);
       return false;
     } finally {
       completed = true;
@@ -150,17 +155,22 @@ class EllaBleService {
     }
   }
 
-  void _showBleError(BuildContext? context, EllaBleSearchFailureReason reason) {
+  void _showBleError(
+      BuildContext? context, DeviceBleProvisioningFailureReason reason) {
     if (context == null || !context.mounted) return;
     final message = switch (reason) {
-      EllaBleSearchFailureReason.permissionDenied =>
+      DeviceBleProvisioningFailureReason.permissionDenied =>
         AppStrings.blePermissionDenied,
-      EllaBleSearchFailureReason.bluetoothOff => AppStrings.bleBluetoothOff,
-      EllaBleSearchFailureReason.invalidDeviceId =>
+      DeviceBleProvisioningFailureReason.bluetoothOff =>
+        AppStrings.bleBluetoothOff,
+      DeviceBleProvisioningFailureReason.invalidDeviceId =>
         AppStrings.bleInvalidDeviceId,
-      EllaBleSearchFailureReason.deviceNotFound => AppStrings.bleSearchFailed,
-      EllaBleSearchFailureReason.challengeFailed => AppStrings.bleSearchFailed,
-      EllaBleSearchFailureReason.writeOtpFailed => AppStrings.bleSearchFailed,
+      DeviceBleProvisioningFailureReason.deviceNotFound =>
+        AppStrings.bleSearchFailed,
+      DeviceBleProvisioningFailureReason.challengeFailed =>
+        AppStrings.bleSearchFailed,
+      DeviceBleProvisioningFailureReason.writeOtpFailed =>
+        AppStrings.bleSearchFailed,
     };
     BasicDialog.showError(
       context: context,
@@ -216,7 +226,7 @@ class EllaBleService {
           await characteristic.read().timeout(const Duration(seconds: 5));
       return value;
     } catch (e) {
-      safeDebugPrint('[EllaBLE] Challenge read failed: $e');
+      safeDebugPrint('[DeviceBLE] Challenge read failed: $e');
       return null;
     }
   }
@@ -224,7 +234,8 @@ class EllaBleService {
   Future<String?> readChallengeBase64(BuildContext? context) async {
     final challengeBytes = await readChallengeBytes();
     if (challengeBytes == null || challengeBytes.isEmpty) {
-      _showBleError(context, EllaBleSearchFailureReason.challengeFailed);
+      _showBleError(
+          context, DeviceBleProvisioningFailureReason.challengeFailed);
       return null;
     }
     return base64.encode(challengeBytes);
@@ -242,8 +253,8 @@ class EllaBleService {
       final otpBytes = base64.decode(otpBase64);
       return writeOtpBytes(otpBytes, context: context);
     } on FormatException catch (e) {
-      safeDebugPrint('[EllaBLE] Invalid OTP base64: $e');
-      _showBleError(context, EllaBleSearchFailureReason.writeOtpFailed);
+      safeDebugPrint('[DeviceBLE] Invalid OTP base64: $e');
+      _showBleError(context, DeviceBleProvisioningFailureReason.writeOtpFailed);
       return false;
     }
   }
@@ -255,7 +266,8 @@ class EllaBleService {
     try {
       final currentDevice = _device;
       if (currentDevice == null) {
-        _showBleError(context, EllaBleSearchFailureReason.writeOtpFailed);
+        _showBleError(
+            context, DeviceBleProvisioningFailureReason.writeOtpFailed);
         return false;
       }
 
@@ -266,7 +278,8 @@ class EllaBleService {
         _config.otpUuid,
       );
       if (characteristic == null) {
-        _showBleError(context, EllaBleSearchFailureReason.writeOtpFailed);
+        _showBleError(
+            context, DeviceBleProvisioningFailureReason.writeOtpFailed);
         return false;
       }
 
@@ -276,7 +289,7 @@ class EllaBleService {
       );
       return true;
     } catch (e) {
-      safeDebugPrint('[EllaBLE] OTP write failed: $e');
+      safeDebugPrint('[DeviceBLE] OTP write failed: $e');
       // 送信直後にデバイスが再起動して切断されると例外になることがある。送信は成功している可能性が高いためエラーは出さず成功扱いにする。
       return true;
     }
@@ -297,7 +310,7 @@ class EllaBleService {
     try {
       await currentDevice.disconnect();
     } catch (e) {
-      safeDebugPrint('[EllaBLE] Disconnect failed: $e');
+      safeDebugPrint('[DeviceBLE] Disconnect failed: $e');
     }
   }
 
@@ -328,7 +341,7 @@ class EllaBleService {
   }
 
   /// hex の先頭2文字(partnerId) + 末尾4文字(deviceId) → "EL"+大文字。
-  /// 4バイト以上なら type(2-4文字目)== "03" のときだけ対象（isValidEllaDevice）。
+  /// 4バイト以上なら type(2-4文字目)== "03" のときだけ対象。
   bool _isTargetDevice(ScanResult result, String normalizedDeviceId) {
     final serviceData = result.advertisementData.serviceData;
     final data = _getFd8bServiceData(serviceData);
@@ -398,7 +411,7 @@ class EllaBleService {
         await Future.delayed(const Duration(milliseconds: 500));
         adapterState = await FlutterBluePlus.adapterState.first;
       } catch (e) {
-        safeDebugPrint('[EllaBLE] turnOn failed: $e');
+        safeDebugPrint('[DeviceBLE] turnOn failed: $e');
       }
     }
 
@@ -412,7 +425,7 @@ class EllaBleService {
         milliseconds: Platform.isAndroid ? 1000 : 400,
       ));
     } catch (e) {
-      safeDebugPrint('[EllaBLE] stopScan failed (ignored): $e');
+      safeDebugPrint('[DeviceBLE] stopScan failed (ignored): $e');
       await Future.delayed(Duration(
         milliseconds: Platform.isAndroid ? 500 : 200,
       ));

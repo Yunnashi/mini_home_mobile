@@ -12,7 +12,11 @@ import 'package:mini_home/core/widgets/basic_screen.dart';
 import 'package:mini_home/core/widgets/basic_textfield.dart';
 import 'package:mini_home/core/widgets/basic_toast.dart';
 import 'package:mini_home/core/widgets/button/basic_button.dart';
+import 'package:mini_home/core/widgets/device_reboot_widget.dart';
 import 'package:mini_home/core/widgets/error_message_view.dart';
+import 'package:mini_home/core/widgets/fw_update_section.dart';
+import 'package:mini_home/features/device/models/device.dart';
+import 'package:mini_home/features/device/services/fw_update_info_service.dart';
 import 'package:mini_home/features/device/services/smart_device_service.dart';
 import 'package:mini_home/features/home/services/home_service.dart';
 import 'package:mini_home/router/router.dart';
@@ -29,6 +33,33 @@ class DeviceSettingScreen extends HookConsumerWidget {
     final nameController = useTextEditingController();
     final selectedRoomId = useState<int?>(null);
     final saving = useState(false);
+    final deviceNotifier = useMemoized(() => ValueNotifier<Device?>(null));
+    final latestFwVersion = useState<String?>(null);
+    final fwUpdateInfoServiceAsync = ref.watch(fwUpdateInfoServiceProvider);
+
+    useEffect(() {
+      return deviceNotifier.dispose;
+    }, const []);
+
+    useEffect(() {
+      final service = fwUpdateInfoServiceAsync.valueOrNull;
+      var disposed = false;
+      if (service == null) {
+        latestFwVersion.value = null;
+        return null;
+      }
+
+      Future.microtask(() async {
+        final info = await service.fetchFwUpdateInfo();
+        if (!disposed) {
+          latestFwVersion.value = info?.latestVersion;
+        }
+      });
+
+      return () {
+        disposed = true;
+      };
+    }, [fwUpdateInfoServiceAsync.valueOrNull]);
 
     useEffect(() {
       final device = deviceAsync.value;
@@ -36,8 +67,9 @@ class DeviceSettingScreen extends HookConsumerWidget {
         nameController.text = device.name ?? device.nickname ?? '';
         selectedRoomId.value = device.roomId;
       }
+      deviceNotifier.value = device;
       return null;
-    }, [deviceAsync.value?.id]);
+    }, [deviceAsync.value]);
 
     Future<void> save() async {
       final roomId = selectedRoomId.value;
@@ -137,25 +169,43 @@ class DeviceSettingScreen extends HookConsumerWidget {
               onPressed: saving.value ? () {} : save,
             ),
             const SizedBox(height: AppSpacing.xl),
-            Container(
-              padding: const EdgeInsets.all(AppSpacing.md),
-              decoration: BoxDecoration(
-                color: AppColors.white,
-                borderRadius: BorderRadius.circular(AppRadius.card),
-                border: Border.all(color: AppColors.border),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    AppStrings.deviceInformation,
-                    style: Theme.of(context).textTheme.titleMedium,
+            _SettingsSectionCard(
+              title: AppStrings.deviceMaintenance,
+              children: [
+                _SettingsInfoRow(
+                  label: AppStrings.deviceFwVersionLabel,
+                  trailing: FirmwareUpdateWidget(
+                    device: deviceNotifier,
+                    homeId: device.homeId,
+                    latestFwVersion: latestFwVersion.value,
+                    isBanner: false,
                   ),
-                  const SizedBox(height: AppSpacing.sm),
-                  Text('ID: ${device.externalDeviceId}'),
-                  Text('Type: ${device.type.name}'),
-                ],
-              ),
+                ),
+                const Divider(height: AppSpacing.lg),
+                _SettingsInfoRow(
+                  label: AppStrings.deviceSettingRebootLabel,
+                  trailing: DeviceRestartWidget(
+                    homeId: device.homeId,
+                    deviceId: device.id,
+                    externalDeviceId: device.externalDeviceId,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: AppSpacing.md),
+            _SettingsSectionCard(
+              title: AppStrings.deviceInformation,
+              children: [
+                _SettingsInfoRow(
+                  label: AppStrings.deviceId,
+                  value: device.externalDeviceId,
+                ),
+                const Divider(height: AppSpacing.lg),
+                _SettingsInfoRow(
+                  label: AppStrings.deviceTypeLabel,
+                  value: device.type.name,
+                ),
+              ],
             ),
             const SizedBox(height: AppSpacing.xl),
             BasicButton.buildLarge(
@@ -166,6 +216,78 @@ class DeviceSettingScreen extends HookConsumerWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _SettingsSectionCard extends StatelessWidget {
+  const _SettingsSectionCard({
+    required this.title,
+    required this.children,
+  });
+
+  final String title;
+  final List<Widget> children;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(AppSpacing.md),
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(AppRadius.card),
+        border: Border.all(color: AppColors.border),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          ...children,
+        ],
+      ),
+    );
+  }
+}
+
+class _SettingsInfoRow extends StatelessWidget {
+  const _SettingsInfoRow({
+    required this.label,
+    this.value,
+    this.trailing,
+  });
+
+  final String label;
+  final String? value;
+  final Widget? trailing;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Expanded(
+          child: Text(
+            label,
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+        ),
+        if (trailing != null)
+          Flexible(child: trailing!)
+        else
+          Flexible(
+            child: Text(
+              value ?? '',
+              textAlign: TextAlign.end,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: AppColors.greyText,
+                  ),
+            ),
+          ),
+      ],
     );
   }
 }

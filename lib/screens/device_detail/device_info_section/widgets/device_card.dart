@@ -10,13 +10,11 @@ import 'package:mini_home/features/device/models/device_status.dart';
 class DeviceCard extends StatelessWidget {
   final Device device;
   final VoidCallback? onTap;
-  final double? pendingChargingAmpere;
 
   const DeviceCard({
     super.key,
     required this.device,
     this.onTap,
-    this.pendingChargingAmpere,
   });
 
   @override

@@ -141,12 +141,12 @@ class DeviceRepository {
   }
 
   Future<Result> getDeviceById({
-    required int userGroupId,
+    required int homeId,
     required int deviceId,
   }) async {
     Result? response;
     await _dioClient.sendRequest(
-      resourcePath: ApiEndpoints.device(userGroupId, deviceId),
+      resourcePath: ApiEndpoints.device(homeId, deviceId),
       method: HttpMethod.get,
       isLoggedInContent: true,
       successCallback: (data) {
@@ -189,28 +189,6 @@ class DeviceRepository {
     return response ?? Failure('Unknown error');
   }
 
-  Future<Result> updateChargingAmpere({
-    required int userGroupId,
-    required int deviceId,
-    required double chargingAmpere,
-  }) async {
-    Result? response;
-    await _dioClient.sendRequest(
-      resourcePath:
-          '${ApiEndpoints.device(userGroupId, deviceId)}/charging-ampere',
-      method: HttpMethod.patch,
-      isLoggedInContent: true,
-      body: {'chargingAmpere': chargingAmpere},
-      successCallback: (data) {
-        response = Success(data);
-      },
-      errorCallback: (message, code) {
-        response = Failure(message, code: code);
-      },
-    );
-    return response ?? Failure('Unknown error');
-  }
-
   Future<Result> updateNickname({
     required int userGroupId,
     required int deviceId,
@@ -233,12 +211,12 @@ class DeviceRepository {
   }
 
   Future<Result> requestFwUpdate({
-    required int userGroupId,
+    required int homeId,
     required int deviceId,
   }) async {
     Result? response;
     await _dioClient.sendRequest(
-      resourcePath: '${ApiEndpoints.device(userGroupId, deviceId)}/fw-update',
+      resourcePath: '${ApiEndpoints.device(homeId, deviceId)}/fw-update',
       method: HttpMethod.patch,
       isLoggedInContent: true,
       successCallback: (data) {
@@ -252,13 +230,13 @@ class DeviceRepository {
   }
 
   Future<Result> fetchRebootOtp({
-    required int userGroupId,
+    required int homeId,
     required int deviceId,
     required String deviceChallenge,
   }) async {
     Result? response;
     await _dioClient.sendRequest(
-      resourcePath: '${ApiEndpoints.device(userGroupId, deviceId)}/reboot-otp',
+      resourcePath: '${ApiEndpoints.device(homeId, deviceId)}/reboot-otp',
       method: HttpMethod.post,
       isLoggedInContent: true,
       body: {'deviceChallenge': deviceChallenge},

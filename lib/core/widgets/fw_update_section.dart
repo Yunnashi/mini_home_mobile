@@ -43,7 +43,7 @@ Timer _startProgressTimer({
 }
 
 class FirmwareUpdateWidget extends HookConsumerWidget {
-  final int? userGroupId;
+  final int? homeId;
   final ValueNotifier<Device?> device;
   final String? latestFwVersion;
   final bool isBanner;
@@ -51,7 +51,7 @@ class FirmwareUpdateWidget extends HookConsumerWidget {
   const FirmwareUpdateWidget({
     super.key,
     required this.device,
-    this.userGroupId,
+    this.homeId,
     required this.latestFwVersion,
     required this.isBanner,
   });
@@ -333,7 +333,7 @@ class FirmwareUpdateWidget extends HookConsumerWidget {
     String latestFwVersion,
     ValueNotifier<int?> fwUpdateRequestedAt,
   ) {
-    if (userGroupId == null) return;
+    if (homeId == null) return;
 
     BasicDialog.show(
       context: context,
@@ -348,7 +348,7 @@ class FirmwareUpdateWidget extends HookConsumerWidget {
           autoClose: false,
           callback: () async {
             await ref.read(deviceServiceProvider.notifier).requestFwUpdate(
-                  userGroupId: userGroupId!,
+                  homeId: homeId!,
                   deviceId: device.id,
                   successCallback: () async {
                     final timestamp = DateTime.now().millisecondsSinceEpoch;

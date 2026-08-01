@@ -11,19 +11,19 @@ import 'package:mini_home/features/device/repositories/device_repository.dart';
 import 'package:mini_home/features/device/services/ella_ble_service.dart';
 import 'package:mini_home/core/network/models/result.dart';
 
-/// 充電器の再起動用ウィジェット。設定画面の再起動行で使用。
+/// デバイスの再起動用ウィジェット。設定画面の再起動行で使用。
 /// 表示: deviceSettingDoReboot のテキスト + chevron。
 /// タップ時: BLE 検索 → challenge 取得 → API で OTP 取得 → デバイスに write の一連の再起動処理。
 /// 処理中はスピナー表示、失敗時はダイアログ。
-class DeviceRebootWidget extends HookConsumerWidget {
-  const DeviceRebootWidget({
+class DeviceRestartWidget extends HookConsumerWidget {
+  const DeviceRestartWidget({
     super.key,
-    required this.userGroupId,
+    required this.homeId,
     required this.deviceId,
     required this.externalDeviceId,
   });
 
-  final int userGroupId;
+  final int homeId;
   final int deviceId;
   final String externalDeviceId;
 
@@ -35,7 +35,7 @@ class DeviceRebootWidget extends HookConsumerWidget {
       if (isRebooting.value) return;
       isRebooting.value = true;
       try {
-        final ble = ref.read(ellaBleServiceProvider);
+        final ble = ref.read(deviceBleProvisioningServiceProvider);
         final found = await ble.search(context, externalDeviceId);
         if (!context.mounted) return;
         if (found) {
@@ -46,7 +46,7 @@ class DeviceRebootWidget extends HookConsumerWidget {
           }
           final repo = ref.read(deviceRepositoryProvider);
           final result = await repo.fetchRebootOtp(
-            userGroupId: userGroupId,
+            homeId: homeId,
             deviceId: deviceId,
             deviceChallenge: challenge,
           );
