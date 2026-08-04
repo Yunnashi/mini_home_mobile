@@ -6,8 +6,7 @@
       "terms": "利用規約",
       "privacy_policy": "プライバシーポリシー",
       "activity_type": "アクティビティ",
-      "activity_duration": "利用時間",
-      "activity_energy": "消費電力量(目安)"
+      "activity_duration": "利用時間"
     },
     "actions": {
       "save": "保存",
@@ -80,16 +79,16 @@
     "withdrawal": {
       "title": "退会",
       "withdraw": "退会する",
-      "confirm_withdraw": "退会すると、充電履歴等のデータは削除され、アカウントは使用できなくなります。\n\n本当に退会しますか？",
+      "confirm_withdraw": "退会すると、利用履歴等のデータは削除され、アカウントは使用できなくなります。\n\n本当に退会しますか？",
       "confirm_withdraw_final": "この操作は元に戻せません。\n本当に退会しますか？",
       "withdraw_success_dialog": {
         "title": "退会が完了しました",
         "content": "ご利用ありがとうございました。\nまたのご利用をお待ちしております。"
       }
     },
-    "charging_history": {
-      "title": "充電履歴",
-      "fetch_error": "充電履歴の取得に失敗しました"
+    "activity_history": {
+      "title": "利用履歴",
+      "fetch_error": "利用履歴の取得に失敗しました"
     },
     "others": {
       "licenses": "ライセンス情報",
@@ -147,6 +146,7 @@
     "my": "マイ"
   },
   "home": {
+    "my_home": "マイホーム",
     "all_rooms": "すべて",
     "online": "オンライン",
     "working": "稼働中",
@@ -169,7 +169,7 @@
   },
   "welcome": {
       "title": "ようこそ!",
-      "description": "このアプリはご自宅のEV充電をサポート\nするアプリです",
+      "description": "このアプリはご自宅のスマートデバイス管理をサポート\nするアプリです",
       "login_button": "ログイン",
       "register_button": "新規登録"
   },
@@ -200,13 +200,7 @@
   "device": {
     "status": {
       "disconnected": "未使用",
-      "connected": "接続中",
-      "charging": "充電中",
-      "charging_stopped": "一時停止中",
-      "error": "使用不可",
-      "unknown": "不明",
-      "ota_in_progress": "アップデート中",
-      "offline": "オフライン"
+      "connected": "接続中"
     },
     "fw_update_status": {
       "update_available": "ファームウェアのアップデートが可能です",
@@ -230,10 +224,6 @@
     "is_offline_error": "デバイスがオフライン状態のため、この機能はご利用いただけません。",
     "device_info": "デバイス情報",
     "device_id": "デバイスID",
-    "device_nickname_title": "名前を変更する",
-    "device_nickname": "デバイス名",
-    "device_nickname_short": "名前",
-    "device_nickname_placeholder": "24文字まで入力できます",
     "settings_title": "設定",
     "fw_version": "ファームウェア",
     "device_status": "状況",
@@ -241,15 +231,15 @@
     "pending_changes": "変更中",
     "latest_usage": "直近の利用履歴",
     "more_usage": "もっと見る",
-    "charging_schedule": "スケジュール",
-    "charging_schedule_description": "スケジュールをONにしている場合は、設定時間中のみデバイスが動作します。設定変更後、デバイスに反映されるまで時間がかかる場合があります。",
+    "schedule": "スケジュール",
+    "schedule_description": "スケジュールをONにしている場合は、設定時間中のみデバイスが動作します。設定変更後、デバイスに反映されるまで時間がかかる場合があります。",
     "status_help_title": "デバイスの状況について",
     "status_help_content_disconnected": "デバイスは現在使用されていません。",
     "status_help_content_connected": "デバイスは接続されています。",
-    "status_help_content_charging": "デバイスは動作中です。",
+    "status_help_content_working": "デバイスは動作中です。",
     "status_help_content_ota_in_progress": "ファームウェアのアップデート中です。",
     "status_help_content_error": "デバイスを使用できない状態です。",
-    "status_help_content_charging_stopped": "デバイスは一時停止しています。",
+    "status_help_content_paused": "デバイスは一時停止しています。",
     "status_help_content_offline": "デバイスがネットワークに接続されていないか、電源が入っていない状態です。しばらく待ってから再度お試しください。",
     "fw_update": {
       "dialog": {
@@ -285,9 +275,6 @@
     "bluetooth_off": "Bluetoothをオンにしてください",
     "permission_denied": "Bluetoothの権限を有効にしてください",
     "invalid_device_id": "デバイスIDが正しくありません。設定をご確認ください。"
-  },
-  "user_group": {
-    "my_home": "マイホーム"
   },
   "qr_code_scan": {
     "read_qr": "QRコードを読み取る",

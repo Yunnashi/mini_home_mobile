@@ -75,16 +75,23 @@ class HomeService extends _$HomeService {
     );
   }
 
-  Future<void> refresh() async {
-    state = const AsyncLoading();
+  Future<void> refresh({bool showLoading = true}) async {
+    final previous = state;
+    if (showLoading) {
+      state = const AsyncLoading();
+    }
     final authState = await ref.read(authStateServiceProvider.future);
     final homeId = authState.defaultHomeId;
-    state = await AsyncValue.guard(() async {
+    final next = await AsyncValue.guard(() async {
       if (homeId == null) {
         throw Exception('Default home is not configured');
       }
       return _load(homeId);
     });
+    if (!showLoading && next.hasError && previous.hasValue) {
+      return;
+    }
+    state = next;
   }
 
   void selectRoom(int? roomId) {

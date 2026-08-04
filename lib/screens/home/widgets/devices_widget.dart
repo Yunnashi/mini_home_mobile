@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mini_home/core/themes/colors.dart';
@@ -29,11 +32,47 @@ class DevicesWidget extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final dashboard = ref.watch(homeServiceProvider);
+    final homeService = ref.read(homeServiceProvider.notifier);
+    final lifecycle = useAppLifecycleState();
+    final pollingTimer = useRef<Timer?>(null);
+
+    Future<void> refreshSilently() async {
+      try {
+        await homeService.refresh(showLoading: false);
+      } catch (_) {
+        // Polling should not interrupt the user with transient demo API errors.
+      }
+    }
+
+    void stopPolling() {
+      pollingTimer.value?.cancel();
+      pollingTimer.value = null;
+    }
+
+    void startPolling() {
+      stopPolling();
+      pollingTimer.value = Timer.periodic(const Duration(seconds: 30), (_) {
+        if (ModalRoute.of(context)?.isCurrent != true) return;
+        unawaited(refreshSilently());
+      });
+    }
+
+    useEffect(() {
+      if (lifecycle == AppLifecycleState.resumed) {
+        if (dashboard.hasValue) {
+          unawaited(refreshSilently());
+        }
+        startPolling();
+      } else {
+        stopPolling();
+      }
+      return stopPolling;
+    }, [lifecycle, authState.defaultHomeId]);
 
     return dashboard.when(
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (_, __) => RefreshIndicator(
-        onRefresh: ref.read(homeServiceProvider.notifier).refresh,
+        onRefresh: homeService.refresh,
         child: ErrorMessageView(message: AppStrings.deviceListFetchError),
       ),
       data: (state) {
@@ -49,7 +88,7 @@ class DevicesWidget extends HookConsumerWidget {
         });
 
         return RefreshIndicator(
-          onRefresh: ref.read(homeServiceProvider.notifier).refresh,
+          onRefresh: homeService.refresh,
           child: CustomScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
             slivers: [

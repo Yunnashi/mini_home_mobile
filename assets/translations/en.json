@@ -6,8 +6,7 @@
       "terms": "Terms of Use",
       "privacy_policy": "Privacy Policy",
       "activity_type": "Activity",
-      "activity_duration": "Duration",
-      "activity_energy": "Estimated energy"
+      "activity_duration": "Duration"
     },
     "actions": {
       "save": "Save",
@@ -85,9 +84,9 @@
         "content": "Your account has been deleted.\nThank you for trying miniHome."
       }
     },
-    "charging_history": {
-      "title": "Charging history",
-      "fetch_error": "Failed to load charging history."
+    "activity_history": {
+      "title": "Activity history",
+      "fetch_error": "Failed to load activity history."
     },
     "others": {
       "licenses": "Open-source licenses",
@@ -145,6 +144,7 @@
     "my": "My"
   },
   "home": {
+    "my_home": "My Home",
     "all_rooms": "All",
     "online": "Online",
     "working": "Working",
@@ -198,13 +198,7 @@
   "device": {
     "status": {
       "disconnected": "Not in use",
-      "connected": "Connected",
-      "charging": "Charging",
-      "charging_stopped": "Paused",
-      "error": "Unavailable",
-      "unknown": "Unknown",
-      "ota_in_progress": "Updating",
-      "offline": "Offline"
+      "connected": "Connected"
     },
     "fw_update_status": {
       "update_available": "A firmware update is available",
@@ -227,10 +221,6 @@
     "is_offline_error": "This feature is unavailable while the device is offline.",
     "device_info": "Device information",
     "device_id": "Device ID",
-    "device_nickname_title": "Rename device",
-    "device_nickname": "Device name",
-    "device_nickname_short": "Name",
-    "device_nickname_placeholder": "Up to 24 characters",
     "settings_title": "Settings",
     "fw_version": "Firmware",
     "device_status": "Status",
@@ -238,15 +228,15 @@
     "pending_changes": "Updating",
     "latest_usage": "Recent activity",
     "more_usage": "View more",
-    "charging_schedule": "Schedule",
-    "charging_schedule_description": "When a schedule is enabled, the device runs only during its configured time. Changes may take a moment to appear.",
+    "schedule": "Schedule",
+    "schedule_description": "When a schedule is enabled, the device runs only during its configured time. Changes may take a moment to appear.",
     "status_help_title": "About device status",
     "status_help_content_disconnected": "The device is not currently in use.",
     "status_help_content_connected": "The device is connected.",
-    "status_help_content_charging": "The device is running.",
+    "status_help_content_working": "The device is running.",
     "status_help_content_ota_in_progress": "A firmware update is in progress.",
     "status_help_content_error": "The device is currently unavailable.",
-    "status_help_content_charging_stopped": "The device is temporarily paused.",
+    "status_help_content_paused": "The device is temporarily paused.",
     "status_help_content_offline": "The device is not connected to the network or has no power.",
     "fw_update": {
       "dialog": {
@@ -283,7 +273,6 @@
     "permission_denied": "Allow Bluetooth access.",
     "invalid_device_id": "The device ID is invalid."
   },
-  "user_group": { "my_home": "My Home" },
   "qr_code_scan": {
     "read_qr": "Scan QR code",
     "note": "QR Code is a registered trademark of DENSO WAVE INCORPORATED.",

@@ -31,16 +31,23 @@ class SmartDeviceService extends _$SmartDeviceService {
     throw Exception(result is Failure ? result.message : 'Device not found');
   }
 
-  Future<void> refresh() async {
-    state = const AsyncLoading();
+  Future<void> refresh({bool showLoading = true}) async {
+    final previous = state;
+    if (showLoading) {
+      state = const AsyncLoading();
+    }
     final authState = await ref.read(authStateServiceProvider.future);
     final homeId = authState.defaultHomeId;
-    state = await AsyncValue.guard(() async {
+    final next = await AsyncValue.guard(() async {
       if (homeId == null) {
         throw Exception('Default home is not configured');
       }
       return _fetch(homeId: homeId, deviceId: deviceId);
     });
+    if (!showLoading && next.hasError && previous.hasValue) {
+      return;
+    }
+    state = next;
   }
 
   Future<void> setPower(bool value) async {

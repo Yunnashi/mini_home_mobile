@@ -65,9 +65,6 @@ class AppStrings {
   static String get activityDurationTitle =>
       "commons.labels.activity_duration".tr();
 
-  static String get activityEnergyTitle =>
-      "commons.labels.activity_energy".tr();
-
   static String get activityTypeTitle => "commons.labels.activity_type".tr();
 
   static String activityType(String value) =>
@@ -187,14 +184,14 @@ class AppStrings {
   static String get contentSuccessWithdrawal =>
       "settings.withdrawal.withdraw_success_dialog.content".tr();
 
-  //-------------------Charging History Screen(Usages)-------------------
-  static String get chargingHistory => "settings.charging_history.title".tr();
+  //-------------------Activity History Screen(Usages)-------------------
+  static String get activityHistory => "settings.activity_history.title".tr();
 
   static String get usagesFetchError =>
-      "settings.charging_history.fetch_error".tr();
+      "settings.activity_history.fetch_error".tr();
 
-  static String get chargingHistoryTitle =>
-      "settings.charging_history.title".tr();
+  static String get activityHistoryTitle =>
+      "settings.activity_history.title".tr();
 
   //-------------------Others-------------------
   static String get lblLicensesInfo => "settings.others.licenses".tr();
@@ -292,14 +289,7 @@ class AppStrings {
   static String get deviceStatusDisconnected =>
       "device.status.disconnected".tr();
   static String get deviceStatusConnected => "device.status.connected".tr();
-  static String get deviceStatusCharging => "device.status.charging".tr();
-  static String get deviceStatusChargingStopped =>
-      "device.status.charging_stopped".tr();
-  static String get deviceStatusError => "device.status.error".tr();
-  static String get deviceStatusUnknown => "device.status.unknown".tr();
-  static String get deviceStatusOtaInProgress =>
-      "device.status.ota_in_progress".tr();
-  static String get deviceStatusOffline => "device.status.offline".tr();
+
   //-------------------Fw Update Status-------------------
   static String get fwUpdateStatusUpdateAvailable =>
       "device.fw_update_status.update_available".tr();
@@ -365,17 +355,6 @@ class AppStrings {
 
   static String get deviceId => "device_detail.device_id".tr();
 
-  static String get deviceNicknameTitle =>
-      "device_detail.device_nickname_title".tr();
-
-  static String get deviceNickname => "device_detail.device_nickname".tr();
-
-  static String get deviceNicknameShort =>
-      "device_detail.device_nickname_short".tr();
-
-  static String get deviceNicknamePlaceholder =>
-      "device_detail.device_nickname_placeholder".tr();
-
   static String get deviceSettingsTitle => "device_detail.settings_title".tr();
 
   static String get deviceFwVersionLabel => "device_detail.fw_version".tr();
@@ -409,11 +388,10 @@ class AppStrings {
 
   static String get deviceDetailMoreUsage => "device_detail.more_usage".tr();
 
-  static String get deviceDetailChargingSchedule =>
-      "device_detail.charging_schedule".tr();
+  static String get deviceDetailSchedule => "device_detail.schedule".tr();
 
-  static String get deviceDetailChargingScheduleDescription =>
-      "device_detail.charging_schedule_description".tr();
+  static String get deviceDetailScheduleDescription =>
+      "device_detail.schedule_description".tr();
 
   static String get deviceStatusHelpTitle =>
       "device_detail.status_help_title".tr();
@@ -424,11 +402,11 @@ class AppStrings {
   static String get deviceStatusHelpContentConnected =>
       "device_detail.status_help_content_connected".tr();
 
-  static String get deviceStatusHelpContentChargingStopped =>
-      "device_detail.status_help_content_charging_stopped".tr();
+  static String get deviceStatusHelpContentPaused =>
+      "device_detail.status_help_content_paused".tr();
 
-  static String get deviceStatusHelpContentCharging =>
-      "device_detail.status_help_content_charging".tr();
+  static String get deviceStatusHelpContentWorking =>
+      "device_detail.status_help_content_working".tr();
 
   static String get deviceStatusHelpContentError =>
       "device_detail.status_help_content_error".tr();
@@ -464,13 +442,13 @@ class AppStrings {
 
   static String get usageHistoryEmpty => "usage_history.empty".tr();
 
-  // -------------------User Group Screen-------------------
-  static String get myHome => "user_group.my_home".tr();
+  // -------------------Home-------------------
+  static String get myHome => "home.my_home".tr();
 
   //-------------------QR Code Scanner Screen-------------------
   static String get readQr => "qr_code_scan.read_qr".tr();
 
-  static String get chargingPreparingQrNote => "qr_code_scan.note".tr();
+  static String get devicePreparingQrNote => "qr_code_scan.note".tr();
 
   static String get readQrDescription => "qr_code_scan.description".tr();
 
