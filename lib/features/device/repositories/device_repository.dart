@@ -189,27 +189,6 @@ class DeviceRepository {
     return response ?? Failure('Unknown error');
   }
 
-  Future<Result> updateNickname({
-    required int userGroupId,
-    required int deviceId,
-    required String nickname,
-  }) async {
-    Result? response;
-    await _dioClient.sendRequest(
-      resourcePath: '${ApiEndpoints.device(userGroupId, deviceId)}/nickname',
-      method: HttpMethod.patch,
-      isLoggedInContent: true,
-      body: {'nickname': nickname},
-      successCallback: (data) {
-        response = Success(data);
-      },
-      errorCallback: (message, code) {
-        response = Failure(message, code: code);
-      },
-    );
-    return response ?? Failure('Unknown error');
-  }
-
   Future<Result> requestFwUpdate({
     required int homeId,
     required int deviceId,

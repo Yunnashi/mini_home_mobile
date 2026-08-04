@@ -26,7 +26,6 @@ abstract class Usage with _$Usage {
     String? finishedAt,
     required bool isFinalized,
     required String activityType,
-    required double energyKwh,
     required int durationSeconds,
     required String? createdAt,
     required String? updatedAt,

@@ -75,8 +75,7 @@ class ScheduleRepository {
   }) async {
     Result? response;
     await _dioClient.sendRequest(
-      resourcePath:
-          '${ApiEndpoints.schedules(homeId, deviceId)}/$scheduleId',
+      resourcePath: '${ApiEndpoints.schedules(homeId, deviceId)}/$scheduleId',
       method: HttpMethod.patch,
       isLoggedInContent: true,
       body: {
@@ -124,8 +123,7 @@ class ScheduleRepository {
   }) async {
     Result? response;
     await _dioClient.sendRequest(
-      resourcePath:
-          '${ApiEndpoints.schedules(homeId, deviceId)}/$scheduleId',
+      resourcePath: '${ApiEndpoints.schedules(homeId, deviceId)}/$scheduleId',
       method: HttpMethod.delete,
       isLoggedInContent: true,
       successCallback: (data) {

@@ -372,7 +372,6 @@ mixin _$Usage {
   String? get finishedAt;
   bool get isFinalized;
   String get activityType;
-  double get energyKwh;
   int get durationSeconds;
   String? get createdAt;
   String? get updatedAt;
@@ -402,8 +401,6 @@ mixin _$Usage {
                 other.isFinalized == isFinalized) &&
             (identical(other.activityType, activityType) ||
                 other.activityType == activityType) &&
-            (identical(other.energyKwh, energyKwh) ||
-                other.energyKwh == energyKwh) &&
             (identical(other.durationSeconds, durationSeconds) ||
                 other.durationSeconds == durationSeconds) &&
             (identical(other.createdAt, createdAt) ||
@@ -422,14 +419,13 @@ mixin _$Usage {
       finishedAt,
       isFinalized,
       activityType,
-      energyKwh,
       durationSeconds,
       createdAt,
       updatedAt);
 
   @override
   String toString() {
-    return 'Usage(id: $id, device: $device, startedAt: $startedAt, finishedAt: $finishedAt, isFinalized: $isFinalized, activityType: $activityType, energyKwh: $energyKwh, durationSeconds: $durationSeconds, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Usage(id: $id, device: $device, startedAt: $startedAt, finishedAt: $finishedAt, isFinalized: $isFinalized, activityType: $activityType, durationSeconds: $durationSeconds, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 }
 
@@ -445,7 +441,6 @@ abstract mixin class $UsageCopyWith<$Res> {
       String? finishedAt,
       bool isFinalized,
       String activityType,
-      double energyKwh,
       int durationSeconds,
       String? createdAt,
       String? updatedAt});
@@ -471,7 +466,6 @@ class _$UsageCopyWithImpl<$Res> implements $UsageCopyWith<$Res> {
     Object? finishedAt = freezed,
     Object? isFinalized = null,
     Object? activityType = null,
-    Object? energyKwh = null,
     Object? durationSeconds = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
@@ -501,10 +495,6 @@ class _$UsageCopyWithImpl<$Res> implements $UsageCopyWith<$Res> {
           ? _self.activityType
           : activityType // ignore: cast_nullable_to_non_nullable
               as String,
-      energyKwh: null == energyKwh
-          ? _self.energyKwh
-          : energyKwh // ignore: cast_nullable_to_non_nullable
-              as double,
       durationSeconds: null == durationSeconds
           ? _self.durationSeconds
           : durationSeconds // ignore: cast_nullable_to_non_nullable
@@ -631,7 +621,6 @@ extension UsagePatterns on Usage {
             String? finishedAt,
             bool isFinalized,
             String activityType,
-            double energyKwh,
             int durationSeconds,
             String? createdAt,
             String? updatedAt)?
@@ -648,7 +637,6 @@ extension UsagePatterns on Usage {
             _that.finishedAt,
             _that.isFinalized,
             _that.activityType,
-            _that.energyKwh,
             _that.durationSeconds,
             _that.createdAt,
             _that.updatedAt);
@@ -679,7 +667,6 @@ extension UsagePatterns on Usage {
             String? finishedAt,
             bool isFinalized,
             String activityType,
-            double energyKwh,
             int durationSeconds,
             String? createdAt,
             String? updatedAt)
@@ -695,7 +682,6 @@ extension UsagePatterns on Usage {
             _that.finishedAt,
             _that.isFinalized,
             _that.activityType,
-            _that.energyKwh,
             _that.durationSeconds,
             _that.createdAt,
             _that.updatedAt);
@@ -725,7 +711,6 @@ extension UsagePatterns on Usage {
             String? finishedAt,
             bool isFinalized,
             String activityType,
-            double energyKwh,
             int durationSeconds,
             String? createdAt,
             String? updatedAt)?
@@ -741,7 +726,6 @@ extension UsagePatterns on Usage {
             _that.finishedAt,
             _that.isFinalized,
             _that.activityType,
-            _that.energyKwh,
             _that.durationSeconds,
             _that.createdAt,
             _that.updatedAt);
@@ -761,7 +745,6 @@ class _Usage implements Usage {
       this.finishedAt,
       required this.isFinalized,
       required this.activityType,
-      required this.energyKwh,
       required this.durationSeconds,
       required this.createdAt,
       required this.updatedAt});
@@ -779,8 +762,6 @@ class _Usage implements Usage {
   final bool isFinalized;
   @override
   final String activityType;
-  @override
-  final double energyKwh;
   @override
   final int durationSeconds;
   @override
@@ -818,8 +799,6 @@ class _Usage implements Usage {
                 other.isFinalized == isFinalized) &&
             (identical(other.activityType, activityType) ||
                 other.activityType == activityType) &&
-            (identical(other.energyKwh, energyKwh) ||
-                other.energyKwh == energyKwh) &&
             (identical(other.durationSeconds, durationSeconds) ||
                 other.durationSeconds == durationSeconds) &&
             (identical(other.createdAt, createdAt) ||
@@ -838,14 +817,13 @@ class _Usage implements Usage {
       finishedAt,
       isFinalized,
       activityType,
-      energyKwh,
       durationSeconds,
       createdAt,
       updatedAt);
 
   @override
   String toString() {
-    return 'Usage(id: $id, device: $device, startedAt: $startedAt, finishedAt: $finishedAt, isFinalized: $isFinalized, activityType: $activityType, energyKwh: $energyKwh, durationSeconds: $durationSeconds, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Usage(id: $id, device: $device, startedAt: $startedAt, finishedAt: $finishedAt, isFinalized: $isFinalized, activityType: $activityType, durationSeconds: $durationSeconds, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 }
 
@@ -862,7 +840,6 @@ abstract mixin class _$UsageCopyWith<$Res> implements $UsageCopyWith<$Res> {
       String? finishedAt,
       bool isFinalized,
       String activityType,
-      double energyKwh,
       int durationSeconds,
       String? createdAt,
       String? updatedAt});
@@ -889,7 +866,6 @@ class __$UsageCopyWithImpl<$Res> implements _$UsageCopyWith<$Res> {
     Object? finishedAt = freezed,
     Object? isFinalized = null,
     Object? activityType = null,
-    Object? energyKwh = null,
     Object? durationSeconds = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
@@ -919,10 +895,6 @@ class __$UsageCopyWithImpl<$Res> implements _$UsageCopyWith<$Res> {
           ? _self.activityType
           : activityType // ignore: cast_nullable_to_non_nullable
               as String,
-      energyKwh: null == energyKwh
-          ? _self.energyKwh
-          : energyKwh // ignore: cast_nullable_to_non_nullable
-              as double,
       durationSeconds: null == durationSeconds
           ? _self.durationSeconds
           : durationSeconds // ignore: cast_nullable_to_non_nullable

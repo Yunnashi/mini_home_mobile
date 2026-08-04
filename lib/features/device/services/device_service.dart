@@ -72,37 +72,6 @@ class DeviceService extends _$DeviceService {
     }
   }
 
-  /// デバイスのニックネームを更新
-  Future<void> updateNickname({
-    required int userGroupId,
-    required int deviceId,
-    required String nickname,
-    Function(String?)? successCallback,
-    Function(String?, String?)? errorCallback,
-  }) async {
-    try {
-      Loading().show();
-      final deviceRepository = ref.read(deviceRepositoryProvider);
-      final response = await deviceRepository.updateNickname(
-        userGroupId: userGroupId,
-        deviceId: deviceId,
-        nickname: nickname,
-      );
-      if (response is Success) {
-        final updatedDevice =
-            Device.fromJson(response.value as Map<String, dynamic>);
-        Loading().dismiss();
-        successCallback?.call(updatedDevice.nickname);
-      } else if (response is Failure) {
-        Loading().dismiss();
-        errorCallback?.call(response.message, response.code);
-      }
-    } catch (e) {
-      Loading().dismiss();
-      errorCallback?.call(e.toString(), 'UPDATE_NICKNAME_ERROR');
-    }
-  }
-
   /// デバイスのファームウェアをアップデートをリクエスト
   Future<void> requestFwUpdate({
     required int homeId,

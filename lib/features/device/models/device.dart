@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:mini_home/features/device/models/device_status.dart';
 import 'package:mini_home/features/device/models/device_type.dart';
 import 'package:mini_home/features/device/models/light_state.dart';
 import 'package:mini_home/features/device/models/air_conditioner_state.dart';
@@ -31,12 +30,6 @@ sealed class Device with _$Device {
       DateTime? lastPingedAt}) = _Device;
 
   bool get hasDeviceError => isOffline == true || isOnline == false;
-
-  DeviceStatus get status => DeviceStatus.fromDeviceState(
-        isOnline: isOnline,
-        isPowerOn: isPowerOn,
-        isOffline: isOffline,
-      );
 
   FwUpdateStatus fwStatus(String latestFwVersion, [bool? isUpdating]) {
     return FwUpdateStatus.fromFwVersion(fwVersion, latestFwVersion, isUpdating);
