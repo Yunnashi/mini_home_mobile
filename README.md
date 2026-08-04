@@ -122,42 +122,9 @@ Screens do not call Dio directly. API access goes through repositories, while
 feature behavior and state updates live in services. This structure keeps the UI
 focused on rendering and user interaction.
 
-```mermaid
-flowchart TB
-  subgraph UI["UI Layer"]
-    direction LR
-    Screens["Screens / Widgets"]
-    State["Riverpod UI State"]
-  end
-
-  subgraph Domain["State & Domain Layer"]
-    direction LR
-    Services["Riverpod Services"]
-    Models["Freezed Models"]
-  end
-
-  subgraph Data["Data Layer"]
-    direction LR
-    Repositories["Repositories"]
-    Dio["Dio Client"]
-    Mockoon["Mockoon API"]
-  end
-
-  Screens --> Services
-  Services --> Models
-  Services --> Repositories
-  Repositories --> Dio
-  Dio --> Mockoon
-  Services -.-> State
-  State -.-> Screens
-
-  classDef primary fill:#26A69A,color:#ffffff,stroke:#26A69A,stroke-width:2px;
-  classDef surface fill:#ffffff,color:#1D2939,stroke:#EAECF0,stroke-width:2px;
-  classDef external fill:#F6F8FA,color:#1D2939,stroke:#26A69A,stroke-width:2px;
-  class Screens,State,Services primary;
-  class Models,Repositories,Dio surface;
-  class Mockoon external;
-```
+<p align="center">
+  <img src="docs/images/minihome-architecture-overview.png" alt="miniHome architecture overview" width="1200">
+</p>
 
 For device data, the Home and Device Detail screens use a lightweight polling
 strategy. They refresh data every 30 seconds only while the screen is visible,
