@@ -8,6 +8,7 @@ import 'package:mini_home/router/router.dart';
 import 'package:mini_home/core/themes/colors.dart';
 import 'package:mini_home/core/themes/strings.dart';
 import 'package:mini_home/core/themes/text_style.dart';
+import 'package:mini_home/core/widgets/app_settings_list_tile.dart';
 import 'package:mini_home/utils/logger.dart';
 import 'package:mini_home/utils/app_package_info.dart';
 import 'package:mini_home/core/widgets/basic_dialog.dart';
@@ -196,13 +197,13 @@ class _NotLoggedInContents extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: [
-        _ListItem(
+        AppSettingsListTile(
           title: AppStrings.titleSignUp,
           onTap: () {
             context.pushNamed(AppRoutes.signUp);
           },
         ),
-        _ListItem(
+        AppSettingsListTile(
           title: AppStrings.titleSignIn,
           onTap: () {
             context.pushNamed(AppRoutes.signIn);
@@ -215,7 +216,7 @@ class _NotLoggedInContents extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         const _LegalContents(),
-        _ListItem(
+        AppSettingsListTile(
           title: AppStrings.lblLicensesInfo,
           onTap: () {
             showLicensePage(
@@ -270,9 +271,9 @@ class _LoggedInContents extends ConsumerWidget {
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: [
-        _ListItem(
+        AppSettingsListTile(
           title: AppStrings.accountSettingsTitle,
-          subTitle: state.email,
+          subtitle: state.email,
           icon: Icons.person_outline,
           onTap: () async {
             context.pushNamed(AppRoutes.accountSettings);
@@ -285,7 +286,7 @@ class _LoggedInContents extends ConsumerWidget {
         ),
         const SizedBox(height: 8),
         const _LegalContents(),
-        _ListItem(
+        AppSettingsListTile(
           title: AppStrings.lblLicensesInfo,
           onTap: () {
             showLicensePage(
@@ -294,9 +295,10 @@ class _LoggedInContents extends ConsumerWidget {
         ),
         _InquiryContents(),
         const SizedBox(height: 16),
-        ListTile(
-          contentPadding: EdgeInsets.zero,
-          title: Text(AppStrings.signout, style: AppTextStyle.body1TextRed),
+        AppSettingsListTile(
+          title: AppStrings.signout,
+          titleStyle: AppTextStyle.body1TextRed,
+          showTrailing: false,
           onTap: () => _handleSignout(context, ref),
         ),
       ],
@@ -325,11 +327,11 @@ class _LegalContents extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: [
-        _ListItem(
+        AppSettingsListTile(
           title: AppStrings.lblTerms,
           onTap: () => _navigateToTerms(context, ref),
         ),
-        _ListItem(
+        AppSettingsListTile(
           title: AppStrings.lblPrivacyPolicy,
           onTap: () => _navigateToPrivacyPolicy(context, ref),
         ),
@@ -355,7 +357,7 @@ class _InquiryContents extends ConsumerWidget {
     List<Widget> items = [];
 
     items.add(
-      _ListItem(
+      AppSettingsListTile(
         title: AppStrings.lblFaq,
         onTap: () => _navigateToFaq(context, ref),
       ),
@@ -363,9 +365,9 @@ class _InquiryContents extends ConsumerWidget {
 
     if (!contactTel.isNullOrEmpty) {
       items.add(
-        _ListItem(
+        AppSettingsListTile(
           title: AppStrings.inquiryTitle,
-          subTitle: contactTel!,
+          subtitle: contactTel!,
           onTap: () {
             PhoneUtils.openPhoneCall(contactTel);
           },
@@ -377,52 +379,6 @@ class _InquiryContents extends ConsumerWidget {
 
     return Column(
       children: items,
-    );
-  }
-}
-
-class _ListItem extends StatelessWidget {
-  final String title;
-  final String subTitle;
-  final VoidCallback onTap;
-  final IconData? icon;
-
-  const _ListItem({
-    required this.title,
-    required this.onTap,
-    this.subTitle = '',
-    this.icon,
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      contentPadding: EdgeInsets.zero,
-      horizontalTitleGap: icon != null ? 12 : -5,
-      leading: icon != null
-          ? SizedBox(
-              width: 24,
-              height: 24,
-              child: Icon(
-                icon,
-                color: AppColors.text,
-                size: 24,
-              ),
-            )
-          : null,
-      title: Text(
-        title,
-        style: AppTextStyle.body1,
-      ),
-      subtitle: subTitle.isNotEmpty ? Text(subTitle) : null,
-      onTap: onTap,
-      dense: true,
-      trailing: const Icon(
-        Icons.navigate_next,
-        size: 24,
-        color: AppColors.text,
-      ),
     );
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mini_home/core/themes/colors.dart';
+import 'package:mini_home/core/widgets/app_surface_card.dart';
 import 'package:mini_home/features/usage/models/usage.dart';
 import 'package:mini_home/screens/device_detail/usage_list_section/usage_card.dart';
 
@@ -19,13 +19,8 @@ class UsageGroupingWidget extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
-    return Container(
+    return AppSurfaceCard(
       width: double.infinity,
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(5.51),
-        border: Border.all(color: AppColors.border),
-      ),
       padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

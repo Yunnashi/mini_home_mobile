@@ -9,16 +9,16 @@ import 'package:mini_home/screens/device_detail/usage_list_section/usage_groupin
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class UsageListSection extends StatelessWidget {
-  final int? userGroupId;
+  final int? homeId;
   final ValueNotifier<Device?> device;
   final AsyncValue<List<Usage>> usageListAsync;
-  final Future<void> Function(int userGroupId, String externalDeviceId,
+  final Future<void> Function(int homeId, String externalDeviceId,
       {int pageSize}) fetchUsageList;
   final bool isLoading;
 
   const UsageListSection({
     Key? key,
-    required this.userGroupId,
+    required this.homeId,
     required this.device,
     required this.usageListAsync,
     required this.fetchUsageList,

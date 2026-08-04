@@ -3,8 +3,11 @@ import 'package:mini_home/core/widgets/glass_container.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:mini_home/core/themes/colors.dart';
+import 'package:mini_home/core/themes/design_tokens.dart';
 import 'package:mini_home/core/themes/text_style.dart';
 import 'package:mini_home/core/themes/strings.dart';
+import 'package:mini_home/core/widgets/app_surface_card.dart';
+import 'package:mini_home/core/widgets/button/basic_button.dart';
 import 'package:mini_home/core/widgets/time_picker.dart';
 import 'package:mini_home/features/schedule/models/schedule.dart';
 import 'package:mini_home/screens/schedule/widgets/weekday_selector.dart';
@@ -108,19 +111,8 @@ class ScheduleFormWidget extends HookWidget {
         children: [
           Text(label, style: AppTextStyle.body1TextGrey),
           const SizedBox(height: 4),
-          Container(
-            padding: const EdgeInsets.all(4),
-            decoration: BoxDecoration(
-              color: AppColors.white,
-              borderRadius: BorderRadius.circular(5.51),
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.black.withValues(alpha: 0.1),
-                  blurRadius: 4,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
+          AppSurfaceCard(
+            padding: const EdgeInsets.all(AppSpacing.xs),
             child: TimePicker(
               initialTime: parseTime(timeValue),
               onTimeChanged: (time) {
@@ -277,19 +269,9 @@ class _SaveButtonSection extends StatelessWidget {
           padding: _padding,
           child: SizedBox(
             width: double.infinity,
-            child: FilledButton(
+            child: BasicButton.buildLarge(
               onPressed: onPressed,
-              style: FilledButton.styleFrom(
-                backgroundColor: AppColors.primary,
-                padding: const EdgeInsets.symmetric(vertical: 16),
-              ),
-              child: Text(
-                AppStrings.save,
-                style: AppTextStyle.body1.copyWith(
-                  color: AppColors.white,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
+              text: AppStrings.save,
             ),
           ),
         );

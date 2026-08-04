@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
@@ -6,6 +8,7 @@ import 'package:mini_home/core/themes/colors.dart';
 import 'package:mini_home/core/themes/design_tokens.dart';
 import 'package:mini_home/core/themes/strings.dart';
 import 'package:mini_home/core/widgets/app_bar/basic_app_bar.dart';
+import 'package:mini_home/core/widgets/app_surface_card.dart';
 import 'package:mini_home/core/widgets/basic_screen.dart';
 import 'package:mini_home/core/widgets/basic_toast.dart';
 import 'package:mini_home/core/widgets/error_message_view.dart';
@@ -30,6 +33,8 @@ class DeviceDetailScreen extends HookConsumerWidget {
     final service = ref.read(smartDeviceServiceProvider(deviceId).notifier);
     final scheduleListAsync =
         useState<AsyncValue<List<Schedule>>>(const AsyncLoading());
+    final lifecycle = useAppLifecycleState();
+    final pollingTimer = useRef<Timer?>(null);
 
     Future<void> guard(Future<void> Function() action) async {
       try {
@@ -81,6 +86,39 @@ class DeviceDetailScreen extends HookConsumerWidget {
             },
           );
     }
+
+    Future<void> refreshDeviceSilently() async {
+      try {
+        await service.refresh(showLoading: false);
+      } catch (_) {
+        // Polling should stay quiet; pull-to-refresh and user actions show UI errors.
+      }
+    }
+
+    void stopPolling() {
+      pollingTimer.value?.cancel();
+      pollingTimer.value = null;
+    }
+
+    void startPolling() {
+      stopPolling();
+      pollingTimer.value = Timer.periodic(const Duration(seconds: 30), (_) {
+        if (ModalRoute.of(context)?.isCurrent != true) return;
+        unawaited(refreshDeviceSilently());
+      });
+    }
+
+    useEffect(() {
+      if (lifecycle == AppLifecycleState.resumed) {
+        if (device.hasValue) {
+          unawaited(refreshDeviceSilently());
+        }
+        startPolling();
+      } else {
+        stopPolling();
+      }
+      return stopPolling;
+    }, [lifecycle, deviceId]);
 
     useEffect(() {
       final value = device.value;
@@ -464,7 +502,7 @@ class _ValueControlCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _SurfaceCard(
+    return AppSurfaceCard(
       padding: compact
           ? const EdgeInsets.symmetric(
               horizontal: AppSpacing.md,
@@ -561,7 +599,7 @@ class _SliderControlCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final roundedValue = value.round();
 
-    return _SurfaceCard(
+    return AppSurfaceCard(
       padding: compact
           ? const EdgeInsets.symmetric(
               horizontal: AppSpacing.lg,
@@ -631,7 +669,7 @@ class _DropdownControlCard<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _SurfaceCard(
+    return AppSurfaceCard(
       padding: compact
           ? const EdgeInsets.symmetric(
               horizontal: AppSpacing.md,
@@ -693,30 +731,6 @@ class _DropdownControlCard<T> extends StatelessWidget {
   }
 }
 
-class _SurfaceCard extends StatelessWidget {
-  const _SurfaceCard({
-    required this.child,
-    this.padding = const EdgeInsets.all(AppSpacing.lg),
-  });
-
-  final Widget child;
-  final EdgeInsetsGeometry padding;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: padding,
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(AppRadius.panel),
-        boxShadow: AppShadows.card,
-      ),
-      child: child,
-    );
-  }
-}
-
 class _FloatingActionBar extends StatelessWidget {
   const _FloatingActionBar({
     required this.device,
@@ -732,13 +746,9 @@ class _FloatingActionBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final isOffline = _isDeviceOffline(device);
 
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(32),
-        border: Border.all(color: AppColors.border),
-        boxShadow: AppShadows.card,
-      ),
+    return AppSurfaceCard(
+      radius: 32,
+      padding: EdgeInsets.zero,
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.lg,
@@ -833,13 +843,8 @@ class _OfflineBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AppSurfaceCard(
       padding: const EdgeInsets.all(AppSpacing.md),
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(AppRadius.card),
-        border: Border.all(color: AppColors.border),
-      ),
       child: Row(
         children: [
           const Icon(Icons.cloud_off_outlined, color: AppColors.greyText),

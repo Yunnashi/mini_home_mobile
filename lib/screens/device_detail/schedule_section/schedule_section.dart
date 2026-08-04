@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mini_home/core/themes/colors.dart';
+import 'package:mini_home/core/themes/design_tokens.dart';
 import 'package:mini_home/core/themes/strings.dart';
 import 'package:mini_home/core/themes/text_style.dart';
+import 'package:mini_home/core/widgets/app_surface_card.dart';
 import 'package:mini_home/core/widgets/skeleton.dart';
-import 'package:mini_home/screens/device_detail/schedule_section/charging_schedule_card.dart';
+import 'package:mini_home/screens/device_detail/schedule_section/device_schedule_card.dart';
 import 'package:mini_home/features/schedule/models/schedule.dart';
 import 'package:mini_home/features/device/models/device.dart';
 import 'package:mini_home/router/router.dart';
@@ -76,8 +78,7 @@ class ScheduleSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // タイトル
-        Text(AppStrings.deviceDetailChargingSchedule,
-            style: AppTextStyle.body1),
+        Text(AppStrings.deviceDetailSchedule, style: AppTextStyle.body1),
         const SizedBox(height: 6),
         isLoading
             ? Padding(
@@ -87,7 +88,7 @@ class ScheduleSection extends StatelessWidget {
             : _buildScheduleScroll(context),
         // 説明文
         Text(
-          AppStrings.deviceDetailChargingScheduleDescription,
+          AppStrings.deviceDetailScheduleDescription,
           style: AppTextStyle.body4TextGrey,
         ),
       ],
@@ -118,7 +119,7 @@ class ScheduleSection extends StatelessWidget {
                   if (i > 0) const SizedBox(width: _cardGap),
                   SizedBox(
                     width: cardWidth,
-                    child: ChargingScheduleCard(
+                    child: DeviceScheduleCard(
                       schedule: scheduleList[i],
                       onTap: () async {
                         await handleScheduleNavigation(
@@ -153,37 +154,35 @@ class ScheduleSection extends StatelessWidget {
   }
 
   Widget _addCard({required VoidCallback onTap}) {
-    final double borderRadius = 5.51;
-    return GestureDetector(
-      onTap: onTap,
-      child: DottedBorder(
-        borderType: BorderType.RRect,
-        dashPattern: [2, 2],
-        radius: Radius.circular(borderRadius),
-        color: AppColors.border,
-        padding: const EdgeInsets.all(1),
-        child: Container(
-          width: double.infinity,
-          height: 80,
-          decoration: BoxDecoration(
-            color: AppColors.lightGrey,
-            borderRadius: BorderRadius.circular(5.51),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(
-                Icons.add,
-                color: AppColors.greyText,
-                size: 24,
-              ),
-              const SizedBox(width: 12),
-              Text(
-                AppStrings.scheduleCreateTitle,
-                style: AppTextStyle.body1TextGrey,
-              ),
-            ],
-          ),
+    const borderRadius = AppRadius.card;
+    return DottedBorder(
+      borderType: BorderType.RRect,
+      dashPattern: const [2, 2],
+      radius: const Radius.circular(borderRadius),
+      color: AppColors.border,
+      padding: const EdgeInsets.all(1),
+      child: AppSurfaceCard(
+        onTap: onTap,
+        width: double.infinity,
+        height: 80,
+        radius: borderRadius,
+        backgroundColor: AppColors.lightGrey,
+        borderColor: Colors.transparent,
+        shadows: null,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(
+              Icons.add,
+              color: AppColors.greyText,
+              size: 24,
+            ),
+            const SizedBox(width: 12),
+            Text(
+              AppStrings.scheduleCreateTitle,
+              style: AppTextStyle.body1TextGrey,
+            ),
+          ],
         ),
       ),
     );

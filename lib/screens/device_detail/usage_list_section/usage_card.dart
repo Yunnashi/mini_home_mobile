@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mini_home/utils/double_utils.dart';
 import 'package:mini_home/core/themes/strings.dart';
-import 'package:mini_home/core/themes/colors.dart';
 import 'package:mini_home/core/themes/text_style.dart';
 import 'package:mini_home/features/usage/models/usage.dart';
 import 'package:mini_home/utils/string_utils.dart';
@@ -20,11 +19,8 @@ class UsageCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
-        decoration: BoxDecoration(
-          color: AppColors.white,
-        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -70,22 +66,6 @@ class UsageCard extends StatelessWidget {
                             style: AppTextStyle.body3TextGrey),
                         const SizedBox(width: 32),
                         Text(usage.durationSeconds.toDouble().formatDuration(),
-                            style: AppTextStyle.body2),
-                      ],
-                    ),
-                    const TableRow(
-                      children: [
-                        SizedBox(height: 8),
-                        SizedBox(height: 8),
-                        SizedBox(height: 8),
-                      ],
-                    ),
-                    TableRow(
-                      children: [
-                        Text(AppStrings.activityEnergyTitle,
-                            style: AppTextStyle.body3TextGrey),
-                        const SizedBox(width: 32),
-                        Text("${AppStrings.formatDouble(usage.energyKwh)} kWh",
                             style: AppTextStyle.body2),
                       ],
                     ),

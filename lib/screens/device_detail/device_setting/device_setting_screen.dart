@@ -7,6 +7,7 @@ import 'package:mini_home/core/themes/colors.dart';
 import 'package:mini_home/core/themes/design_tokens.dart';
 import 'package:mini_home/core/themes/strings.dart';
 import 'package:mini_home/core/widgets/app_bar/basic_app_bar.dart';
+import 'package:mini_home/core/widgets/app_surface_card.dart';
 import 'package:mini_home/core/widgets/basic_dialog.dart';
 import 'package:mini_home/core/widgets/basic_screen.dart';
 import 'package:mini_home/core/widgets/basic_textfield.dart';
@@ -231,13 +232,8 @@ class _SettingsSectionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AppSurfaceCard(
       padding: const EdgeInsets.all(AppSpacing.md),
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(AppRadius.card),
-        border: Border.all(color: AppColors.border),
-      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

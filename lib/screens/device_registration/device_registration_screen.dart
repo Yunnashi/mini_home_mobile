@@ -13,8 +13,6 @@ import 'package:mini_home/core/themes/text_style.dart';
 import 'package:mini_home/core/widgets/app_bar/basic_app_bar.dart';
 import 'package:mini_home/core/widgets/basic_dialog.dart';
 import 'package:mini_home/core/widgets/basic_screen.dart';
-import 'package:mini_home/core/widgets/button/_custom_button.dart';
-import 'package:mini_home/core/widgets/button/basic_button.dart';
 import 'package:mini_home/features/auth/services/auth_service.dart';
 import 'package:mini_home/features/auth/services/auth_state_service.dart';
 import 'package:mini_home/features/device/services/device_service.dart';
