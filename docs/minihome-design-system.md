@@ -25,6 +25,8 @@ least 44 x 44 px.
 
 - `MiniHomeDeviceCard`: shared device summary with type icon, status and power.
 - `MiniHomeEmptyState`: empty or first-run state with one primary action.
+- `AppSurfaceCard`: default white surface for cards and control panels.
+- `AppSettingsListTile`: shared settings row for the My/account area.
 - Status badges always combine color with text.
 - Offline controls remain visible but disabled.
 

@@ -1,27 +1,33 @@
-# セキュリティと公開リポジトリ運用
+# Security and public repository policy
 
-## 基本方針
+miniHome is intended to be published as a public portfolio repository. The Git
+history must not contain credentials, signing assets, real user data, or private
+project identifiers.
 
-このリポジトリはPUBLICで公開することを前提とする。
-認証情報、署名情報、実ユーザーデータ、非公開プロジェクトの識別情報を
-Git履歴へ含めない。
+## Do not commit
 
-## Git管理しないもの
+- Local runtime config files.
+- `.env` files and derived environment files.
+- Firebase native config files.
+- Android signing keys and key properties.
+- Apple distribution `ExportOptions` files.
+- Real access tokens, refresh tokens, passwords, or API secrets.
+- Real user emails, phone numbers, addresses, or device identifiers.
 
-- ローカル用設定JSON
-- `.env`とその派生ファイル
-- Firebaseネイティブ設定ファイル
-- Android署名鍵とkey properties
-- Apple配布用ExportOptions
-- 実アクセストークン、リフレッシュトークン、パスワード
-- 実ユーザーのメールアドレス、電話番号、デバイスID
+The root `.gitignore` is the source of truth for ignored files.
 
-除外ルールのsource of truthはルートの`.gitignore`とする。
+## Runtime configuration
 
-## アプリ設定
+Publicly safe configuration keys are documented in
+`config/app_config.example.json`.
 
-公開可能なキー一覧は`config/app_config.example.json`で管理する。
-実際の値は`config/app_config.local.json`へ保存し、次の形式で渡す。
+Local values must be stored in:
+
+```text
+config/app_config.local.json
+```
+
+Run the app with:
 
 ```sh
 fvm flutter run \
@@ -29,28 +35,32 @@ fvm flutter run \
   --dart-define-from-file=config/app_config.local.json
 ```
 
-Mockoon利用時は`APP_API_KEY`を空文字にする。Dioは空のAPIキーをヘッダーへ
-追加しない。
+When using Mockoon only, keep the local API key empty and disable Firebase in the
+local config. The app should not require private Firebase values for the demo
+Mockoon flow.
 
 ## Firebase
 
-Firebaseのクライアント設定値だけでサービスを保護しない。
+Firebase client configuration is not a security boundary by itself.
 
-- miniHome専用Firebaseプロジェクトを使用する
-- Firestore Security Rulesを必ず設定する
-- Authenticationの許可ドメインを制限する
-- 対応時にApp Checkを有効化する
-- サービスアカウント秘密鍵はアプリやリポジトリへ保存しない
+Before connecting a real Firebase project:
 
-## Mockoon
+- Use a miniHome-specific Firebase project.
+- Configure Firestore Security Rules before storing any data.
+- Restrict Authentication authorized domains.
+- Enable App Check when the project is ready for it.
+- Never store service-account private keys in the app or repository.
 
-`mockoon.json`には架空データのみを保存する。
+## Mockoon data
 
-- トークンは明確なダミー値を使う
-- 実メールアドレスや実デバイスIDを使わない
-- 本番APIのレスポンスをそのままコピーしない
+`mockoon.json` must contain fictional data only.
 
-## コミット前確認
+- Use obviously fake tokens.
+- Do not use real email addresses.
+- Do not use production device IDs.
+- Do not copy production API responses directly.
+
+## Pre-commit checklist
 
 ```sh
 git status --short --untracked-files=all
@@ -58,5 +68,6 @@ git diff --cached
 rg -n -i 'api[_-]?key|client[_-]?secret|private[_-]?key|access[_-]?token|refresh[_-]?token|password'
 ```
 
-秘密情報を誤ってコミットした場合は、ファイルを削除するだけでは不十分である。
-公開前に履歴から除去し、該当するキーやトークンを失効・再発行する。
+If a secret is committed by mistake, deleting the file in a later commit is not
+enough. Remove the secret from Git history before publishing the repository, and
+rotate or revoke the exposed key/token.
