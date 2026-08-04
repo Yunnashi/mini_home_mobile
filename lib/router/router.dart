@@ -31,7 +31,6 @@ class AppRoutes {
   static const String passwordReset = 'passwordResetScreen';
   static const String passwordChange = 'passwordChangeScreen';
   static const String webView = 'webViewScreen';
-  static const String chargingHistory = 'chargingHistoryScreen';
   static const String accountSettings = 'accountSettingsScreen';
   static const String withdrawal = 'withdrawalScreen';
   static const String deviceRegistration = 'deviceRegistrationScreen';

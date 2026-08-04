@@ -1,6 +1,5 @@
 import 'package:mini_home/features/auth/repositories/auth_storage_repository.dart';
 import 'package:mini_home/features/user/services/user_service.dart';
-import 'package:mini_home/features/user_group/models/user_group.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'auth_state_service.g.dart';
@@ -9,26 +8,22 @@ class AuthState {
   final bool isLoggedIn;
   final String email;
   final int? defaultHomeId;
-  final UserGroup? defaultUserGroup;
 
   const AuthState({
     required this.isLoggedIn,
     required this.email,
     this.defaultHomeId,
-    this.defaultUserGroup,
   });
 
   AuthState copyWith({
     bool? isLoggedIn,
     String? email,
     int? defaultHomeId,
-    UserGroup? defaultUserGroup,
   }) {
     return AuthState(
       isLoggedIn: isLoggedIn ?? this.isLoggedIn,
       email: email ?? this.email,
       defaultHomeId: defaultHomeId ?? this.defaultHomeId,
-      defaultUserGroup: defaultUserGroup ?? this.defaultUserGroup,
     );
   }
 
@@ -45,24 +40,10 @@ class AuthStateService extends _$AuthStateService {
 
     if (isLoggedIn) {
       final user = await userService.getCurrentUser();
-      final defaultHomeId = user?.defaultHomeId;
-      final userGroups = user?.userGroups ?? const <UserGroup>[];
-      final matchedDefaultHome = [
-        for (final group in userGroups)
-          if (group.id == defaultHomeId) group,
-      ];
-      final defaultUserGroup = defaultHomeId != null
-          ? matchedDefaultHome.isNotEmpty
-              ? matchedDefaultHome.first
-              : UserGroup(id: defaultHomeId, name: '')
-          : userGroups.isNotEmpty
-              ? userGroups.first
-              : null;
       return AuthState(
         isLoggedIn: true,
         email: user?.email ?? "",
-        defaultHomeId: defaultHomeId ?? defaultUserGroup?.id,
-        defaultUserGroup: defaultUserGroup,
+        defaultHomeId: user?.defaultHomeId,
       );
     } else {
       return AuthState.initial();
