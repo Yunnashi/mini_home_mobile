@@ -1,5 +1,7 @@
 # miniHome product specification and navigation
 
+🌐 English | [日本語](minihome-product-spec.ja.md)
+
 ## 1. Purpose
 
 This document is the source of truth for the miniHome product scope, screens,

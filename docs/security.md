@@ -1,5 +1,7 @@
 # Security and public repository policy
 
+🌐 English | [日本語](security.ja.md)
+
 miniHome is intended to be published as a public portfolio repository. The Git
 history must not contain credentials, signing assets, real user data, or private
 project identifiers.

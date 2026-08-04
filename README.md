@@ -1,5 +1,7 @@
 # miniHome
 
+🌐 English | [日本語](README.ja.md)
+
 <p align="center">
   <img src="assets/branding/mini_home/images/splash.png" alt="miniHome logo" width="320">
 </p>
@@ -27,10 +29,6 @@ problems:
 - switching the UI based on data type;
 - keeping screen code separate from API access;
 - supporting multiple languages.
-
-Through this project, I focused on three things: choosing practical technologies,
-building a feature-based architecture, and designing a UI that is easy to use in
-daily smart-home scenarios.
 
 ## What I focused on
 
@@ -150,11 +148,11 @@ signing assets should never be committed.
 
 ## Documentation
 
-- [docs/README.md](docs/README.md)
-- [Product specification and navigation](docs/minihome-product-spec.md)
+- [docs/README.md](docs/README.md) / [日本語](docs/README.ja.md)
+- [Product specification and navigation](docs/minihome-product-spec.md) / [日本語](docs/minihome-product-spec.ja.md)
 - [Mockoon API contract](docs/minihome-api.md)
 - [Design system](docs/minihome-design-system.md)
-- [Security and public repository policy](docs/security.md)
+- [Security and public repository policy](docs/security.md) / [日本語](docs/security.ja.md)
 
 ## Security note
 

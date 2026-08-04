@@ -1,5 +1,7 @@
 # Documentation
 
+🌐 English | [日本語](README.ja.md)
+
 This directory contains the detailed documentation that should not be crowded
 into the root `README.md`.
 
@@ -9,10 +11,10 @@ rules, or public-repository policy.
 
 ## miniHome documents
 
-- [Product specification and navigation](minihome-product-spec.md)
+- [Product specification and navigation](minihome-product-spec.md) / [日本語](minihome-product-spec.ja.md)
 - [Mockoon API contract](minihome-api.md)
 - [Design system](minihome-design-system.md)
-- [Security and public repository policy](security.md)
+- [Security and public repository policy](security.md) / [日本語](security.ja.md)
 
 ## Current direction
 
