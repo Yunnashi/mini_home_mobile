@@ -8,7 +8,12 @@ import 'package:mini_home/core/themes/colors.dart';
 import 'package:mini_home/core/themes/design_tokens.dart';
 import 'package:mini_home/core/themes/strings.dart';
 import 'package:mini_home/core/widgets/app_bar/basic_app_bar.dart';
+import 'package:mini_home/core/widgets/app_dropdown_field.dart';
+import 'package:mini_home/core/widgets/app_offline_banner.dart';
+import 'package:mini_home/core/widgets/app_slider_control_card.dart';
+import 'package:mini_home/core/widgets/app_status_pill.dart';
 import 'package:mini_home/core/widgets/app_surface_card.dart';
+import 'package:mini_home/core/widgets/app_value_control_card.dart';
 import 'package:mini_home/core/widgets/basic_screen.dart';
 import 'package:mini_home/core/widgets/basic_toast.dart';
 import 'package:mini_home/core/widgets/error_message_view.dart';
@@ -172,7 +177,7 @@ class DeviceDetailScreen extends HookConsumerWidget {
                     _DeviceHero(device: value),
                     if (isOffline) ...[
                       const SizedBox(height: AppSpacing.md),
-                      _OfflineBanner(message: AppStrings.offlineMessage),
+                      AppOfflineBanner(message: AppStrings.offlineMessage),
                     ],
                     SizedBox(
                       height: value.type == DeviceType.light
@@ -246,7 +251,7 @@ class _DeviceHero extends StatelessWidget {
 
     return Column(
       children: [
-        _StatusPill(
+        AppStatusPill(
           label: isOffline
               ? AppStrings.offline
               : active
@@ -274,42 +279,6 @@ class _DeviceHero extends StatelessWidget {
   }
 }
 
-class _StatusPill extends StatelessWidget {
-  const _StatusPill({required this.label, required this.active});
-
-  final String label;
-  final bool active;
-
-  @override
-  Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(AppRadius.pill),
-        border: Border.all(color: AppColors.border),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.md,
-          vertical: AppSpacing.xs,
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              Icons.circle,
-              size: 9,
-              color: active ? AppColors.green : AppColors.placeholder,
-            ),
-            const SizedBox(width: AppSpacing.xs),
-            Text(label),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 class _LightControlPanel extends StatelessWidget {
   const _LightControlPanel({required this.device, required this.onChanged});
 
@@ -325,7 +294,7 @@ class _LightControlPanel extends StatelessWidget {
       enabled: enabled,
       child: Column(
         children: [
-          _SliderControlCard(
+          AppSliderControlCard(
             title: AppStrings.brightness,
             value: state.brightness.toDouble(),
             min: 0,
@@ -336,21 +305,21 @@ class _LightControlPanel extends StatelessWidget {
                 onChanged(state.copyWith(brightness: value.round())),
           ),
           const SizedBox(height: AppSpacing.sm),
-          _DropdownControlCard<int>(
+          AppDropdownControlCard<int>(
             icon: Icons.thermostat_rounded,
             title: AppStrings.colorTemperature,
             value: _colorTemperaturePreset(state.colorTemperature),
             compact: true,
             items: [
-              _DropdownOption(
+              AppDropdownOption(
                 value: 3000,
                 label: '${AppStrings.warmLight} · 3000K',
               ),
-              _DropdownOption(
+              AppDropdownOption(
                 value: 4500,
                 label: '${AppStrings.neutralLight} · 4500K',
               ),
-              _DropdownOption(
+              AppDropdownOption(
                 value: 6500,
                 label: '${AppStrings.coolLight} · 6500K',
               ),
@@ -388,7 +357,7 @@ class _AirConditionerControlPanel extends StatelessWidget {
       enabled: enabled,
       child: Column(
         children: [
-          _ValueControlCard(
+          AppValueControlCard(
             value: '${state.targetTemperature}',
             suffix: '°C',
             compact: true,
@@ -409,14 +378,14 @@ class _AirConditionerControlPanel extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: _DropdownControlCard<AirConditionerMode>(
+                child: AppDropdownControlCard<AirConditionerMode>(
                   icon: Icons.mode_fan_off_outlined,
                   title: AppStrings.operationMode,
                   value: state.mode,
                   compact: true,
                   items: AirConditionerMode.values
                       .map(
-                        (mode) => _DropdownOption(
+                        (mode) => AppDropdownOption(
                           value: mode,
                           label: _modeLabel(mode),
                         ),
@@ -427,14 +396,14 @@ class _AirConditionerControlPanel extends StatelessWidget {
               ),
               const SizedBox(width: AppSpacing.sm),
               Expanded(
-                child: _DropdownControlCard<FanSpeed>(
+                child: AppDropdownControlCard<FanSpeed>(
                   icon: Icons.air_rounded,
                   title: AppStrings.fanSpeed,
                   value: state.fanSpeed,
                   compact: true,
                   items: FanSpeed.values
                       .map(
-                        (speed) => _DropdownOption(
+                        (speed) => AppDropdownOption(
                           value: speed,
                           label: _fanLabel(speed),
                         ),
@@ -480,252 +449,6 @@ class _DisabledSection extends StatelessWidget {
         opacity: enabled ? 1 : 0.42,
         duration: const Duration(milliseconds: 180),
         child: child,
-      ),
-    );
-  }
-}
-
-class _ValueControlCard extends StatelessWidget {
-  const _ValueControlCard({
-    required this.value,
-    required this.suffix,
-    required this.onDecrease,
-    required this.onIncrease,
-    this.compact = false,
-  });
-
-  final String value;
-  final String suffix;
-  final VoidCallback onDecrease;
-  final VoidCallback onIncrease;
-  final bool compact;
-
-  @override
-  Widget build(BuildContext context) {
-    return AppSurfaceCard(
-      padding: compact
-          ? const EdgeInsets.symmetric(
-              horizontal: AppSpacing.md,
-              vertical: AppSpacing.sm,
-            )
-          : const EdgeInsets.all(AppSpacing.lg),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          _RoundControlButton(
-            icon: Icons.remove,
-            onTap: onDecrease,
-            compact: compact,
-          ),
-          Expanded(
-            child: Center(
-              child: RichText(
-                text: TextSpan(
-                  style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                        color: AppColors.text,
-                        fontWeight: FontWeight.w900,
-                        fontSize: compact ? 32 : null,
-                      ),
-                  children: [
-                    TextSpan(text: value),
-                    TextSpan(
-                      text: suffix,
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.w700,
-                          ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          _RoundControlButton(
-            icon: Icons.add,
-            onTap: onIncrease,
-            compact: compact,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _RoundControlButton extends StatelessWidget {
-  const _RoundControlButton({
-    required this.icon,
-    required this.onTap,
-    this.compact = false,
-  });
-
-  final IconData icon;
-  final VoidCallback onTap;
-  final bool compact;
-
-  @override
-  Widget build(BuildContext context) {
-    return IconButton.filled(
-      onPressed: onTap,
-      style: IconButton.styleFrom(
-        backgroundColor: AppColors.background,
-        foregroundColor: AppColors.text,
-        minimumSize: compact ? const Size.square(40) : null,
-        padding: compact ? const EdgeInsets.all(AppSpacing.xs) : null,
-      ),
-      icon: Icon(icon),
-    );
-  }
-}
-
-class _SliderControlCard extends StatelessWidget {
-  const _SliderControlCard({
-    required this.title,
-    required this.value,
-    required this.min,
-    required this.max,
-    required this.suffix,
-    required this.onChanged,
-    this.compact = false,
-  });
-
-  final String title;
-  final double value;
-  final double min;
-  final double max;
-  final String suffix;
-  final ValueChanged<double> onChanged;
-  final bool compact;
-
-  @override
-  Widget build(BuildContext context) {
-    final roundedValue = value.round();
-
-    return AppSurfaceCard(
-      padding: compact
-          ? const EdgeInsets.symmetric(
-              horizontal: AppSpacing.lg,
-              vertical: AppSpacing.md,
-            )
-          : const EdgeInsets.all(AppSpacing.lg),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                title,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w800,
-                    ),
-              ),
-              Text(
-                '$roundedValue$suffix',
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w900,
-                    ),
-              ),
-            ],
-          ),
-          SizedBox(height: compact ? AppSpacing.xs : AppSpacing.sm),
-          Slider(
-            value: value.clamp(min, max),
-            min: min,
-            max: max,
-            divisions: (max - min).round(),
-            onChanged: onChanged,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _DropdownOption<T> {
-  const _DropdownOption({
-    required this.value,
-    required this.label,
-  });
-
-  final T value;
-  final String label;
-}
-
-class _DropdownControlCard<T> extends StatelessWidget {
-  const _DropdownControlCard({
-    required this.icon,
-    required this.title,
-    required this.value,
-    required this.items,
-    required this.onChanged,
-    this.compact = false,
-  });
-
-  final IconData icon;
-  final String title;
-  final T value;
-  final List<_DropdownOption<T>> items;
-  final ValueChanged<T> onChanged;
-  final bool compact;
-
-  @override
-  Widget build(BuildContext context) {
-    return AppSurfaceCard(
-      padding: compact
-          ? const EdgeInsets.symmetric(
-              horizontal: AppSpacing.md,
-              vertical: AppSpacing.sm,
-            )
-          : const EdgeInsets.all(AppSpacing.md),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(icon, size: 20, color: AppColors.greyText),
-              const SizedBox(width: AppSpacing.xs),
-              Expanded(
-                child: Text(
-                  title,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: AppColors.greyText,
-                        fontWeight: FontWeight.w600,
-                      ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: compact ? AppSpacing.xxs : AppSpacing.xs),
-          DropdownButtonHideUnderline(
-            child: DropdownButton<T>(
-              value: value,
-              isExpanded: true,
-              isDense: compact,
-              borderRadius: BorderRadius.circular(AppRadius.card),
-              icon: const Icon(Icons.keyboard_arrow_down_rounded, size: 20),
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: AppColors.text,
-                    fontWeight: FontWeight.w800,
-                  ),
-              items: [
-                for (final item in items)
-                  DropdownMenuItem<T>(
-                    value: item.value,
-                    child: Text(
-                      item.label,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-              ],
-              onChanged: (value) {
-                if (value == null) return;
-                onChanged(value);
-              },
-            ),
-          ),
-        ],
       ),
     );
   }
@@ -831,26 +554,6 @@ class _FloatingActionItem extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class _OfflineBanner extends StatelessWidget {
-  const _OfflineBanner({required this.message});
-
-  final String message;
-
-  @override
-  Widget build(BuildContext context) {
-    return AppSurfaceCard(
-      padding: const EdgeInsets.all(AppSpacing.md),
-      child: Row(
-        children: [
-          const Icon(Icons.cloud_off_outlined, color: AppColors.greyText),
-          const SizedBox(width: AppSpacing.sm),
-          Expanded(child: Text(message)),
-        ],
       ),
     );
   }
