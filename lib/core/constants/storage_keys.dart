@@ -4,8 +4,6 @@ class StorageKeys {
   static const String USER_DEFAULTS_KEY_USER = "USER_DEFAULTS_KEY_USER";
   static const String SECURE_STORAGE_KEY_ACCESS_TOKEN = "accessToken";
   static const String SECURE_STORAGE_KEY_REFRESH_TOKEN = "refreshToken";
-  static const String STORAGE_KEY_CHARGING_AMPERE =
-      "STORAGE_KEY_CHARGING_AMPERE";
   static const String STORAGE_KEY_FW_UPDATE_REQUESTED_AT =
       "STORAGE_KEY_FW_UPDATE_REQUESTED_AT";
 

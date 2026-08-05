@@ -150,8 +150,7 @@ The app supports QR/camera registration. The scanned value is sent as
 }
 ```
 
-Mockoon returns a demo device. Bluetooth-related maintenance code must not be
-deleted; it is used by the device reboot flow.
+Mockoon returns a demo device.
 
 ### Update common device fields
 
@@ -216,17 +215,15 @@ Validation:
 
 Firmware update is treated as a generic smart-device maintenance feature.
 
-### Fetch reboot OTP
+### Restart device
 
-`POST /v1/homes/:homeId/devices/:deviceId/reboot-otp`
+`POST /v1/homes/:homeId/devices/:deviceId/restart`
 
 ```json
 {
-  "deviceChallenge": "base64-device-challenge"
+  "status": "accepted"
 }
 ```
-
-The app uses Bluetooth to write the returned OTP to the device.
 
 ### Delete device
 
@@ -287,7 +284,7 @@ Return `204` with an empty body.
 
 ```json
 {
-  "usages": [
+  "data": [
     {
       "id": 1,
       "activity": "Power on",

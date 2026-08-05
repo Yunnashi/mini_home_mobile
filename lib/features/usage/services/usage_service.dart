@@ -12,6 +12,7 @@ class UsageService extends _$UsageService {
 
   Future<void> getUsagesByDevice({
     required int homeId,
+    required int deviceId,
     required String externalDeviceId,
     int pageSize = 3,
     int pageNum = 1,
@@ -22,6 +23,7 @@ class UsageService extends _$UsageService {
       final usageRepository = ref.read(usageRepositoryProvider);
       final response = await usageRepository.getUsages(
         homeId: homeId,
+        deviceId: deviceId,
         externalDeviceId: externalDeviceId,
         pageSize: pageSize,
         pageNum: pageNum,

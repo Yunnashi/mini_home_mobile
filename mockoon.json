@@ -225,7 +225,7 @@
       "type": "http",
       "documentation": "miniHome activity history",
       "method": "get",
-      "endpoint": "v1/homes/:homeId/usages",
+      "endpoint": "v1/homes/:homeId/devices/:deviceId/usages",
       "responses": [
         {
           "uuid": "4dc4f185-9075-4a59-9359-000000000091",
@@ -507,7 +507,7 @@
           "body": "{\n  \"statusCode\": 400,\n  \"message\": \"password should not be empty\",\n  \"error\": \"Bad Request\",\n  \"errorCode\": \"GL_AU_01\"\n}",
           "latency": 0,
           "statusCode": 400,
-          "label": "リクエストデータが不正",
+          "label": "Validation error",
           "headers": [
             {
               "key": "Content-Type",
@@ -579,7 +579,7 @@
           "body": "{\n  \"statusCode\": 400,\n  \"message\": \"password should not be empty\",\n  \"error\": \"Bad Request\",\n  \"errorCode\": \"GL_AU_01\"\n}",
           "latency": 0,
           "statusCode": 409,
-          "label": "デバイスが既に存在",
+          "label": "Device already exists",
           "headers": [
             {
               "key": "Content-Type",
@@ -978,7 +978,7 @@
     {
       "uuid": "bd71ee19-acc6-4693-959b-310484a46e9a",
       "type": "http",
-      "documentation": "スケジュール登録",
+      "documentation": "Create schedule",
       "method": "post",
       "endpoint": "v1/homes/:homeId/devices/:deviceId/schedules",
       "responses": [
@@ -1011,7 +1011,7 @@
           "body": "{\n  \"statusCode\": 400,\n  \"message\": \"password should not be empty\",\n  \"error\": \"Bad Request\",\n  \"errorCode\": \"GL_AU_01\"\n}",
           "latency": 0,
           "statusCode": 400,
-          "label": "リクエストデータが不正",
+          "label": "Validation error",
           "headers": [
             {
               "key": "Content-Type",
@@ -1059,7 +1059,7 @@
           "body": "{\n  \"statusCode\": 400,\n  \"message\": \"password should not be empty\",\n  \"error\": \"Bad Request\",\n  \"errorCode\": \"GL_AU_01\"\n}",
           "latency": 0,
           "statusCode": 404,
-          "label": "デバイスが存在しない",
+          "label": "Device not found",
           "headers": [
             {
               "key": "Content-Type",
@@ -1086,7 +1086,7 @@
     {
       "uuid": "2a9ea42f-722e-47a5-b832-11e1dfc72656",
       "type": "http",
-      "documentation": "スケジュール一覧取得",
+      "documentation": "List schedules",
       "method": "get",
       "endpoint": "v1/homes/:homeId/devices/:deviceId/schedules",
       "responses": [
@@ -1143,7 +1143,7 @@
           "body": "{\n  \"statusCode\": 400,\n  \"message\": \"password should not be empty\",\n  \"error\": \"Bad Request\",\n  \"errorCode\": \"GL_AU_01\"\n}",
           "latency": 0,
           "statusCode": 404,
-          "label": "デバイスが存在しない",
+          "label": "Device not found",
           "headers": [
             {
               "key": "Content-Type",
@@ -1170,7 +1170,7 @@
     {
       "uuid": "704cb5e5-41e3-404f-b3e9-7fb440d7b3fd",
       "type": "http",
-      "documentation": "スケジュール更新",
+      "documentation": "Update schedule",
       "method": "patch",
       "endpoint": "v1/homes/:homeId/devices/:deviceId/schedules/:scheduleId",
       "responses": [
@@ -1203,7 +1203,7 @@
           "body": "{\n  \"statusCode\": 400,\n  \"message\": \"password should not be empty\",\n  \"error\": \"Bad Request\",\n  \"errorCode\": \"GL_AU_01\"\n}",
           "latency": 0,
           "statusCode": 400,
-          "label": "リクエストデータが不正",
+          "label": "Validation error",
           "headers": [
             {
               "key": "Content-Type",
@@ -1251,7 +1251,7 @@
           "body": "{\n  \"statusCode\": 400,\n  \"message\": \"password should not be empty\",\n  \"error\": \"Bad Request\",\n  \"errorCode\": \"GL_AU_01\"\n}",
           "latency": 0,
           "statusCode": 404,
-          "label": "スケジュールが存在しない",
+          "label": "Schedule not found",
           "headers": [
             {
               "key": "Content-Type",
@@ -1278,7 +1278,7 @@
     {
       "uuid": "53942965-adb0-4d9a-8e36-91e68b5c9f26",
       "type": "http",
-      "documentation": "スケジュール削除",
+      "documentation": "Delete schedule",
       "method": "delete",
       "endpoint": "v1/homes/:homeId/devices/:deviceId/schedules/:scheduleId",
       "responses": [
@@ -1335,7 +1335,7 @@
           "body": "{\n  \"statusCode\": 400,\n  \"message\": \"password should not be empty\",\n  \"error\": \"Bad Request\",\n  \"errorCode\": \"GL_AU_01\"\n}",
           "latency": 0,
           "statusCode": 404,
-          "label": "スケジュールが存在しない",
+          "label": "Schedule not found",
           "headers": [
             {
               "key": "Content-Type",
@@ -1362,7 +1362,7 @@
     {
       "uuid": "95c867f8-4b44-4669-bbe3-e8d99fb39e3e",
       "type": "http",
-      "documentation": "スケジュール有効/無効切り替え",
+      "documentation": "Toggle schedule enabled",
       "method": "patch",
       "endpoint": "v1/homes/:homeId/devices/:deviceId/schedules/:scheduleId/enabled",
       "responses": [
@@ -1395,7 +1395,7 @@
           "body": "{\n  \"statusCode\": 400,\n  \"message\": \"password should not be empty\",\n  \"error\": \"Bad Request\",\n  \"errorCode\": \"GL_AU_01\"\n}",
           "latency": 0,
           "statusCode": 400,
-          "label": "リクエストデータが不正",
+          "label": "Validation error",
           "headers": [
             {
               "key": "Content-Type",
@@ -1443,7 +1443,7 @@
           "body": "{\n  \"statusCode\": 400,\n  \"message\": \"password should not be empty\",\n  \"error\": \"Bad Request\",\n  \"errorCode\": \"GL_AU_01\"\n}",
           "latency": 0,
           "statusCode": 404,
-          "label": "スケジュールが存在しない",
+          "label": "Schedule not found",
           "headers": [
             {
               "key": "Content-Type",
@@ -1578,13 +1578,13 @@
     {
       "uuid": "4dc4f185-9075-4a59-9359-000000000103",
       "type": "http",
-      "documentation": "Issue demo OTP for BLE reboot",
+      "documentation": "Restart device",
       "method": "post",
-      "endpoint": "v1/homes/:homeId/devices/:deviceId/reboot-otp",
+      "endpoint": "v1/homes/:homeId/devices/:deviceId/restart",
       "responses": [
         {
           "uuid": "4dc4f185-9075-4a59-9359-000000000113",
-          "body": "{\"otp\":\"ZGVtby1vdHA=\"}",
+          "body": "{\"status\":\"accepted\"}",
           "latency": 80,
           "statusCode": 200,
           "label": "Success",
@@ -1631,15 +1631,15 @@
     },
     {
       "type": "route",
-      "uuid": "4dc4f185-9075-4a59-9359-000000000004"
-    },
-    {
-      "type": "route",
       "uuid": "4dc4f185-9075-4a59-9359-000000000006"
     },
     {
       "type": "route",
       "uuid": "4dc4f185-9075-4a59-9359-000000000008"
+    },
+    {
+      "type": "route",
+      "uuid": "4dc4f185-9075-4a59-9359-000000000004"
     },
     {
       "type": "route",

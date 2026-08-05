@@ -148,6 +148,7 @@ class UsagesScreen extends HookConsumerWidget {
 
       await ref.read(usageServiceProvider.notifier).getUsagesByDevice(
             homeId: d.homeId,
+            deviceId: d.id,
             externalDeviceId: d.externalDeviceId,
             pageSize: _pageSize,
             pageNum: page,
