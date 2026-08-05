@@ -30,10 +30,6 @@
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>充電器へ接続して認証を行うためにBluetoothを使用します。</string>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>充電器へ接続して認証を行うためにBluetoothを使用します。</string>
 	<key>NSCameraUsageDescription</key>
 	<string>__PLACEHOLDER__</string>
 	<key>NSLocalNetworkUsageDescription</key>

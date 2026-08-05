@@ -46,9 +46,8 @@ problems:
 - **Localization**: I made English the default language and added Japanese
   support with `easy_localization`. User-facing text is managed through
   `AppStrings` instead of being hard-coded in widgets.
-- **QR, Bluetooth, and permissions**: I implemented mobile-native flows such as
-  QR code scanning with the camera, runtime permission handling, and
-  Bluetooth-based device maintenance actions.
+- **QR, camera, and permissions**: I implemented mobile-native flows such as
+  QR code scanning with the camera and runtime permission handling.
 
 ## Features
 

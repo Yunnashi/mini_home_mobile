@@ -74,7 +74,7 @@ miniHome として自然に見えるデザインにします。
 ## 5. 登録とメンテナンス
 
 アプリは QR / カメラによる device registration をサポートします。
-Bluetooth は reboot 関連など、device maintenance action の通信で使用します。
+再起動などの device maintenance action は、現在の MVP では Mockoon API 経由で扱います。
 
 本番 IoT provisioning は現在のポートフォリオスコープ外です。
 

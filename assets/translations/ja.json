@@ -270,12 +270,6 @@
       "success": "デバイスを再起動しました"
     }
   },
-  "ble": {
-    "search_failed": "デバイスが見つかりませんでした。Bluetoothをオンにし、デバイスの近くで再度お試しください。",
-    "bluetooth_off": "Bluetoothをオンにしてください",
-    "permission_denied": "Bluetoothの権限を有効にしてください",
-    "invalid_device_id": "デバイスIDが正しくありません。設定をご確認ください。"
-  },
   "qr_code_scan": {
     "read_qr": "QRコードを読み取る",
     "note": "※ QRコードは(株)デンソーウェーブの登録商標です",

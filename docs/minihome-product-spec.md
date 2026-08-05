@@ -75,8 +75,8 @@ Future work:
 
 ## 5. Registration and maintenance
 
-The app supports QR/camera registration. Bluetooth is used by device
-maintenance actions such as reboot-related communication.
+The app supports QR/camera registration. Device maintenance actions such as
+restart use the Mockoon API in the current MVP.
 
 Production IoT provisioning is outside the current portfolio scope.
 

@@ -368,14 +368,6 @@ class AppStrings {
   static String get deviceSettingRebootSuccess =>
       "device_settings.reboot.success".tr();
 
-  static String get bleSearchFailed => "ble.search_failed".tr();
-
-  static String get bleBluetoothOff => "ble.bluetooth_off".tr();
-
-  static String get blePermissionDenied => "ble.permission_denied".tr();
-
-  static String get bleInvalidDeviceId => "ble.invalid_device_id".tr();
-
   static String get deviceStatus => "device_detail.device_status".tr();
 
   static String get deviceTemperature => "device_detail.temperature".tr();

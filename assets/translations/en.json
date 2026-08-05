@@ -267,12 +267,6 @@
       "success": "Device restarted"
     }
   },
-  "ble": {
-    "search_failed": "Device not found. Turn on Bluetooth and try again near the device.",
-    "bluetooth_off": "Turn on Bluetooth.",
-    "permission_denied": "Allow Bluetooth access.",
-    "invalid_device_id": "The device ID is invalid."
-  },
   "qr_code_scan": {
     "read_qr": "Scan QR code",
     "note": "QR Code is a registered trademark of DENSO WAVE INCORPORATED.",

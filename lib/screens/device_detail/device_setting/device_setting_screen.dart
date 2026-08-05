@@ -7,6 +7,7 @@ import 'package:mini_home/core/themes/colors.dart';
 import 'package:mini_home/core/themes/design_tokens.dart';
 import 'package:mini_home/core/themes/strings.dart';
 import 'package:mini_home/core/widgets/app_bar/basic_app_bar.dart';
+import 'package:mini_home/core/widgets/app_dropdown_field.dart';
 import 'package:mini_home/core/widgets/app_surface_card.dart';
 import 'package:mini_home/core/widgets/basic_dialog.dart';
 import 'package:mini_home/core/widgets/basic_screen.dart';
@@ -144,23 +145,12 @@ class DeviceSettingScreen extends HookConsumerWidget {
               ],
             ),
             const SizedBox(height: AppSpacing.md),
-            DropdownButtonFormField<int>(
-              initialValue: selectedRoomId.value,
-              decoration: InputDecoration(
-                labelText: AppStrings.room,
-                filled: true,
-                fillColor: AppColors.white,
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(AppRadius.control),
-                  borderSide: const BorderSide(color: AppColors.border),
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(AppRadius.control),
-                ),
-              ),
+            AppDropdownField<int>(
+              value: selectedRoomId.value,
+              labelText: AppStrings.room,
               items: [
                 for (final room in homeAsync.value?.home.rooms ?? const [])
-                  DropdownMenuItem(value: room.id, child: Text(room.name)),
+                  AppDropdownOption(value: room.id, label: room.name),
               ],
               onChanged: (value) => selectedRoomId.value = value,
             ),
@@ -188,7 +178,6 @@ class DeviceSettingScreen extends HookConsumerWidget {
                   trailing: DeviceRestartWidget(
                     homeId: device.homeId,
                     deviceId: device.id,
-                    externalDeviceId: device.externalDeviceId,
                   ),
                 ),
               ],

@@ -208,17 +208,15 @@ class DeviceRepository {
     return response ?? Failure('Unknown error');
   }
 
-  Future<Result> fetchRebootOtp({
+  Future<Result> requestDeviceRestart({
     required int homeId,
     required int deviceId,
-    required String deviceChallenge,
   }) async {
     Result? response;
     await _dioClient.sendRequest(
-      resourcePath: '${ApiEndpoints.device(homeId, deviceId)}/reboot-otp',
+      resourcePath: '${ApiEndpoints.device(homeId, deviceId)}/restart',
       method: HttpMethod.post,
       isLoggedInContent: true,
-      body: {'deviceChallenge': deviceChallenge},
       successCallback: (data) {
         response = Success(data);
       },

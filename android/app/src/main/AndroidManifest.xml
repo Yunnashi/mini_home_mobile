@@ -1,21 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- BLE 利用宣言（virtualkey_mobile に合わせ required=false） -->
-    <uses-feature android:name="android.hardware.bluetooth_le" android:required="false" />
-
-    <!-- Android 12 以降の BLE 権限 -->
-    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
-    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
-    <!-- BLE スキャンで必要になることがある（Android 12+ でも manufacturer data・一部デバイス・古い端末では必要） -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-    <!-- Android 11 以下用 -->
-    <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30" />
-
-    <!-- Android 9 以下用（virtualkey_mobile に合わせ COARSE を追加） -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" android:maxSdkVersion="28" />
-
     <application
         android:label="@string/app_name"
         android:name=".MainApplication"

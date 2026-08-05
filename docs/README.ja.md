@@ -26,7 +26,7 @@ miniHome は、feature単位の Flutter 構成で作成したコンパクトな�
 - ローカル開発では Mockoon がデモAPIレスポンスを提供する。
 - Firebase Core と Remote Config は利用可能にし、Firebase Auth と Firestore は
   今後の拡張として扱う。
-- QR / カメラ登録と Bluetooth を使ったメンテナンス導線を維持する。
+- QR / カメラ登録と API を使ったメンテナンス導線を維持する。
 - 最初の対象デバイスはライトとエアコンとする。
 
 ## ローカルセットアップ

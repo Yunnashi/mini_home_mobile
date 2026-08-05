@@ -27,7 +27,7 @@ Project principles:
 - Mockoon provides demo API responses for local development.
 - Firebase Core and Remote Config are available, while Firebase Auth and
   Firestore are planned as future work.
-- QR/camera registration and Bluetooth-based maintenance flows are supported.
+- QR/camera registration and API-based maintenance flows are supported.
 - Lights and air conditioners are the first supported device types.
 
 ## Local setup
