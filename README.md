@@ -12,7 +12,7 @@ portfolio project to explore how a clean mobile UI, typed data models, and
 API-driven state management can work together in a practical app.
 
 The app is intentionally small in scope, but it includes the kinds of screens
-that appear in many real products: authentication, a dashboard, device details,
+that appear in many real products: authentication, a dashboard, qr-reader, details,
 settings, schedules, activity history, and error/offline states.
 
 ## Why I created this app
@@ -133,17 +133,15 @@ showing loading indicators during background refreshes.
 The app runs locally with FVM and Mockoon. Detailed setup and development
 commands are documented in [docs/README.md](docs/README.md).
 
-In short, create `config/app_config.local.json` from the example file, start
-Mockoon on port `3001`, and run the `homeStaging` flavor with
-`--dart-define-from-file=config/app_config.local.json`.
-
 ## Demo API
 
 The app uses Mockoon for local API responses. API details are documented in
 [docs/minihome-api.md](docs/minihome-api.md).
 
 The demo data is fictional. Real users, tokens, device IDs, Firebase files, and
-signing assets should never be committed.
+signing assets should never be included.
+
+See [docs/security.md](docs/security.md) for the full policy.
 
 ## Documentation
 
@@ -153,16 +151,4 @@ signing assets should never be committed.
 - [Design system](docs/minihome-design-system.md)
 - [Security and public repository policy](docs/security.md) / [日本語](docs/security.ja.md)
 
-## Security note
 
-This repository is intended to be public. The following files must not be
-committed:
-
-- `config/app_config.local.json`
-- `GoogleService-Info*.plist`
-- `google-services.json`
-- `*.jks` / `*.keystore`
-- `*key.properties`
-- `ExportOptions*.plist`
-
-See [docs/security.md](docs/security.md) for the full policy.
