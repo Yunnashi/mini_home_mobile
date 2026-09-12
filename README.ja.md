@@ -6,29 +6,11 @@
   <img src="assets/branding/mini_home/images/splash.png" alt="miniHome logo" width="320">
 </p>
 
-miniHome は、ライトやエアコンなどのスマートホーム機器を管理する Flutter
-アプリです。ポートフォリオとして、一からテーマ・画面構成・データモデル・
-API連携を設計し、実用的なモバイルアプリ構成をわかりやすく見せることを目的に
-作成しました。
+<p align="center"> ライトやエアコンなどのスマートホーム機器を操作する Flutter アプリです。 </p>
 
-スコープはコンパクトですが、認証、ホームダッシュボード、デバイス詳細、
-設定、スケジュール、利用履歴、エラー・オフライン状態など、実際のアプリで
-よく必要になる画面と状態を含んでいます。
+<p align="center"> <img src="docs/images/minihome-ui-overview.png" alt="miniHome UI overview" width="1200"> </p>
 
-## 作成した目的
-
-miniHome は、Flutter での設計力・実装力・UI/UXへの配慮を伝えるために作成した
-ポートフォリオアプリです。
-
-スマートホームアプリは見た目はシンプルですが、モバイル開発でよく出てくる
-課題を多く含んでいます。
-
-- APIから取得した一覧データの表示
-- UI操作によるデバイス状態の更新
-- loading / empty / error / offline 状態の扱い
-- デバイス種別によるUI切り替え
-- 画面とAPIアクセスの責務分離
-- 多言語対応
+> クリーンな UI/UX、拡張性を意識したアーキテクチャ、実際のAPI連携を想定した状態管理を中心に、一から設計・実装しています。
 
 ## 注力したこと
 
@@ -63,10 +45,6 @@ miniHome は、Flutter での設計力・実装力・UI/UXへの配慮を伝え�
 - 英語既定・日本語対応の localization
 
 ## UI design
-
-<p align="center">
-  <img src="docs/images/minihome-ui-overview.png" alt="miniHome UI overview" width="1200">
-</p>
 
 白基調の背景、角丸カード、わかりやすい状態表示、コンパクトな操作UIを中心に、
 モダンなスマートホームアプリらしい見た目を目指しました。
