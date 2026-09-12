@@ -6,29 +6,15 @@
   <img src="assets/branding/mini_home/images/splash.png" alt="miniHome logo" width="320">
 </p>
 
-miniHome is a Flutter smart-home app for managing connected home devices, such
-as lights and air conditioners. I designed and implemented it from scratch as a
-portfolio project to explore how a clean mobile UI, typed data models, and
-API-driven state management can work together in a practical app.
+<p align="center">
+  A Flutter smart-home app for controlling connected home devices.
+</p>
 
-The app is intentionally small in scope, but it includes the kinds of screens
-that appear in many real products: authentication, a dashboard, qr-reader, details,
-settings, schedules, activity history, and error/offline states.
+<p align="center">
+  <img src="docs/images/minihome-ui-overview.png" alt="miniHome UI overview" width="1200">
+</p>
 
-## Why I created this app
-
-I created miniHome to demonstrate my Flutter development skills through a theme
-that is easy to understand at a glance.
-
-Smart-home apps look simple, but they involve many common mobile development
-problems:
-
-- showing a list of remote data;
-- updating device state from the UI;
-- handling loading, empty, error, and offline states;
-- switching the UI based on data type;
-- keeping screen code separate from API access;
-- supporting multiple languages.
+> Built from scratch with a focus on clean UI/UX, scalable architecture, and realistic API-driven interactions.
 
 ## What I focused on
 
@@ -65,10 +51,6 @@ problems:
 - English-first localization with Japanese support.
 
 ## UI design
-
-<p align="center">
-  <img src="docs/images/minihome-ui-overview.png" alt="miniHome UI overview" width="1200">
-</p>
 
 The UI is inspired by modern smart-home apps: bright backgrounds, rounded cards,
 clear status labels, and compact controls.
