@@ -92,8 +92,7 @@ service に寄せています。これにより、UIは描画とユーザー操�
   <img src="docs/images/minihome-architecture-overview.png" alt="miniHome architecture overview" width="1200">
 </p>
 
-Home と Device Detail では、表示中の画面だけが30秒ごとに軽くデータを更新する
-polling を行います。画面が非表示になったり、アプリが非アクティブになった場合は停止し、
+Home と Device Detail では、30秒ごとにポーリングを行ってリアクティブに画面を描画できる様にしています。画面が非表示になったり、アプリが非アクティブになった場合は停止し、
 バックグラウンド更新中は不要な loading 表示を出さないようにしています。
 
 ## 起動方法
