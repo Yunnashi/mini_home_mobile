@@ -55,11 +55,6 @@
 The UI is inspired by modern smart-home apps: bright backgrounds, rounded cards,
 clear status labels, and compact controls.
 
-I tried to keep the design simple enough for a portfolio reviewer to understand
-quickly, while still making the app feel like a real product. Device cards show
-the most important information first, and each detail screen changes its
-controls based on the device type.
-
 The design tokens and component rules are documented in
 [docs/minihome-design-system.md](docs/minihome-design-system.md).
 
