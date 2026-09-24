@@ -10,7 +10,7 @@
 
 <p align="center"> <img src="docs/images/minihome-ui-overview.png" alt="miniHome UI overview" width="1200"> </p>
 
-> UIデザインを行い、技術選定を含めて一から実装を行っています。APIはMockで用意しています。
+> UIデザインを行い、技術選定を含めて一から実装を行っています。APIはMockで動くようにサンプルデータを用意しています。
 
 ## 注力したこと
 
