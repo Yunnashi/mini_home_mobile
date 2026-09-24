@@ -123,7 +123,7 @@ Firebase設定、署名関連ファイルはコミットしない方針です。
 
 ## Security note
 
-このリポジトリは公開ポートフォリオとして扱う想定です。以下のファイルはコミットしません。
+このリポジトリは公開ポートフォリオのため、以下のファイルはコミットしていません。
 
 - `config/app_config.local.json`
 - `GoogleService-Info*.plist`
