@@ -10,7 +10,7 @@
 
 <p align="center"> <img src="docs/images/minihome-ui-overview.png" alt="miniHome UI overview" width="1200"> </p>
 
-> クリーンな UI/UX、拡張性を意識したアーキテクチャ、実際のAPI連携を想定した状態管理を中心に、一から設計・実装しています。
+> UIデザインを行い、技術選定を含めて一から実装を行っています。APIはMockで用意しています。
 
 ## 注力したこと
 
