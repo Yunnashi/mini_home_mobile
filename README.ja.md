@@ -85,8 +85,8 @@ lib/
 └── utils/                    # 横断的なutility
 ```
 
-画面から Dio を直接呼ばず、APIアクセスは repository、機能ロジックと状態更新は
-service に寄せています。これにより、UIは描画とユーザー操作に集中できます。
+UI層から Dio を直接呼ばず、APIアクセスは repository、機能ロジックと状態更新は
+service に責務を分離しています。これにより、UIは描画とユーザー操作のみに責務が分離できます。
 
 <p align="center">
   <img src="docs/images/minihome-architecture-overview.png" alt="miniHome architecture overview" width="1200">
